@@ -10,7 +10,7 @@
 			function construireListeCIM10() {
 			$.ajax({
 				type: 'GET',
-				url: '/RESTFullMotif/rest/motif/cim10',
+				url: '/aat/motif/cim10',
 				dataType : 'json',
 	            success: function(data) {
 	            	var taille = data.length;
@@ -85,7 +85,7 @@
 				source: function(requete, reponse){ // les deux arguments représentent les données nécessaires au plugin
 					$.ajax({
 						type: 'GET',
-						url: '/RESTFullMotif/rest/motif/motif/'+$('#champMotif').val(),
+						url: '/aat/motif?param='+$('#champMotif').val(),
 						dataType : 'json',
 			            success: function(data) {
 			                reponse($.map(data, function(objet){
@@ -348,7 +348,7 @@
 		function afficheListeMotifs(){
 			$.ajax({
 				type: 'GET',
-				url: '/RESTFullMotif/rest/motif/liste/',
+				url: '/aat/motif/liste/',
 				dataType : 'json',
 	            success: function(data) {
 	            	document.getElementById('blocMotifs').innerHTML = "";
