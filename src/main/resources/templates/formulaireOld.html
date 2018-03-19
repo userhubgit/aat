@@ -64,7 +64,7 @@
 	<script type="text/javascript" src="js/datetimepicker_css.js"></script>	
 	<script type="text/javascript" src="js/PIE.js"></script>
 	<script type="text/javascript" src="js/popIn.js"></script>
-	<script type="text/javascript" src="js/aat.js"></script>
+	<script type="text/javascript" src="js/aat2.js"></script>
 </head>
 
 
@@ -177,14 +177,37 @@
 		
     	<!--colonne de gauche-->
 		<div id="colonneGauche">
-            <!--cadres-->			
+			<h2>Avis d'arrêt de travail en 5 clics</h2>
+            <div class="lignePointille"></div>           
+            <!--cadres-->	
+					
+			<div class="titreBlanc">
+                <div class="titreBlancBordGauche"></div>
+                <div class="titreBlancFond"><h3>Création d'un avis d'arrêt de travail</h3></div>
+                <div class="titreBlancBordDroit"></div>
+            </div>			
 			<div class="cadreXL">               
                 <div class="cadreAngleHD">
                     <div class="cadreAngleBG">
                     	<div class="cadreAngleBD">                  
                     		<div class="zoneContenus">
                                 <!--CONTENUS CADRE-->
-								<form action="" method="">																													
+								<form action="" method="">												
+									<h4>Nature de l'arrêt</h4>									
+									<div><input type="radio" class="vertical" name="btradio" value="complet" id="btradio" onclick="radioClick()" onchange="choisirNatureArret(this);" checked="checked" /><label for="btradio" class="radioV">Prescription d’un arrêt de travail à temps complet</label></div>
+									<div><input type="radio" class="vertical" name="btradio" value="partiel" id="btradio" onclick="radioClick()" onchange="choisirNatureArret(this);"/><label for="btradio" class="radioV">Prescription d’un temps partiel pour raison médicale</label></div>
+									
+									<h4>éléments d'ordre médical</h4>										
+									<div class="item_reverse">
+										<label id="rapportAffection">L'arrêt <span>n'est pas en rapport</span> avec une affection L324-1 et R613-69 du code de la sécurité sociale</label>
+										<img class="lienPicto" src="images/picto_reverse.png" alt="Bouton d'options alternative" id="" onclick="changerRapportAffection();" />	
+										<img class="btAide" src="images/aide.gif" alt="Bouton Aide"/>								
+									</div>
+									<div id="divGrossesse" class="item_reverse">
+										<label id="rapportGrossesse">L'arrêt <span>n'est pas en rapport</span> avec un état pathologique résultant de la grossesse</label>
+										<img class="lienPicto" src="images/picto_reverse.png" alt="Bouton d'options alternative" id="" onclick="changerRapportGrossesse();" />	
+										<img class="btAide" src="images/aide.gif" alt="Bouton Aide"/>								
+									</div>
 									<div class="blocGris">
 										<div class="eom">
 											<p class="bold">Saisissez le motif ou recherchez dans la liste :</p>
@@ -232,18 +255,129 @@
 											</div>
 										</div>
 									</div>
-									
-									<br/>
-									<div id="resultatDuree" class="resultatDuree inactif">
+									<h4 id="titreDuree">Durée de l'arrêt</h4>
+									<div id="blocktableauDurees" style="display: none;">
+										<h5>Tableau des durées indicatives pour le motif sélectionné</h5>
+										<p>Ces durées de référence sont indicatives et à adapter en fonction du patient.</p>
+										<div class="lienFicheDetaillee" style="position: inherit; float: right;">
+											<p class="PDF">
+												<a href="" id="pdf" target="_blank" title="Ouvrir la fiche des durées indicatives">Fiche détaillée des durées indicatives</a>
+											</p>
+										</div>
+										<br/>
+										<div id="tableauDurees"></div>								
 									</div>
 									<br/>
+									<div id="resultatDuree" class="resultatDuree inactif">
+										<div class="datesArret lg71">
+											<span>
+												<label for="">A partir du <span class="obligatoire"></span>:</label>
+												<input id="debutArret" type="text" class="champ" name="" value="14/06/2016" size="10" style="" disabled="disabled"/>
+												<img src="images/calendrier.gif" alt="Bouton calendrier" class="calend"/>
+											</span>
+											<span class="jusquau">	
+												<label for="">Jusqu'au (inclus)<span class="obligatoire"></span>:</label>
+												<input id="finArret" type="text" class="champ" name="" value="" size="8" style="" disabled="disabled"/>
+												<img src="images/calendrier.gif" alt="Bouton calendrier" class="calend"/>
+											</span>
+										</div>
+										<div class="dureeArret lg25">
+											<label for="">Durée</label>
+											<input id="dureeArret" type="text" class="champ" name="" value="" size="3" style="width: 30px;" onchange ="calculerDateFin(this.value);" disabled="disabled"/>
+											<p>jour(s)</p>
+										</div>
+									</div>
+									<br/>
+									<div id="blocModaliteComplet">
+										<h4>Modalités de l'arrêt</h4>
+										<div class="item_blocDepliable">
+											<label>Avis d'arrêt de travail initial</label>
+											<img class="lienPicto" onclick="" src="images/picto_modifier_plus.png" id="" alt="" />												
+										</div>
+										<div class="item_blocDepliable">
+											<label>Adresse de visite habituelle</label>
+											<img class="lienPicto" onclick="" src="images/picto_modifier_plus.png" id="" alt="" />												
+										</div>
+										<div class="item_blocDepliable">
+											<label>Assuré(e) sans précision sur l'employeur</label>
+											<img class="lienPicto" onclick="" src="images/picto_modifier_plus.png" id="" alt="" />												
+										</div>
+										<div class="item_reverse">
+											<label>Sorties autorisées avec restriction d'horaire à partir du <span class="obligatoire"></span></label>
+											<input type="text" id="dateSortie" class="champ" name="" value="14/06/2016" size="10" style=""/>
+											<img src="images/calendrier.gif" alt="Bouton calendrier" class="calend"/>
+											<img class="lienPicto" src="images/picto_reverse.png" alt="Bouton d'options alternative" id="" onclick="" />	
+											<img class="btAide" src="images/aide.gif" alt="Bouton Aide"/>
+										</div>
+										<br />
+										<div class="item_reverse">
+											<label>L'arrêt ne fait pas suite à un accident causé par un tiers</label>										
+											<img class="lienPicto" src="images/picto_reverse.png" alt="Bouton d'options alternative" id="" onclick="" />
+										</div>
+										<div class="item_reverse">
+											<label>L'arrêt ne fait pas suite à une cure thermale</label>										
+											<img class="lienPicto" src="images/picto_reverse.png" alt="Bouton d'options alternative" id="" onclick="" />
+										</div>
+										<div class="item_reverse">
+											<label>L'arrêt n'est pas en rapport avec l'affection pour laquelle l'assuré est pensionné de guerre</label>										
+											<img class="lienPicto" src="images/picto_reverse.png" alt="Bouton d'options alternative" id="" onclick="" />
+										</div>
+										<div class="item_reverse">
+											<label>L'arrêt n'est pas suivi d'une reprise à temps partiel thérapeutique</label>										
+											<img class="lienPicto" src="images/picto_reverse.png" alt="Bouton d'options alternative" id="" onclick="" />
+										</div>
+									</div>
+									<div id="blocModalitePartiel" style="display: none;">
+										<h4>Modalités de la reprise à temps partiel</h4>
+										<div class="item_blocDepliable">
+											<label>Reprise de travail à temps partiel thérapeutique initiale</label>
+											<img class="lienPicto" onclick="" src="images/picto_modifier_plus.png" id="" alt="" />												
+										</div>
+										<div class="item_blocDepliable">
+											<label>Adresse de visite habituelle</label>
+											<img class="lienPicto" onclick="" src="images/picto_modifier_plus.png" id="" alt="" />												
+										</div>
+										<div class="item_blocDepliable">
+											<label>Assuré(e) sans précision sur l'employeur</label>
+											<img class="lienPicto" onclick="" src="images/picto_modifier_plus.png" id="" alt="" />												
+										</div>
+										<div class="item_reverse">
+											<label>La reprise ne fait pas suite à un accident causé par un tiers</label>										
+											<img class="lienPicto" src="images/picto_reverse.png" alt="Bouton d'options alternative" id="" onclick="" />
+										</div>
+										<div class="item_reverse">
+											<label>La reprise ne fait pas suite à une cure thermale</label>										
+											<img class="lienPicto" src="images/picto_reverse.png" alt="Bouton d'options alternative" id="" onclick="" />
+										</div>
+										<div class="item_reverse">
+											<label>La reprise n'est pas en rapport avec l'affection pour laquelle l'assuré est pensionné de guerre</label>										
+											<img class="lienPicto" src="images/picto_reverse.png" alt="Bouton d'options alternative" id="" onclick="" />
+										</div>
+									</div>
 									<br />
+									<p class="mentionObligatoire">* Champ(s) obligatoire(s)</p>
+									<div class="separateurGroupeElements636"></div>	
+									<div class="conditions">
+										<input type="checkbox" class="" name="btradio" value="" id="btradio" />
+										<label for="btradio" class="">
+											Mon patient accepte que je transmette le présent avis d'arrêt de travail pour son compte et est informé des <a href="" title="">textes applicables</a>.<br />J'accepte les <a href="" title="">conditions de la transmission</a> et j'ai pris connaissance des <a href="" title="">textes applicables</a>.
+										</label>
+									</div>
+									
+									<div class="groupeBoutons">
+										<div class="alignGauche">
+											<a class="bouton" href="#"><span>Abandonner</span></a>
+										</div>
+										<div class="alignDroite">
+											<a class="bouton" href="#"><span>Imprimer sans transmettre</span></a>
+											<a class="boutonInaccessible" href="#"><span>Transmettre</span></a>
+										</div>											
+									</div>
 								</form>
 							</div>
 						</div>
                     </div>
 				</div>
-				
 				<div class="fond_popIn" id="popIn_listeMotifs" style="display:none;">
 					<div class="popIn">
 						<div class="popIn_entete">
@@ -267,7 +401,8 @@
 												<div class="separateurGroupeElements560"></div>
 												<div id="blocMotifs" class="blocMotifs">
 													
-												</div> 
+												</div>
+												<div class="clearFloat"></div>  
 											</div>
 										</div>
 									</div>
@@ -333,8 +468,9 @@
             </div>
             
             <!--Gestion des float-->
-            <div class="clearFloat">
-            </div>  
+            <div class="clearFloat"></div>  
+			
+			
         </div>
 		
 		

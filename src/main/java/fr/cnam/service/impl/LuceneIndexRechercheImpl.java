@@ -5,8 +5,11 @@ package fr.cnam.service.impl;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
 import java.text.ParseException;
@@ -37,7 +40,12 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.store.RAMDirectory;
 import org.apache.lucene.util.PagedBytes.Reader;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.stereotype.Service;
 import org.apache.lucene.util.Version;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 
 import fr.cnam.model.Motif;
 import fr.cnam.service.LuceneIndexRecherche;
@@ -50,6 +58,7 @@ import fr.cnam.util.ReferentielCSVReaderUtil;
  * @author ONDONGO-09929.
  *
  */
+@Service
 public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 
     /**
@@ -58,18 +67,20 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
     private static final Analyzer ANALYZER =
     AATLuceneAnalyzerUtil.getAnalyzer();
     
+    @Autowired
+    private ResourceLoader resourceLoader;
     /**
      * Directory.
      */
     private final RAMDirectory ramDirectory = new RAMDirectory();
-
+    
     /**
      * Message d'erreur lors de la recherche.
      */
     private static String MSG_ERREUR_RECHERCHE =
     "Une erreur s'est produite lors la recherche de motif pour le terme:=%s";
 
-    /** Maximum de resultat de l'autocomplétion. */
+    /** Maximum de resultat de l'autocomplï¿½tion. */
     private static final int MAX_RESULT = 10;
 
     /** Le champ code du motif. */
@@ -86,6 +97,8 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
     
     private static final float LIBELLE_SCORE_BOOST = 50;
 
+    
+    
     /*
      * (non-Javadoc)
      *
@@ -159,7 +172,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
             	}
             }
 
-			System.out.println("Nombre de documents indexés : ".concat(String
+			System.out.println("Nombre de documents indexï¿½s : ".concat(String
 						.valueOf(i)));
 
 
@@ -197,6 +210,8 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
         System.out.println("La Saisie du Professionel de Sante := [" + pLibelleSaisie +"]");
         List<Motif> resultat = new ArrayList<Motif>();
         String saisieValide = extraireSaiSieValide(pLibelleSaisie);
+        
+        
         if (saisieValide.length() > 1) {
 
         	Reader reader = null;
@@ -206,14 +221,17 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
                 String saisieNormalise = supprAccent(saisieValide);
                 System.out.println("La saisie valide := [" + saisieNormalise + "]");
                 List<Motif> lListeMotif = null;
-                System.out.println("Liste motif dans le cache : " + lListeMotif);
                 if (lListeMotif == null) {
-					 lListeMotif = ReferentielCSVReaderUtil.
-					lireFichier(new File(getClass().getClassLoader().getResource("FichierReferentielMotifsAAT.csv").getFile()));
-                	// Mise en cache de l'objet retourné par le WS
-		            System.out.println("Liste motif : " + lListeMotif);
+                    InputStream inputStream = resourceLoader.getResource("FichierReferentielMotifsAAT.csv").getInputStream();
+                    File createTempFile = File.createTempFile("thesaurus", "cvs");
+                	byte[] buffer = new byte[inputStream.available()];
+                	inputStream.read(buffer);
+                	OutputStream outStream = new FileOutputStream(createTempFile);
+                	outStream.write(buffer);
+					lListeMotif = ReferentielCSVReaderUtil.lireFichier(createTempFile);
+					outStream.close();
 				}
-                // Indexation à chaud du référentiel
+                // Indexation a chaud du referentiel
                 indexationMemoire(lListeMotif);
 //                reader = DirectoryReader.open(ramDirectory);
                 searcher = new IndexSearcher(ramDirectory);
@@ -229,6 +247,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
                 		pLibelleSaisie) + e2);
             } finally {
                 try {
+                	
 					if (null != reader) {
 //						reader.close();
 					}
@@ -274,10 +293,10 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
     }
 
     /**
-     * Méthode parmettant de valider si la saisie peut faire l'objet d'une
-     * recherche par autocomplétion.
+     * Mï¿½thode parmettant de valider si la saisie peut faire l'objet d'une
+     * recherche par autocomplï¿½tion.
      *
-     * L'idée est retirer tous les termes insignifiants contenus
+     * L'idï¿½e est retirer tous les termes insignifiants contenus
      * dans la saisie de l'utulisateur.
      *
      * @param pSaisieUtilisateur :
@@ -346,7 +365,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 
         BooleanQuery bq = new BooleanQuery();
         /**
-         * Résultat de la recherche.
+         * Rï¿½sultat de la recherche.
          */
         List<Motif> resultat = new ArrayList<Motif>();
         String str = pTerm.trim().concat("*");
@@ -372,7 +391,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 	        
 	        ScoreDoc[] hits = pSearcher.search(query, null, MAX_RESULT).scoreDocs;
 	        
-	        System.out.println("======= { Nombre de motif trouvé := " + hits.length + " } ===========\n");
+	        System.out.println("======= { Nombre de motif trouvï¿½ := " + hits.length + " } ===========\n");
 	        
 	        for (int i = 0; i < hits.length; i++) {
 	            ScoreDoc doc = hits[i];
@@ -454,7 +473,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
        
        System.out.println("****** FIN : Affichage des tokens dans le libelle *******");
        
-        System.out.println("Nombre de documents indexés : ".concat(String
+        System.out.println("Nombre de documents indexï¿½s : ".concat(String
 					.valueOf(i)));
         System.out.println("Taille (en byte) memoire du thesaurus := "
                 + ramDirectory.sizeInBytes());
@@ -480,7 +499,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 //		LuceneIndexRecherche service = new LuceneIndexRechercheImpl();
 //		List<Motif> resultatRecherche = service.rechercher(saisiePS);
 //		System.out.println(resultatRecherche.size() + " motif" + (resultatRecherche.size() > 1 ? "s" : "")
-//				+ " correspondent à la recherche *****************");
+//				+ " correspondent ï¿½ la recherche *****************");
 //		for (Motif motifBO : resultatRecherche) {
 //			System.err.println("Motif:= [" + motifBO.getLibelle() + "]");
 //		}

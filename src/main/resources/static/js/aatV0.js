@@ -10,7 +10,7 @@
 			function construireListeCIM10() {
 			$.ajax({
 				type: 'GET',
-				url: '/aat/motif/cim10',
+				url: '/aatV0/motif/cim10',
 				dataType : 'json',
 	            success: function(data) {
 	            	var taille = data.length;
@@ -39,11 +39,13 @@
 			$("#message_ocre").hide();
 			document.getElementById("message_ocre").style.display="none";
 			document.getElementById("listeCategorie").style.display="none";
-//			document.getElementById("tableauDurees").style.display="none";
-//			document.getElementById("blocktableauDurees").style.display="none";
+			document.getElementById("tableauDurees").style.display="none";
+			document.getElementById("blocktableauDurees").style.display="none";
 // 			document.getElementById("complOblig").style.display="none";
 			document.getElementById('resultat').style.display="none";
-//			document.getElementById('debutArret').value= new Date().ddmmyyyy();
+			document.getElementById('dureeArret').value="";
+			document.getElementById('debutArret').value= new Date().ddmmyyyy();
+			document.getElementById('dateSortie').value= new Date().ddmmyyyy();
 			
 			/*
 			* Gestion de la touche entrée
@@ -83,7 +85,7 @@
 				source: function(requete, reponse){ // les deux arguments représentent les données nécessaires au plugin
 					$.ajax({
 						type: 'GET',
-						url: '/aat/motif?param='+$('#champMotif').val(),
+						url: '/aatV0/motif?param='+$('#champMotif').val(),
 						dataType : 'json',
 			            success: function(data) {
 			                reponse($.map(data, function(objet){
@@ -100,7 +102,7 @@
 // 			    	focusMotifCode = ui.item.label;
 // 			    },			    
 				minLength: 3,
-				delay : 0,
+				delay : 300,
 			    select : function(event,ui){
 			    	
 			    	if(event.keyCode != 9){
@@ -152,13 +154,13 @@
 // 					evt.initMouseEvent("click", true, true, window,0, 0, 0, 0, 0, false, false, false, false, 0, null);
 // 					document.getElementById("categorie").dispatchEvent(evt);
 				}
-//				activerZonePeriodeArret();
+				activerZonePeriodeArret();
 			}else{
 				$("#champTexteLong").html('');
 				$("#motifSelectionne").html(motifSelectionne);
 				document.getElementById("champTexteLong").focus();
 				afficherTableauDuree();
-//				activerZonePeriodeArret();
+				activerZonePeriodeArret();
 			}
 			// 1 - Reset du champ de saisi
 			document.getElementById('champMotif').value="";
@@ -176,6 +178,7 @@
 			document.getElementById("resultatDuree").setAttribute("class", "resultatDuree");
 			document.getElementById("debutArret").disabled=false;
 			document.getElementById("finArret").disabled=false;
+			document.getElementById("dureeArret").disabled=false;
 		}
 		
 		function desactiverZonePeriodeArret() {
@@ -266,10 +269,10 @@
 		<!-- gestion de la saisie libre -->
 		function gererSaisieLibre(){
 			// On cache le tableau des durées
-//			document.getElementById("tableauDurees").style.display="none";
+			document.getElementById("tableauDurees").style.display="none";
 			// On enleve la durée à vide
-//			document.getElementById('dureeArret').value="";
-//			document.getElementById('finArret').value="";
+			document.getElementById('dureeArret').value="";
+			document.getElementById('finArret').value="";
 			
 			//affichage du block catégorie
 			if(motifSelectionne != document.getElementById('champMotif').value){
@@ -313,19 +316,20 @@
 			focusMotif = "";
 			codeLibelle = null;
 			document.getElementById("listeCategorie").style.display="none";
-//			document.getElementById("tableauDurees").style.display="none";
+			document.getElementById("tableauDurees").style.display="none";
 			document.getElementById("message_ocre").style.display="none";
-//			document.getElementById("blocktableauDurees").style.display="none";
+			document.getElementById("blocktableauDurees").style.display="none";
 			document.getElementById('resultat').style.display="none";
 			document.getElementById("saisiComplInfo").style.display="none";
 			document.getElementById("crayonCompl").style.display="inline-block";
-//			document.getElementById('finArret').value="";
+			document.getElementById('dureeArret').value="";
+			document.getElementById('finArret').value="";
 			$("#motifSelectionne").html('');
 			$("#champTexteLong").val('');
 			document.getElementById('champMotif').value="";
 			document.getElementById('champMotif').title="";
 			afficherZoneSaisieMotif();
-			//initEltOrdreMedical();
+			initEltOrdreMedical();
 
 			if (navigator.userAgent.indexOf('MSIE') != -1){
 				inputPlaceholder(document.getElementById('champMotif'));
@@ -337,14 +341,14 @@
 			$("#apres").hide();
 			$("#motifSelectionne").show();
 			$("#idListeMotif").show();
-			//desactiverZonePeriodeArret();
+			desactiverZonePeriodeArret();
 		}
 		
 		<!-- Action sur le lien "Liste des motifs" -->
 		function afficheListeMotifs(){
 			$.ajax({
 				type: 'GET',
-				url: '/aat/motif/liste/',
+				url: '/aatV0/motif/liste/',
 				dataType : 'json',
 	            success: function(data) {
 	            	document.getElementById('blocMotifs').innerHTML = "";

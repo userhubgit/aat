@@ -33,9 +33,9 @@ import fr.cnam.util.MotifMapper;
 import fr.cnam.util.ReferentielCSVReaderUtil;
 
 @RestController
-public class MotifController {
+public class MotifControllerV0 {
 
-	private final Logger logger = LoggerFactory.getLogger(MotifController.class);
+	private final Logger logger = LoggerFactory.getLogger(MotifControllerV0.class);
 
 	@Autowired
 	private LuceneIndexRecherche luceneService;
@@ -45,7 +45,7 @@ public class MotifController {
 
 	private Gson gson = new Gson();
 
-	@GetMapping("/aat/motif")
+	@GetMapping("/aatV0/motif")
 	public String getMotif(@RequestParam("param") String msg) {
 		logger.info("Le motif saisie par l'utilisateur est :" + msg);
 		List<Motif> output = luceneService.rechercher(msg);
@@ -58,7 +58,7 @@ public class MotifController {
 		return gson.toJson(listMotifView);
 	}
 
-	@GetMapping(path = "/aat/motif/cim10")
+	@GetMapping(path = "/aatV0/motif/cim10")
 	public ResponseEntity<?> getListOrdonneCIM10() {
 		/**
 		 * Motifs tries par lette
@@ -98,7 +98,7 @@ public class MotifController {
 		return new ResponseEntity<String>(gson.toJson(listeCIM10), HttpStatus.OK);
 	}
 
-	@GetMapping("/aat/motif/liste")
+	@GetMapping("/aatV0/motif/liste")
 	public String getListOrdonneMotif() throws IOException {
 		/**
 		 * Motifs tries par lette
