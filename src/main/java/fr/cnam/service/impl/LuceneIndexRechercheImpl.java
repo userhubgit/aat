@@ -28,6 +28,7 @@ import org.apache.lucene.document.Field;
 import org.apache.lucene.document.Field.Index;
 import org.apache.lucene.document.Field.Store;
 import org.apache.lucene.index.CorruptIndexException;
+import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.IndexWriterConfig.OpenMode;
@@ -40,12 +41,10 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.store.RAMDirectory;
 import org.apache.lucene.util.PagedBytes.Reader;
+import org.apache.lucene.util.Version;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
-import org.apache.lucene.util.Version;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
 
 import fr.cnam.model.Motif;
 import fr.cnam.service.LuceneIndexRecherche;
@@ -214,7 +213,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
         
         if (saisieValide.length() > 1) {
 
-        	Reader reader = null;
+        	IndexReader reader = null;
             IndexSearcher searcher = null;
             try {
                 // Normalisation de la saisie utilisateur.
@@ -233,8 +232,9 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 				}
                 // Indexation a chaud du referentiel
                 indexationMemoire(lListeMotif);
-//                reader = DirectoryReader.open(ramDirectory);
-                searcher = new IndexSearcher(ramDirectory);
+
+                reader = IndexReader.open(ramDirectory);
+                searcher = new IndexSearcher(reader);
                 resultat = singleTermSearch(saisieNormalise, searcher);
 
             } catch (ParseException e) {

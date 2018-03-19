@@ -9,6 +9,7 @@ import java.util.Set;
 
 import org.apache.lucene.analysis.ASCIIFoldingFilter;
 import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.LetterTokenizer;
 import org.apache.lucene.analysis.LowerCaseFilter;
 import org.apache.lucene.analysis.StopFilter;
 import org.apache.lucene.analysis.TokenStream;
@@ -20,6 +21,7 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 
+
 /**
  *
  * @author ONDONGO-09929
@@ -28,11 +30,11 @@ import org.apache.lucene.util.Version;
 public final class AATLuceneAnalyzerUtil {
 
 	/**
-	 * Liste des termes ignores à l'indexation et pour la recherche dans lucene.
+	 * Liste des termes ignores ï¿½ l'indexation et pour la recherche dans lucene.
 	 * Elle permet d'etendre la liste de base FrenchAnalyzer.getDefaultStopSet()
 	 */
-	public static final String[] STOP_WORD = new String[] { "chez", "-", "droite", "droit", "gauche", "drt", "drte",
-			"gche", "gches", "gch", "gauches", "droites", "dte", "bilatérale", "bilater", "bilat" };
+	public static final String[] STOP_WORD = new String[] { "chez","-","droite","droit","gauche","drt","drte","gche","gches",
+			"gch","gauches","droites","dte","bilatÃ©ral","bilatÃ©rale","bilater","bilat","gau"};
 
 	/**
 	 * Constructeur privÃ©.
@@ -57,6 +59,7 @@ public final class AATLuceneAnalyzerUtil {
 			public TokenStream tokenStream(String fieldName, Reader reader) {
 				Tokenizer aatTokenizer = new WhitespaceTokenizer(Version.LUCENE_36, reader);
 				TokenStream filter = new StandardFilter(Version.LUCENE_36, aatTokenizer);
+				filter = new StopFilter(Version.LUCENE_36, filter, etendreFrenchStopWordSet());
 				filter = new LowerCaseFilter(Version.LUCENE_36, filter);
 				filter = new ASCIIFoldingFilter(filter);
 				return filter;
@@ -75,7 +78,7 @@ public final class AATLuceneAnalyzerUtil {
 		Analyzer customAnalyzer = new Analyzer() {			
 			@Override
 			public TokenStream tokenStream(String fieldName, Reader reader) {
-				Tokenizer aatTokenizer = new WhitespaceTokenizer(Version.LUCENE_36, reader);
+				Tokenizer aatTokenizer = new LetterTokenizer(Version.LUCENE_36, reader);
 				TokenStream filter = new StandardFilter(Version.LUCENE_36, aatTokenizer);
 				filter = new StopFilter(Version.LUCENE_36, filter, etendreFrenchStopWordSet());
 				filter = new LowerCaseFilter(Version.LUCENE_36, filter);
@@ -87,10 +90,10 @@ public final class AATLuceneAnalyzerUtil {
 	}
 
 	/**
-	 * Cette methode permet d'etendre la liste, par defaut, des mots français,
-	 * insignifiants pour etre indexés. Ex : le, la une etc..
+	 * Cette methode permet d'etendre la liste, par defaut, des mots franï¿½ais,
+	 * insignifiants pour etre indexes. Ex : le, la une etc..
 	 * 
-	 * @return la liste résultante.
+	 * @return la liste resultante.
 	 */
 	public static Set<String> etendreFrenchStopWordSet() {
 
