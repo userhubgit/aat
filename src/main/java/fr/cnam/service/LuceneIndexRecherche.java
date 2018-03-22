@@ -60,4 +60,12 @@ public interface LuceneIndexRecherche {
      * @throws TechniqueException : Notification d'une erreur
      */
     List < Motif > rechercherV0(final String pLibelleSaisie);
+
+    /**
+     * Méthode permettant de faire l'indexation en memoire
+     * du référentiel passé en paramètre.
+     * @param pReferentielMotifAAT : le référentiel.
+     * @throws TechniqueException : Notification d'une erreur.
+     */
+	void indexationMemoireV0(final List<Motif> pReferentielMotifAAT);
 }
