@@ -51,4 +51,13 @@ public interface LuceneIndexRecherche {
      * @throws TechniqueException : Notification d'une erreur
      */
     List < Motif > rechercher(final String pLibelleSaisie);
+    
+    /**
+     * Méthode permettant la recherche d'un ou plusieur motif.
+     * @param pLibelleSaisie : la saisie du PS.
+     * @param pHeaderDesirTO : contexte DESIR
+     * @return : la liste des motifs correspondant.
+     * @throws TechniqueException : Notification d'une erreur
+     */
+    List < Motif > rechercherV0(final String pLibelleSaisie);
 }

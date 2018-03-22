@@ -5,6 +5,7 @@
 		var grossessePhatologie = false;
 		var focusMotif = "";
 		var focusMotifCode = "";
+		var minIput = 2;
 		
 		$(document).ready(
 			function construireListeCIM10() {
@@ -99,7 +100,7 @@
 // 			    	focusMotif = ui.item.value;
 // 			    	focusMotifCode = ui.item.label;
 // 			    },			    
-				minLength: 3,
+				minLength: minIput,
 				delay : 0,
 			    select : function(event,ui){
 			    	
@@ -137,8 +138,8 @@
 // 			}
 			
 			if(motifSelectionne==""){
-				if (document.getElementById('champMotif').value.length < 3) {
-					$("#motifSelectionne").html("Veuillez saisir au moins 3 caractères");
+				if (document.getElementById('champMotif').value.length < minIput) {
+					$("#motifSelectionne").html("Veuillez saisir au moins " + minIput + " caractères");
 					$("#motifSelectionne").show();
 				} else {
 					$("#motifSelectionne").html(document.getElementById('champMotif').value);

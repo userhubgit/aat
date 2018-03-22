@@ -48,7 +48,7 @@ public class MotifControllerV0 {
 	@GetMapping("/aatV0/motif")
 	public String getMotif(@RequestParam("param") String msg) {
 		logger.info("Le motif saisie par l'utilisateur est :" + msg);
-		List<Motif> output = luceneService.rechercher(msg);
+		List<Motif> output = luceneService.rechercherV0(msg);
 		List<MotifView> listMotifView = new ArrayList<MotifView>();
 		if (null != output) {
 			for (Motif motif : output) {

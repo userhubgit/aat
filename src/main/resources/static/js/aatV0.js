@@ -5,6 +5,7 @@
 		var grossessePhatologie = false;
 		var focusMotif = "";
 		var focusMotifCode = "";
+		var minIput = 3;
 		
 		$(document).ready(
 			function construireListeCIM10() {
@@ -39,13 +40,11 @@
 			$("#message_ocre").hide();
 			document.getElementById("message_ocre").style.display="none";
 			document.getElementById("listeCategorie").style.display="none";
-			document.getElementById("tableauDurees").style.display="none";
-			document.getElementById("blocktableauDurees").style.display="none";
+//			document.getElementById("tableauDurees").style.display="none";
+//			document.getElementById("blocktableauDurees").style.display="none";
 // 			document.getElementById("complOblig").style.display="none";
 			document.getElementById('resultat').style.display="none";
-			document.getElementById('dureeArret').value="";
-			document.getElementById('debutArret').value= new Date().ddmmyyyy();
-			document.getElementById('dateSortie').value= new Date().ddmmyyyy();
+//			document.getElementById('debutArret').value= new Date().ddmmyyyy();
 			
 			/*
 			* Gestion de la touche entrée
@@ -101,8 +100,8 @@
 // 			    	focusMotif = ui.item.value;
 // 			    	focusMotifCode = ui.item.label;
 // 			    },			    
-				minLength: 3,
-				delay : 300,
+				minLength: minIput,
+				delay : 0,
 			    select : function(event,ui){
 			    	
 			    	if(event.keyCode != 9){
@@ -139,8 +138,8 @@
 // 			}
 			
 			if(motifSelectionne==""){
-				if (document.getElementById('champMotif').value.length < 3) {
-					$("#motifSelectionne").html("Veuillez saisir au moins 3 caractères");
+				if (document.getElementById('champMotif').value.length < minIput) {
+					$("#motifSelectionne").html("Veuillez saisir au moins " + minIput + " caractères");
 					$("#motifSelectionne").show();
 				} else {
 					$("#motifSelectionne").html(document.getElementById('champMotif').value);
@@ -154,13 +153,13 @@
 // 					evt.initMouseEvent("click", true, true, window,0, 0, 0, 0, 0, false, false, false, false, 0, null);
 // 					document.getElementById("categorie").dispatchEvent(evt);
 				}
-				activerZonePeriodeArret();
+//				activerZonePeriodeArret();
 			}else{
 				$("#champTexteLong").html('');
 				$("#motifSelectionne").html(motifSelectionne);
 				document.getElementById("champTexteLong").focus();
 				afficherTableauDuree();
-				activerZonePeriodeArret();
+//				activerZonePeriodeArret();
 			}
 			// 1 - Reset du champ de saisi
 			document.getElementById('champMotif').value="";
@@ -178,7 +177,6 @@
 			document.getElementById("resultatDuree").setAttribute("class", "resultatDuree");
 			document.getElementById("debutArret").disabled=false;
 			document.getElementById("finArret").disabled=false;
-			document.getElementById("dureeArret").disabled=false;
 		}
 		
 		function desactiverZonePeriodeArret() {
@@ -269,10 +267,10 @@
 		<!-- gestion de la saisie libre -->
 		function gererSaisieLibre(){
 			// On cache le tableau des durées
-			document.getElementById("tableauDurees").style.display="none";
+//			document.getElementById("tableauDurees").style.display="none";
 			// On enleve la durée à vide
-			document.getElementById('dureeArret').value="";
-			document.getElementById('finArret').value="";
+//			document.getElementById('dureeArret').value="";
+//			document.getElementById('finArret').value="";
 			
 			//affichage du block catégorie
 			if(motifSelectionne != document.getElementById('champMotif').value){
@@ -316,20 +314,19 @@
 			focusMotif = "";
 			codeLibelle = null;
 			document.getElementById("listeCategorie").style.display="none";
-			document.getElementById("tableauDurees").style.display="none";
+//			document.getElementById("tableauDurees").style.display="none";
 			document.getElementById("message_ocre").style.display="none";
-			document.getElementById("blocktableauDurees").style.display="none";
+//			document.getElementById("blocktableauDurees").style.display="none";
 			document.getElementById('resultat').style.display="none";
 			document.getElementById("saisiComplInfo").style.display="none";
 			document.getElementById("crayonCompl").style.display="inline-block";
-			document.getElementById('dureeArret').value="";
-			document.getElementById('finArret').value="";
+//			document.getElementById('finArret').value="";
 			$("#motifSelectionne").html('');
 			$("#champTexteLong").val('');
 			document.getElementById('champMotif').value="";
 			document.getElementById('champMotif').title="";
 			afficherZoneSaisieMotif();
-			initEltOrdreMedical();
+			//initEltOrdreMedical();
 
 			if (navigator.userAgent.indexOf('MSIE') != -1){
 				inputPlaceholder(document.getElementById('champMotif'));
@@ -341,7 +338,7 @@
 			$("#apres").hide();
 			$("#motifSelectionne").show();
 			$("#idListeMotif").show();
-			desactiverZonePeriodeArret();
+			//desactiverZonePeriodeArret();
 		}
 		
 		<!-- Action sur le lien "Liste des motifs" -->

@@ -29,11 +29,11 @@ public final class ReferentielCSVReaderUtil {
     public static final String VIDE = "";
 
     /**
-     * Separateur des donnÃ©es.
+     * Separateur des données.
      */
     public static final String CSV_SERAPTOR = ";";
     /**
-     * SÃ©parateur des synonymes.
+     * Séparateur des synonymes.
      */
     public static final String SYNONYME_SERAPTOR = ",";
     /**
