@@ -10,6 +10,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
 import java.text.ParseException;
@@ -438,6 +440,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 					byte[] buffer = new byte[inputStream.available()];
 					inputStream.read(buffer);
 					OutputStream outStream = new FileOutputStream(createTempFile);
+					new OutputStreamWriter(outStream, Charset.forName("UTF8"));
 					outStream.write(buffer);
 					lListeMotif = ReferentielCSVReaderUtil.lireFichier(createTempFile);
 					logger.info("======= JUST AFTER READING FILE ==== " + new Gson().toJson(lListeMotif));
