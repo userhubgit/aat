@@ -422,7 +422,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 		logger.info("La Saisie du Professionel de Sante := [" + pLibelleSaisie + "]");
 		List<Motif> resultat = new ArrayList<Motif>();
 		String saisieValide = extraireSaiSieValide(pLibelleSaisie);
-		System.setProperty("file.encoding", "utf8");
+//		System.setProperty("file.encoding", "utf8");
 		if (saisieValide.length() > 1) {
 
 			IndexReader reader = null;
