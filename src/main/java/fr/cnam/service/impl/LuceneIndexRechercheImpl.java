@@ -433,6 +433,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 				if (lListeMotif == null) {
 					InputStream inputStream = resourceLoader.getResource("FichierReferentielMotifsAAT.csv")
 							.getInputStream();
+					
 					File createTempFile = File.createTempFile("thesaurus", "cvs");
 					byte[] buffer = new byte[inputStream.available()];
 					inputStream.read(buffer);

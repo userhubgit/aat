@@ -35,7 +35,7 @@ public class LuceneIndexRechercheTest {
 	
 	@Test
 	public void testSaisieExacte() {
-		List<Motif> resultat = service.rechercher("frac");
+		List<Motif> resultat = service.rechercher("Angine");
 		Assert.assertTrue(resultat.size() == 1);
 		Assert.assertTrue(resultat.get(0).getLibelle().equalsIgnoreCase("Angine"));
 		
