@@ -430,6 +430,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
         logger.info("FIN LuceneIndexRechercheBSImpl.rechercher()");
         return resultat;
     }
+    
 	@Override
 	public List<Motif> rechercherV0(String pLibelleSaisie) {
         logger.info("DEBUT LuceneIndexRechercheBSImpl.rechercher()");
@@ -455,6 +456,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
                 	OutputStream outStream = new FileOutputStream(createTempFile);
                 	outStream.write(buffer);
 					lListeMotif = ReferentielCSVReaderUtil.lireFichier(createTempFile);
+					logger.info("======= JUST AFTER READING FILE ==== " + new Gson().toJson(lListeMotif));
 					outStream.close();
 				}
                 // Indexation a chaud du referentiel
