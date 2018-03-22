@@ -207,7 +207,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			Document doc = new Document();
 
 			doc.add(new Field(CHAMP_CODE, pMotif.getCode(), Store.YES, Index.ANALYZED));
-			doc.add(new Field(CHAMP_LIBELLE, pMotif.getLibelle().getBytes(Charset.forName("UTF8")).toString(), Store.YES, Index.ANALYZED));
+			doc.add(new Field(CHAMP_LIBELLE, pMotif.getLibelle(), Store.YES, Index.ANALYZED));
 			doc.add(new Field(CHAMP_CODE_FONCTIONNEL, pMotif.getCodification(), Store.YES, Index.ANALYZED));
 
 			if (pMotif.getSynonymes() != null) {
@@ -216,7 +216,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 				for (String synonyme : tableDeSynonyme) {
 					syn = syn + " " + synonyme;
 				}
-				doc.add(new Field(CHAMP_SYNONYME, syn.getBytes(Charset.forName("UTF8")).toString(), Store.YES, Index.ANALYZED));
+				doc.add(new Field(CHAMP_SYNONYME, syn, Store.YES, Index.ANALYZED));
 			}
 			pWriter.addDocument(doc);
 		}
@@ -422,7 +422,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 		logger.info("La Saisie du Professionel de Sante := [" + pLibelleSaisie + "]");
 		List<Motif> resultat = new ArrayList<Motif>();
 		String saisieValide = extraireSaiSieValide(pLibelleSaisie);
-
+		System.setProperty("file.encoding", "utf8");
 		if (saisieValide.length() > 1) {
 
 			IndexReader reader = null;
@@ -631,7 +631,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 				do {
 					Term term = terms.term();
 					if (term.field().endsWith(CHAMP_LIBELLE))
-						logger.info("[" + term.field() + "] == " + term.text().getBytes(Charset.forName("UTF8")).toString());
+						logger.info("[" + term.field() + "] == " + term.text());
 				} while (terms.next());
 			}
 			logger.debug("****** FIN : Affichage des tokens dans le libelle *******");
