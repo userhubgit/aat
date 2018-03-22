@@ -51,6 +51,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.Gson;
+
 import fr.cnam.model.Motif;
 import fr.cnam.service.LuceneIndexRecherche;
 import fr.cnam.util.AATLuceneAnalyzerUtil;
@@ -582,6 +584,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 	        
 	        logger.info("======= { Nombre de motif trouvé := " + hits.length + " } ===========\n");
 	        
+	        
 	        for (int i = 0; i < hits.length; i++) {
 	            ScoreDoc doc = hits[i];
 	            Document document = pSearcher.doc(doc.doc);
@@ -593,6 +596,9 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 	            System.out.println(pSearcher.explain(bq, doc.doc));
 //	            logger.info(pSearcher.explain(bq, doc.doc));
 	        }
+	        
+	        logger.info(new Gson().toJson(resultat));
+	        
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

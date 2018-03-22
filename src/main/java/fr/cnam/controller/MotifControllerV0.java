@@ -55,6 +55,7 @@ public class MotifControllerV0 {
 				listMotifView.add(MotifMapper.convertMotifToMotifView(motif));
 			}
 		}
+		logger.info(gson.toJson(listMotifView));
 		return gson.toJson(listMotifView);
 	}
 
