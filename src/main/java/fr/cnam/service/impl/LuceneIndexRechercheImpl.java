@@ -12,6 +12,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
 import java.text.ParseException;
@@ -50,6 +53,7 @@ import org.apache.lucene.util.Version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
@@ -433,6 +437,14 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 				logger.info("La saisie valide := [" + saisieNormalise + "]");
 				List<Motif> lListeMotif = null;
 				if (lListeMotif == null) {
+					
+					Resource res = resourceLoader.getResource("FichierReferentielMotifsAAT.csv");
+					List<String> readAllLines = Files.readAllLines(Paths.get(res.getURI()), StandardCharsets.UTF_8);
+					
+					logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+					logger.info(new Gson().toJson(readAllLines));
+					logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+					
 					InputStream inputStream = resourceLoader.getResource("FichierReferentielMotifsAAT.csv")
 							.getInputStream();
 					
