@@ -39,7 +39,7 @@ public final class AATLuceneAnalyzerUtil {
 	 * Elle permet d'etendre la liste de base FrenchAnalyzer.getDefaultStopSet()
 	 */
 	public static final String[] STOP_WORD = new String[] { "chez","-","droite","droit","gauche","drt","drte","gche","gches",
-			"gch","gauches","droites","dte","bilat�ral","bilat�rale","bilater","bilat","gau"};
+			"gch","gauches","droites","dte","bilatéral","bilatérale","bilater","bilat","gau"};
 
 	/**
 	 * Constructeur priv�.
