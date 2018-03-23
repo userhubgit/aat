@@ -579,7 +579,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			pSearcher.search(bq, collector);
 			ScoreDoc[] hits = collector.topDocs().scoreDocs;
 
-			logger.info("======= { Nombre de motif trouvé := " + hits.length + " } ===========\n");
+			logger.info("======= { Nombre de motif "+ new String("trouvé".getBytes() , Charset.forName("ANSI_X3.4-1968")) + " := " + hits.length + " } ===========\n");
 
 			for (int i = 0; i < hits.length; i++) {
 				ScoreDoc doc = hits[i];
