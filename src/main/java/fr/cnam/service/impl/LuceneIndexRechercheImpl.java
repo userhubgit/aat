@@ -211,7 +211,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			Document doc = new Document();
 
 			doc.add(new Field(CHAMP_CODE, pMotif.getCode(), Store.YES, Index.ANALYZED));
-			doc.add(new Field(CHAMP_LIBELLE, new String(pMotif.getLibelle().getBytes(), StandardCharsets.ISO_8859_1), Store.YES, Index.ANALYZED));
+			doc.add(new Field(CHAMP_LIBELLE, pMotif.getLibelle(), Store.YES, Index.ANALYZED));
 			doc.add(new Field(CHAMP_CODE_FONCTIONNEL, pMotif.getCodification(), Store.YES, Index.ANALYZED));
 
 			if (pMotif.getSynonymes() != null) {
@@ -646,7 +646,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			}
 			logger.debug("****** FIN : Affichage des tokens dans le libelle *******");
 
-			logger.info("Nombre de documents "+ new String("indexés".getBytes(), StandardCharsets.UTF_8) +" : ".concat(String.valueOf(i)));
+			logger.info("Nombre de documents indexés : ".concat(String.valueOf(i)));
 			logger.info("Taille (en byte) memoire du thesaurus := " + ramDirectory.sizeInBytes());
 			
 			writer.close();
