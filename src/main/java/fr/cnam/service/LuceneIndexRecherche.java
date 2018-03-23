@@ -10,7 +10,7 @@ import fr.cnam.model.Motif;
  * Service metier pour l'indexation de la recherche.
  *<p>
  * Description : Ce service permet de faire l'indexation en memoire
- * ou sur disque du référentiel CSV des motif AAT, et de lancer la
+ * ou sur disque du  rÃ©fÃ©rentiel CSV des motif AAT, et de lancer la
  * recherche des motifs synonymes.
  *</p>
  * @author ONDONGO-09929
@@ -18,25 +18,25 @@ import fr.cnam.model.Motif;
  */
 public interface LuceneIndexRecherche {
     /**
-     * Méthode permettant de faire l'indexation en memoire
-     * du référentiel passé en paramètre.
-     * @param pReferentielMotifAAT : le référentiel.
+     * MÃ©thode permettant de faire l'indexation en memoire
+     * du rÃ©fÃ©rentiel passÃ© en paramÃ¨tre.
+     * @param pReferentielMotifAAT : le rÃ©fÃ©rentiel.
      * @throws TechniqueException : Notification d'une erreur
      */
     void indexationMemoire(final File pReferentielMotifAAT);
 
     /**
-     * Méthode permettant de faire l'indexation en memoire
-     * du référentiel passé en paramètre.
-     * @param pReferentielMotifAAT : le référentiel.
+     * MÃ©thode permettant de faire l'indexation en memoire
+     * du rÃ©fÃ©rentiel passÃ© en paramÃ¨tre.
+     * @param pReferentielMotifAAT : le rÃ©fÃ©rentiel.
      * @throws TechniqueException : Notification d'une erreur
      */
     void indexationMemoire(final List < Motif > pReferentielMotifAAT);
 
     /**
-     * Méthode permettant de faire l'indexation en memoire
-     * du référentiel passé en paramètre.
-     * @param pReferentielMotifAAT : le référentiel.
+     * MÃ©thode permettant de faire l'indexation en memoire
+     * du rÃ©fÃ©rentiel passÃ© en paramÃ¨tre.
+     * @param pReferentielMotifAAT : le rÃ©fÃ©rentiel.
      * @param pDisquePath : le repertoire disque de stockage.
      * @throws TechniqueException : Notification d'une erreur
      */
@@ -44,7 +44,7 @@ public interface LuceneIndexRecherche {
             final File pDisquePath);
 
     /**
-     * Méthode permettant la recherche d'un ou plusieur motif.
+     * MÃ©thode permettant la recherche d'un ou plusieur motif.
      * @param pLibelleSaisie : la saisie du PS.
      * @param pHeaderDesirTO : contexte DESIR
      * @return : la liste des motifs correspondant.
@@ -53,7 +53,7 @@ public interface LuceneIndexRecherche {
     List < Motif > rechercher(final String pLibelleSaisie);
     
     /**
-     * Méthode permettant la recherche d'un ou plusieur motif.
+     * MÃ©thode permettant la recherche d'un ou plusieur motif.
      * @param pLibelleSaisie : la saisie du PS.
      * @param pHeaderDesirTO : contexte DESIR
      * @return : la liste des motifs correspondant.
@@ -62,9 +62,9 @@ public interface LuceneIndexRecherche {
     List < Motif > rechercherV0(final String pLibelleSaisie);
 
     /**
-     * Méthode permettant de faire l'indexation en memoire
-     * du référentiel passé en paramètre.
-     * @param pReferentielMotifAAT : le référentiel.
+     * MÃ©thode permettant de faire l'indexation en memoire
+     * du rÃ©fÃ©rentiel passÃ© en paramÃ¨tre.
+     * @param pReferentielMotifAAT : le rÃ©fÃ©rentiel.
      * @throws TechniqueException : Notification d'une erreur.
      */
 	void indexationMemoireV0(final List<Motif> pReferentielMotifAAT);

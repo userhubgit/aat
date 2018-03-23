@@ -22,7 +22,7 @@ public class ConfUtils {
 		InputStream inputStream = null;
 		String propValue = "";
 		
-		// Determiner le fichier properties à lire.
+		// Determiner le fichier properties Ã  lire.
 		String configFile = null;
 		if(propName.contains(MONGODB_FILE)){
 			configFile = "mongodb.properties";

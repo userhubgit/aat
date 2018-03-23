@@ -35,14 +35,14 @@ import org.tartarus.snowball.ext.FrenchStemmer;
 public final class AATLuceneAnalyzerUtil {
 
 	/**
-	 * Liste des termes ignores à l'indexation et pour la recherche dans lucene.
+	 * Liste des termes ignores  Ã  l'indexation et pour la recherche dans lucene.
 	 * Elle permet d'etendre la liste de base FrenchAnalyzer.getDefaultStopSet()
 	 */
 	public static final String[] STOP_WORD = new String[] { "chez","-","droite","droit","gauche","drt","drte","gche","gches",
-			"gch","gauches","droites","dte","bilatéral","bilatérale","bilater","bilat","gau"};
+			"gch","gauches","droites","dte","bilatï¿½ral","bilatï¿½rale","bilater","bilat","gau"};
 
 	/**
-	 * Constructeur privé.
+	 * Constructeur privï¿½.
 	 */
 	private AATLuceneAnalyzerUtil() {
 		super();
@@ -137,7 +137,7 @@ public final class AATLuceneAnalyzerUtil {
 		return customAnalyzer;
 	}
 	/**
-	 * Cette methode permet d'etendre la liste, par defaut, des mots français,
+	 * Cette methode permet d'etendre la liste, par defaut, des mots franï¿½ais,
 	 * insignifiants pour etre indexes. Ex : le, la une etc..
 	 * 
 	 * @return la liste resultante.

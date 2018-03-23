@@ -10,11 +10,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
 import java.text.ParseException;
@@ -53,7 +49,6 @@ import org.apache.lucene.util.Version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
@@ -89,7 +84,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 	 */
 	private static String MSG_ERREUR_RECHERCHE = "Une erreur s'est produite lors la recherche de motif pour le terme:=%s";
 
-	/** Maximum de resultat de l'autocomplétion. */
+	/** Maximum de resultat de l'autocomplÃ©tion. */
 	private static final int MAX_RESULT = 10;
 
 	/** Le champ code du motif. */
@@ -173,7 +168,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 				}
 			}
 
-			logger.info("Nombre de documents indexés : ".concat(String.valueOf(i)));
+			logger.info("Nombre de documents indexÃ©s : ".concat(String.valueOf(i)));
 			br.close();
 			writer.close();
 		} catch (Exception e) {
@@ -202,7 +197,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 	 * @param pWriter
 	 *            : indexeur.
 	 * @param pMotif
-	 *            : l'objet à indexer
+	 *            : l'objet Ã  indexer
 	 * @throws Exception
 	 *             : Notification d'erreur.
 	 */
@@ -227,10 +222,10 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 	}
 
 	/**
-	 * Méthode permettant de valider si la saisie fait l'objet d'une recherche
-	 * par autocomplétion.
+	 * MÃ©thode permettant de valider si la saisie fait l'objet d'une recherche
+	 * par autocomplÃ©tion.
 	 *
-	 * L'idée est retirer tous les termes insignifiants contenus dans la saisie
+	 * L'idï¿½e est retirer tous les termes insignifiants contenus dans la saisie
 	 * de l'utulisateur.
 	 *
 	 * @param pSaisieUtilisateur
@@ -338,7 +333,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			}
 			logger.debug("****** FIN : Affichage des tokens dans le libelle *******");
 
-			logger.info("Nombre de documents indexés : ".concat(String.valueOf(i)));
+			logger.info("Nombre de documents indexÃ©s : ".concat(String.valueOf(i)));
 			logger.info("Taille (en byte) memoire du thesaurus := " + ramDirectory.sizeInBytes());
 			writer.close();
 		} catch (Exception e) {
@@ -524,7 +519,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			pSearcher.search(bq, collector);
 			ScoreDoc[] hits = collector.topDocs().scoreDocs;
 
-			logger.info("======= { Nombre de motif trouvé := " + hits.length + " } ===========\n");
+			logger.info("======= { Nombre de motif trouvï¿½ := " + hits.length + " } ===========\n");
 
 			for (int i = 0; i < hits.length; i++) {
 				ScoreDoc doc = hits[i];
@@ -579,7 +574,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			pSearcher.search(bq, collector);
 			ScoreDoc[] hits = collector.topDocs().scoreDocs;
 
-			logger.info("======= { Nombre de motif "+ new String("trouvé".getBytes() , Charset.forName("ANSI_X3.4-1968")) + " := " + hits.length + " } ===========\n");
+			logger.info("======= { Nombre de motif "+ new String("trouvï¿½".getBytes() , Charset.forName("ANSI_X3.4-1968")) + " := " + hits.length + " } ===========\n");
 
 			for (int i = 0; i < hits.length; i++) {
 				ScoreDoc doc = hits[i];
@@ -646,7 +641,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			}
 			logger.debug("****** FIN : Affichage des tokens dans le libelle *******");
 
-			logger.info("Nombre de documents indexés : ".concat(String.valueOf(i)));
+			logger.info("Nombre de documents indexÃ©s : ".concat(String.valueOf(i)));
 			logger.info("Taille (en byte) memoire du thesaurus := " + ramDirectory.sizeInBytes());
 			
 			writer.close();

@@ -30,7 +30,7 @@ form div.groupeElements{
 }
 
 
-/*éléments de formulaires*/
+/*ï¿½lï¿½ments de formulaires*/
 label{
 	font-size:1em;
 	line-height:1.3em;
@@ -56,7 +56,7 @@ input{
 	text-align:right;	
 }
 
-/*éléments obligatoires*/
+/*ï¿½lï¿½ments obligatoires*/
 form span.obligatoire {
 	display:inline-block;
 	width:10px;
@@ -195,7 +195,7 @@ form .choixImportants input{
 	height:14px;
 }
 
-/*boutons radios et cases à cocher*/
+/*boutons radios et cases Ã  cocher*/
 input[type=radio].horizontal,input[type=checkbox].horizontal{
 	margin:0 1px 0 2px;
 	margin:1px 1px 0 2px\9;/*hack < ie9*/
@@ -256,7 +256,7 @@ p.listeCasesRadios{
 	margin:0 0 5px 0 !important;
 	color:#555 !important
 }
-/*Bloc lié à des boutons radios*/
+/*Bloc liÃ© Ã  des boutons radios*/
 .blocBtRadio{
 	padding:0 5px 0 0;
 	margin:0;
@@ -297,7 +297,7 @@ body:first-of-type .blocBtRadio ul li label{top:0}/*chrome*/
 }
 
 
-/*liste déroulante*/
+/*liste dï¿½roulante*/
 label.liste{margin:3px 3px 0 0 !important;}
 select{
 	font-family: Verdana, Arial, Helvetica, sans-serif;	
@@ -416,7 +416,7 @@ span.btValiderSaisie{
 	cursor:pointer;
 }
 
-/*valeur monétaire*/
+/*valeur monï¿½taire*/
 span.valeurMonetaire{
 	display:inline-block;
 	vertical-align:middle;
@@ -458,7 +458,7 @@ input:focus:-moz-placeholder{color:#aaa}
 input:focus::-webkit-input-placeholder{color:#aaa}
 .input_placeholder{color:#888}
 
-/*pièces jointes*/
+/*piï¿½ces jointes*/
 input[type=file]{
 	position:relative;
 	text-align:right;
@@ -527,13 +527,13 @@ input[type=file]{
 	margin:0 0 0 5px;
 	background:url(../images/bt_supprimer.png) no-repeat;
 }
-/*bouton à droite d'un champ*/
+/*bouton Ã  droite d'un champ*/
 .droiteChamp{
 	position:relative;
 	top:1px;
 }
 
-/*plié/déplié sur item avec message d'erreur*//*item réversible*/
+/*pliï¿½/dï¿½pliï¿½ sur item avec message d'erreur*//*item rï¿½versible*/
 .item_blocDepliable,.item_reverse  {
     margin:0;
 	position:relative;
@@ -577,7 +577,7 @@ img.btAide{
 
 
 
-/*affichage résultats*/
+/*affichage rï¿½sultats*/
 label.resultat{
 	margin:0 3px 3px 0;
 	padding:0;
@@ -599,7 +599,7 @@ span.resultat{
 label.resultat.alignDroit,label.resultat.floatLeft{padding-top:1px}
 @media screen and (-webkit-min-device-pixel-ratio:0) { label.resultat.alignDroit,label.resultat.floatLeft{padding-top:2px;} }
 
-/*positionnement d'éléments de formulaire en pseudo tableaux*/
+/*positionnement d'ï¿½lï¿½ments de formulaire en pseudo tableaux*/
 .pseudotable{
 	display:table;
 	width:100%;
@@ -656,7 +656,7 @@ label.resultat.alignDroit,label.resultat.floatLeft{padding-top:1px}
 .pseudotable .row > label,.pseudotable .cell > label{font-weight:normal !important;}
 
 
-/*longueurs éléments*/
+/*longueurs ï¿½lï¿½ments*/
 .lg1{width:1%}
 .lg2{width:2%}
 .lg3{width:3%}
@@ -758,7 +758,7 @@ label.resultat.alignDroit,label.resultat.floatLeft{padding-top:1px}
 .lg99{width:99%}
 .lg100{width:100%}
 
-/*textes de conditions à cocher pour activer la validation de la page*/
+/*textes de conditions Ã  cocher pour activer la validation de la page*/
 .conditions{
 	display:inline-block;
 	margin:0 0 5px;

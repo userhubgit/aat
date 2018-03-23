@@ -50,10 +50,10 @@ td{
 tr.lien:hover{background:#e8ebf1;cursor:pointer}
 tr.even.lien:hover{background:#d4dfeb;cursor:pointer}
 
-/*Tableau sans tête de colonnes*/
+/*Tableau sans tï¿½te de colonnes*/
 table.tableau2 td{border-left: 1px solid #fff;vertical-align:middle !important}
 
-/*Alignement des données*/
+/*Alignement des donnï¿½es*/
 th.textes,td.textes{
 	text-align:left;	
 }
@@ -89,7 +89,7 @@ th.triDecroissant.h75{background:url(../images/tableau_fond75_haut.jpg) no-repea
 
 td.tri{padding-left:15px !important;}
 
-/*Colonne cases à cocher*/
+/*Colonne cases Ã  cocher*/
 th.cases,td.cases{
 	width:20px;
 	text-align:center;
@@ -183,7 +183,7 @@ tr.filtres th select{
 	font-size:1em;
 }
 
-/*affichage du nombre de lignes trouvées*/
+/*affichage du nombre de lignes trouvï¿½es*/
 #paginationBloc #nombresLignesTrouvees{
 	display:table-cell;
 	width:30%;
@@ -219,7 +219,7 @@ tr.filtres th select{
 }
 #btMultilignes a{margin:0;padding:0}
 
-/*éléments de pagination*/
+/*ï¿½lï¿½ments de pagination*/
 #pagination{
 	display:table-cell;
 	height:25px;

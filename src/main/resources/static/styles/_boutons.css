@@ -75,7 +75,7 @@ div.groupeBoutons .alignDroite{
 }
 div.groupeBoutons .alignGauche a.bouton,div.groupeBoutons .alignGauche a.boutonInaccessible{margin:0 6px 0 0 !important}
 div.groupeBoutons .alignDroite a.bouton,div.groupeBoutons .alignDroite a.boutonInaccessible{margin:0 0 0 6px !important}
-/*btCentre pour cadre à droite*/
+/*btCentre pour cadre Ã  droite*/
 .btCentre{
 	width:205px;
 	margin:0 !important;
