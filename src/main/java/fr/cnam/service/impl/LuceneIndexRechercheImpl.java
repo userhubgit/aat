@@ -646,7 +646,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			}
 			logger.debug("****** FIN : Affichage des tokens dans le libelle *******");
 
-			logger.info("Nombre de documents "+ new String("indexés".getBytes(), StandardCharsets.US_ASCII) +" : ".concat(String.valueOf(i)));
+			logger.info("Nombre de documents "+ new String("indexés".getBytes(), StandardCharsets.UTF_8) +" : ".concat(String.valueOf(i)));
 			logger.info("Taille (en byte) memoire du thesaurus := " + ramDirectory.sizeInBytes());
 			
 			writer.close();
