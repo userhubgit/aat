@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
 import java.text.ParseException;
@@ -206,7 +207,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			Document doc = new Document();
 
 			doc.add(new Field(CHAMP_CODE, pMotif.getCode(), Store.YES, Index.ANALYZED));
-			doc.add(new Field(CHAMP_LIBELLE, pMotif.getLibelle(), Store.YES, Index.ANALYZED));
+			doc.add(new Field(CHAMP_LIBELLE, new String(pMotif.getLibelle().getBytes(), StandardCharsets.UTF_8), Store.YES, Index.ANALYZED));
 			doc.add(new Field(CHAMP_CODE_FONCTIONNEL, pMotif.getCodification(), Store.YES, Index.ANALYZED));
 
 			if (pMotif.getSynonymes() != null) {
