@@ -211,7 +211,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			Document doc = new Document();
 
 			doc.add(new Field(CHAMP_CODE, pMotif.getCode(), Store.YES, Index.ANALYZED));
-			doc.add(new Field(CHAMP_LIBELLE, pMotif.getLibelle(), Store.YES, Index.ANALYZED));
+			doc.add(new Field(CHAMP_LIBELLE, new String(pMotif.getLibelle().getBytes(), StandardCharsets.ISO_8859_1), Store.YES, Index.ANALYZED));
 			doc.add(new Field(CHAMP_CODE_FONCTIONNEL, pMotif.getCodification(), Store.YES, Index.ANALYZED));
 
 			if (pMotif.getSynonymes() != null) {
@@ -438,12 +438,12 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 				List<Motif> lListeMotif = null;
 				if (lListeMotif == null) {
 					
-					Resource res = resourceLoader.getResource("FichierReferentielMotifsAAT.csv");
-					List<String> readAllLines = Files.readAllLines(Paths.get(res.getURI()), StandardCharsets.UTF_8);
-					
-					logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-					logger.info(new Gson().toJson(readAllLines));
-					logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+//					Resource res = resourceLoader.getResource("classpath:FichierReferentielMotifsAAT.csv");
+//					List<String> readAllLines = Files.readAllLines(Paths.get(res.getURI()), StandardCharsets.UTF_8);
+//					
+//					logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+//					logger.info(new Gson().toJson(readAllLines));
+//					logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 					
 					InputStream inputStream = resourceLoader.getResource("FichierReferentielMotifsAAT.csv")
 							.getInputStream();
@@ -646,8 +646,9 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			}
 			logger.debug("****** FIN : Affichage des tokens dans le libelle *******");
 
-			logger.info("Nombre de documents indexés : ".concat(String.valueOf(i)));
+			logger.info("Nombre de documents "+ new String("indexés".getBytes(), StandardCharsets.ISO_8859_1) +" : ".concat(String.valueOf(i)));
 			logger.info("Taille (en byte) memoire du thesaurus := " + ramDirectory.sizeInBytes());
+			
 			writer.close();
 		} catch (Exception e) {
 			logger.error("Une erreur s'est produite lors de l'indexation du thesaurus : " + e);
