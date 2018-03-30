@@ -55,7 +55,10 @@ public class MotifController {
 				listMotifView.add(MotifMapper.convertMotifToMotifView(motif));
 			}
 		}
+		
+		logger.info("étant donné là je suis émotion élève quoi");
 		return gson.toJson(listMotifView);
+		
 	}
 
 	@GetMapping(path = "/aat/motif/cim10")
