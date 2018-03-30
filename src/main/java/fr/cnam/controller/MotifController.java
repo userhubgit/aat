@@ -56,7 +56,7 @@ public class MotifController {
 			}
 		}
 		
-		logger.info("étant ISO-8859-1=> etoile et mère UTF-8 étoilé et mère");
+		logger.info("étranger là entérite");
 		return gson.toJson(listMotifView);
 		
 	}
