@@ -56,7 +56,7 @@ public class MotifController {
 			}
 		}
 		
-		logger.info("étant donné là je suis émotion élève quoi etoile et mère ");
+		logger.info("étant ISO-8859-1=> etoile et mère UTF-8 étoilé et mère");
 		return gson.toJson(listMotifView);
 		
 	}
