@@ -56,7 +56,7 @@ public class MotifController {
 			}
 		}
 		
-		logger.info("étant donné là je suis émotion élève quoi");
+		logger.info("étant donné là je suis émotion élève quoi etoile et mère ");
 		return gson.toJson(listMotifView);
 		
 	}
