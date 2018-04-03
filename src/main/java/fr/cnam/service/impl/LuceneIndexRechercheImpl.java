@@ -322,17 +322,17 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			}
 
 			// Affichage des tokens dans le libelle
-			logger.debug("****** DEBUT : Affichage des tokens dans le libelle *******");
+			logger.info("****** DEBUT : Affichage des tokens dans le libelle *******");
 
 			TermEnum terms = writer.getReader().terms(new Term(CHAMP_LIBELLE));
 			if (null != terms.term()) {
 				do {
 					Term term = terms.term();
 					if (term.field().endsWith(CHAMP_LIBELLE))
-						logger.debug("[" + term.field() + "] == " + term.text());
+						logger.info("[" + term.field() + "] == " + term.text());
 				} while (terms.next());
 			}
-			logger.debug("****** FIN : Affichage des tokens dans le libelle *******");
+			logger.info("****** FIN : Affichage des tokens dans le libelle *******");
 
 			logger.info("Nombre de documents indexÃ©s : ".concat(String.valueOf(i)));
 			logger.info("Taille (en byte) memoire du thesaurus := " + ramDirectory.sizeInBytes());
@@ -433,14 +433,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 				logger.info("La saisie valide := [" + saisieNormalise + "]");
 				List<Motif> lListeMotif = null;
 				if (lListeMotif == null) {
-					
-//					Resource res = resourceLoader.getResource("classpath:FichierReferentielMotifsAAT.csv");
-//					List<String> readAllLines = Files.readAllLines(Paths.get(res.getURI()), StandardCharsets.UTF_8);
-//					
-//					logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-//					logger.info(new Gson().toJson(readAllLines));
-//					logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-					
+										
 					InputStream inputStream = resourceLoader.getResource("FichierReferentielMotifsAAT.csv")
 							.getInputStream();
 					
@@ -520,7 +513,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			pSearcher.search(bq, collector);
 			ScoreDoc[] hits = collector.topDocs().scoreDocs;
 
-			logger.info("======= { Nombre de motif trouvï¿½ := " + hits.length + " } ===========\n");
+			logger.info("======= { Nombre de motif trouvé := " + hits.length + " } ===========\n");
 
 			for (int i = 0; i < hits.length; i++) {
 				ScoreDoc doc = hits[i];
@@ -575,7 +568,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			pSearcher.search(bq, collector);
 			ScoreDoc[] hits = collector.topDocs().scoreDocs;
 
-			logger.info("======= { Nombre de motif "+ new String("trouvï¿½".getBytes() , Charset.forName("ANSI_X3.4-1968")) + " := " + hits.length + " } ===========\n");
+			logger.info("======= { Nombre de motif trouvé " + hits.length + " } ===========\n");
 
 			for (int i = 0; i < hits.length; i++) {
 				ScoreDoc doc = hits[i];
@@ -607,8 +600,8 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			// Renseignement des analyzer different pour les champs
 			// libelle et synonyme.
 			Map<String, Analyzer> analyzerPerField = new HashMap<String, Analyzer>();
-			analyzerPerField.put(CHAMP_LIBELLE, AATLuceneAnalyzerUtil.getAnalyzer());
-			analyzerPerField.put(CHAMP_SYNONYME, AATLuceneAnalyzerUtil.getSynonymeAnalyzer());
+			analyzerPerField.put(CHAMP_LIBELLE, AATLuceneAnalyzerUtil.getAnalyzerV0());
+			analyzerPerField.put(CHAMP_SYNONYME, AATLuceneAnalyzerUtil.getSynonymeAnalyzerV0());
 			PerFieldAnalyzerWrapper analyzers = new PerFieldAnalyzerWrapper(new StandardAnalyzer(Version.LUCENE_36),
 					analyzerPerField);
 
@@ -642,7 +635,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			}
 			logger.debug("****** FIN : Affichage des tokens dans le libelle *******");
 
-			logger.info("Nombre de documents indexÃ©s : ".concat(String.valueOf(i)));
+			logger.info("Nombre de documents indexés : ".concat(String.valueOf(i)));
 			logger.info("Taille (en byte) memoire du thesaurus := " + ramDirectory.sizeInBytes());
 			
 			writer.close();

@@ -1,29 +1,16 @@
 package fr.cnam.service;
 
-import java.io.IOException;
-import java.io.StringReader;
 import java.util.List;
-import java.util.Set;
 
-import org.apache.lucene.analysis.ASCIIFoldingFilter;
-import org.apache.lucene.analysis.LowerCaseFilter;
-import org.apache.lucene.analysis.StopFilter;
-import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.snowball.SnowballFilter;
-import org.apache.lucene.analysis.standard.StandardTokenizer;
-import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
-import org.apache.lucene.util.Version;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.tartarus.snowball.ext.FrenchStemmer;
 
 import fr.cnam.SpringBootWebApplication;
 import fr.cnam.model.Motif;
-import fr.cnam.util.AATLuceneAnalyzerUtil;
 
 
 @RunWith(SpringRunner.class)

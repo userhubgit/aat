@@ -50,7 +50,7 @@ public final class AATLuceneAnalyzerUtil {
 	 * @return {@link Analyzer}
 	 * @throws IOException
 	 */
-	public static Analyzer getAnalyzer() {
+	public static Analyzer getAnalyzerV0() {
 
 		Analyzer customAnalyzer = new Analyzer() {
 			@Override
@@ -72,7 +72,7 @@ public final class AATLuceneAnalyzerUtil {
 	 * @return {@link Analyzer}
 	 * @throws IOException
 	 */
-	public static Analyzer getAnalyzerV0() {
+	public static Analyzer getAnalyzer() {
 
 		Analyzer customAnalyzer = new Analyzer() {
 			@Override
