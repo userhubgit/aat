@@ -13,8 +13,6 @@ import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import javax.sql.DataSource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +25,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
-import fr.cnam.dao.EnqueteRepository;
 import fr.cnam.dto.MotifView;
 import fr.cnam.model.Enquete;
 import fr.cnam.model.Motif;
@@ -47,11 +44,11 @@ public class MotifController {
     @Autowired
     private ResourceLoader resourceLoader;
     
-	@Autowired
-	DataSource dataSource;
-	
-	@Autowired
-	EnqueteRepository enqueteRepository;
+//	@Autowired
+//	DataSource dataSource;
+//	
+//	@Autowired
+//	EnqueteRepository enqueteRepository;
 
 	private Gson gson = new Gson();
 
@@ -66,8 +63,8 @@ public class MotifController {
 			}
 			Enquete enquete = new Enquete();
 			enquete.setUserInput(msg);
-			logger.info("JE STOKE EN BASE DE DONNEES");
-			enqueteRepository.save(enquete);
+//			logger.info("JE STOKE EN BASE DE DONNEES");
+//			enqueteRepository.save(enquete);
 		}
 		
 		return gson.toJson(listMotifView);

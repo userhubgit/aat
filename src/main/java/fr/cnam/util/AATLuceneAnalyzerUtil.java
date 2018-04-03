@@ -1,6 +1,5 @@
 package fr.cnam.util;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 import java.text.Normalizer;
@@ -18,11 +17,8 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.WhitespaceTokenizer;
 import org.apache.lucene.analysis.fr.FrenchAnalyzer;
-import org.apache.lucene.analysis.fr.FrenchStemFilter;
 import org.apache.lucene.analysis.snowball.SnowballFilter;
 import org.apache.lucene.analysis.standard.StandardFilter;
-import org.apache.lucene.store.Directory;
-import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 import org.tartarus.snowball.ext.FrenchStemmer;
 
