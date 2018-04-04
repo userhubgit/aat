@@ -25,7 +25,7 @@ function browserSyncInit(baseDir, browser) {
     };
 
     browserSync.instance = browserSync.init({
-        startPath: 'PORTAIL/pse/pse_creer.html',
+        startPath: 'index.html',
         server: server,
         browser: browser,
         online: true // ne tentera pas de déterminer le statut du réseau, assume que vous êtes en ligne
@@ -71,7 +71,7 @@ gulp.task('styles', function () {
             .pipe($.rename('amelipro.min.css'))
             .pipe($.cleanCss())
             .pipe($.sourcemaps.write('/'))
-            .pipe(gulp.dest(symfonyWeb + 'css/'))
+            //.pipe(gulp.dest(symfonyWeb + 'css/'))
             .pipe(gulp.dest(src + 'css/'))
             .pipe(browserSync.stream())
             .on('end', function () {
@@ -89,7 +89,7 @@ gulp.task('styles-pdf', function () {
             .pipe($.sass().on('error', $.sass.logError))
             .pipe($.autoprefixer('last 2 version'))
             .pipe($.rename('rapport-pdf.css'))
-            .pipe(gulp.dest(symfonyWeb + 'css/'))
+            //.pipe(gulp.dest(symfonyWeb + 'css/'))
             .pipe(gulp.dest(src + 'css/'))
             .pipe(browserSync.stream())
             .on('end', function () {
@@ -120,7 +120,7 @@ gulp.task('scripts', function () {
             .pipe($.uglify())
             .pipe($.concat('amelipro.min.js'))
             .pipe($.sourcemaps.write('/'))
-            .pipe(gulp.dest(symfonyWeb + 'js/'))
+            //.pipe(gulp.dest(symfonyWeb + 'js/'))
             .pipe(gulp.dest(src + 'js/'))
             .pipe(browserSync.stream())
             .on('end', function () {
@@ -196,14 +196,14 @@ gulp.task('new-page', function () {
 /* Récupération d'une copie des fonts disponibles dans la charte amelipro*/
 gulp.task('get-fonts', function () {
     return gulp.src(npm + '/charte-amelipro/src/fonts/*')
-            .pipe(gulp.dest(symfonyWeb + 'fonts/'))
+            //.pipe(gulp.dest(symfonyWeb + 'fonts/'))
             .pipe(gulp.dest(src + 'fonts/'));
 });
 
 /* Récupération d'une copie des images disponibles dans la charte amelipro*/
 gulp.task('get-img', function () {
     return gulp.src(npm + '/charte-amelipro/src/img/*')
-            .pipe(gulp.dest(symfonyWeb + 'img/'))
+            //.pipe(gulp.dest(symfonyWeb + 'img/'))
             .pipe(gulp.dest(src + 'img/'));
 });
 
