@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Creator: CorelDRAW X7 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="40px" height="40px" version="1.0" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 3624 3624"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil1 {fill:#CCCCCC}
+    .fil0 {fill:#EDEDED}
+    .fil2 {fill:white}
+   ]]>
+  </style>
+ </defs>
+ <g id="Plan_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_466314416">
+   <circle class="fil0" cx="1812" cy="1812" r="1812"/>
+   <g>
+    <path id="document-file-xls" class="fil1" d="M911 1229c-117,0 -211,96 -211,212l0 743c0,116 95,211 211,211l1802 0c117,0 212,-96 212,-211l0 -743c0,-117 -96,-212 -212,-212l-1802 0 0 0z"/>
+    <path id="document-file-xls_0" class="fil2" d="M2395 1441c-117,0 -212,94 -212,212 0,117 94,212 212,212l105 0c59,0 107,47 107,106 0,59 -47,106 -106,106l-106 0c-59,0 -106,-48 -106,-105l0 -2 -106 0 0 1c0,117 95,212 212,212l105 0c118,0 213,-94 213,-212 0,-117 -94,-212 -212,-212l-105 0c-59,0 -107,-47 -107,-106 0,-58 47,-106 106,-106l106 0c58,0 106,48 106,106l106 0c0,-117 -95,-212 -213,-212l-105 0 0 0z"/>
+    <polygon id="document-file-xls_1" class="fil2" points="2077,2077 2077,2183 1547,2183 1547,1441 1653,1441 1653,2077 2077,2077 "/>
+    <polygon id="document-file-xls_2" class="fil2" points="1123,1812 912,1441 1017,1441 1176,1720 1335,1441 1441,1441 1229,1812 1441,2183 1335,2183 1176,1905 1017,2183 912,2183 1123,1812 "/>
+   </g>
+  </g>
+ </g>
+</svg>

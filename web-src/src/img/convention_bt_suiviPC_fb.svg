@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X7 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="34px" height="34px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 2035 2035"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil1 {fill:none}
+    .fil0 {fill:#004985}
+    .fil2 {fill:white}
+   ]]>
+  </style>
+    <clipPath id="id0">
+     <path d="M1018 0l0 0c559,0 1017,458 1017,1018l0 0c0,559 -458,1017 -1017,1017l0 0c-560,0 -1018,-458 -1018,-1017l0 0c0,-560 458,-1018 1018,-1018z"/>
+    </clipPath>
+ </defs>
+ <g id="Plan_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_530545696">
+   <path class="fil0" d="M1018 0l0 0c559,0 1017,458 1017,1018l0 0c0,559 -458,1017 -1017,1017l0 0c-560,0 -1018,-458 -1018,-1017l0 0c0,-560 458,-1018 1018,-1018z"/>
+   <g>
+   </g>
+   <g style="clip-path:url(#id0)">
+   </g>
+   <path class="fil1" d="M1018 0l0 0c559,0 1017,458 1017,1018l0 0c0,559 -458,1017 -1017,1017l0 0c-560,0 -1018,-458 -1018,-1017l0 0c0,-560 458,-1018 1018,-1018z"/>
+   <g id="_567964712">
+    <g>
+     <path class="fil2" d="M1009 683c-225,0 -401,135 -616,352 185,188 341,354 616,354 275,0 478,-211 617,-349 -143,-162 -345,-357 -617,-357zm0 605c-136,0 -247,-114 -247,-253 0,-138 111,-251 247,-251 136,0 247,113 247,251 0,140 -111,253 -247,253z"/>
+     <g>
+      <path class="fil2" d="M1009 947c0,-21 8,-41 21,-56 -6,-1 -14,-2 -21,-2 -79,0 -144,66 -144,146 0,82 65,147 144,147 80,0 144,-65 144,-147 0,-5 0,-11 -1,-18 -15,12 -34,18 -54,18 -50,0 -89,-38 -89,-88l0 0z"/>
+     </g>
+    </g>
+   </g>
+  </g>
+ </g>
+</svg>
