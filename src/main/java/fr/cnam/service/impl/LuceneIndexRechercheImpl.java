@@ -10,7 +10,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.charset.Charset;
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
 import java.text.ParseException;
@@ -41,11 +40,16 @@ import org.apache.lucene.search.BooleanClause.Occur;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.FuzzyQuery;
 import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.PhraseQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopScoreDocCollector;
+import org.apache.lucene.search.spans.SpanMultiTermQueryWrapper;
+import org.apache.lucene.search.spans.SpanNearQuery;
+import org.apache.lucene.search.spans.SpanQuery;
 import org.apache.lucene.store.RAMDirectory;
 import org.apache.lucene.util.Version;
+import org.hibernate.validator.internal.constraintvalidators.bv.future.FutureValidatorForChronoZonedDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -481,6 +485,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 	 * @throws ParseException
 	 * @throws IOException
 	 */
+	@SuppressWarnings("unchecked")
 	private List<Motif> singleTermSearch(String pTerm, IndexSearcher pSearcher) throws ParseException, IOException {
 
 		BooleanQuery bq = new BooleanQuery();
@@ -490,14 +495,22 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 
 		QueryParser libQuery = new QueryParser(Version.LUCENE_36, CHAMP_LIBELLE, ANALYZER);
 		libQuery.setDefaultOperator(Operator.AND);
-
+		libQuery.setFuzzyPrefixLength(2);
+		libQuery.setFuzzyMinSim(1);
 		Query query;
 
 		try {
 			query = libQuery.parse(str);
 			query.setBoost(LIBELLE_SCORE_BOOST);
-
-			FuzzyQuery fuzzyQuery = new FuzzyQuery(new Term(CHAMP_LIBELLE, pTerm));
+			
+			String[] termSaisie = pTerm.split(" ");
+			SpanQuery[] clauses = new SpanQuery[termSaisie.length];
+			for (int i = 0; i < termSaisie.length; i++) {
+				clauses[i] = new SpanMultiTermQueryWrapper(new FuzzyQuery(new Term(CHAMP_LIBELLE, termSaisie[i])));
+			}
+			
+//			FuzzyQuery fuzzyQuery = new FuzzyQuery(new Term(CHAMP_LIBELLE, pTerm));
+			SpanNearQuery snq = new SpanNearQuery(clauses, 2, true);
 
 			// Synonyme query
 			QueryParser qpSynonyme = new QueryParser(Version.LUCENE_36, CHAMP_SYNONYME,
@@ -505,9 +518,17 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			qpSynonyme.setDefaultOperator(Operator.AND);
 			Query querySynonyme = qpSynonyme.parse(pTerm);
 
+			PhraseQuery phraseQuery = new PhraseQuery();
+			phraseQuery.add(new Term(CHAMP_LIBELLE, pTerm));
+			
+			
+			
 			bq.add(query, Occur.SHOULD);
 			bq.add(querySynonyme, Occur.SHOULD);
-			bq.add(fuzzyQuery, Occur.SHOULD);
+//			bq.add(fuzzyQuery, Occur.SHOULD);
+			bq.add(snq, Occur.SHOULD);
+			
+			
 
 			TopScoreDocCollector collector = TopScoreDocCollector.create(MAX_RESULT, false);
 			pSearcher.search(bq, collector);
@@ -547,7 +568,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 		List<Motif> resultat = new ArrayList<Motif>();
 		String str = pTerm.trim().concat("*");
 
-		QueryParser libQuery = new QueryParser(Version.LUCENE_36, CHAMP_LIBELLE, AATLuceneAnalyzerUtil.getAnalyzer());
+		QueryParser libQuery = new QueryParser(Version.LUCENE_36, CHAMP_LIBELLE, AATLuceneAnalyzerUtil.getAnalyzerV0());
 		libQuery.setDefaultOperator(Operator.AND);
 
 		Query query;

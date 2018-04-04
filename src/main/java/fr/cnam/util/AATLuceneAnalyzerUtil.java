@@ -83,7 +83,7 @@ public final class AATLuceneAnalyzerUtil {
 				filter = new LowerCaseFilter(Version.LUCENE_36, filter);
 				filter = new ASCIIFoldingFilter(filter);
 				filter = new StopFilter(Version.LUCENE_36, filter, normaliserListe);
-				filter = new SnowballFilter(filter, new FrenchStemmer());
+//				filter = new SnowballFilter(filter, new FrenchStemmer());
 				return filter;
 				
 			}
