@@ -19,7 +19,7 @@
     &-label{
         color: #074778;
         font-family: $opensans-semi-bold;
-        font-size: 0.94rem;
+        font-size: 1rem;
         text-align: center;
         padding: 0;
         margin: 0;
@@ -28,8 +28,10 @@
     &-input{
 
         position: relative;
-        
+
         & input{
+            font-family: $opensans-semi-bold;
+            font-size: .81rem;
             height: 44px;
             width: 100%;
             border: none !important;
@@ -52,7 +54,7 @@
 }
 
 .capsule{
-    background: $gris-5;
+    background: $gris-6;
     padding: 9px 15px;
     margin-top: 5px;
     cursor: pointer;
@@ -115,6 +117,11 @@
                 background-color: $bleu-3;
             }
         }
+
+        &.selected{
+            color: $blanc;
+            background-color: $bleu-3;
+        }
     }
 }
 
@@ -132,15 +139,25 @@
 
         & li{
             padding-left:25px;
-            margin-bottom: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+
             &.lettre{
                 padding-left:0;
                 font-size: 1.75rem;
                 color: $gris-2;
+                &:hover{
+                    background-color: transparent;
+                }
             }
 
             &.active{
                 font-family: $opensans-semi-bold;
+            }
+
+            &:hover{
+                background-color: #EBF8FF;
             }
         }
     }
@@ -150,7 +167,7 @@
 .motif-selectionne{
     font-family: $opensans-semi-bold;
     color: $bleu-5;
-    font-size: .94rem;
+    font-size: 1rem;
 }
 
 .motif-selectionne a{
@@ -170,4 +187,8 @@ textarea{
 .pictogramme{
     @include pictogramme-svg("printemps","picto_printemps","","");
     @include pictogramme-svg("votre-avis","picto_votreAvis","","");
+}
+
+h3{
+    font-size: 1rem;
 }

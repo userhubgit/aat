@@ -27,7 +27,7 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-10"> 
                                 <div id="motifs-plus-frequents" class="row small-spacer">
-                                    <div class="col-xs-12 col-md-3 texte-courant-semi-gras texte-turquoise-3"> 
+                                    <div class="small-spacer col-xs-12 col-md-3 texte-courant-semi-gras texte-turquoise-3"> 
                                         LES PLUS FRÉQUENTS
                                     </div>
                                     <div class="col-xs-12 col-md-8">
@@ -38,7 +38,7 @@
                                     </div>
                                 </div>
                                 <div id="motifs-en-ce-moment" class="row small-spacer">
-                                    <div class="col-xs-12 col-md-3 texte-courant-semi-gras texte-vert-1"> 
+                                    <div class="small-spacer  col-xs-12 col-md-3 texte-courant-semi-gras texte-vert-1"> 
                                         <span class="pictogramme-svg-printemps large"></span> EN CE MOMENT
                                     </div>
                                     <div class="col-xs-12 col-md-8">
@@ -59,18 +59,18 @@
 
                         <div class="motif-selectionne">
                             <input type="hidden" id="id-motif-selectionne" value=""/>
-                            <span id="nom-motif-selectionne">Rupture des tendons de la coiffe des rotateurs</span>
+                            <span id="nom-motif-selectionne"></span>
                             <a id="reset-motif" class="pictogramme-svg-suppression-2 large"></a>
                         </div>
 
                         <div id="categorie-motif" class="collapse">
-                            <p class="small-spacer texte-turquoise-3">
-                                <span class="pictogramme-svg-information"></span>
-                                Le motif saisi est inconnu, veuillez préciser une catégorie de pathologies.
-                            </p>
+                            <div class="small-spacer texte-turquoise-3">
+                                <span class="pictogramme-svg-information pull-left"></span>
+                                <p>Le motif saisi est inconnu, veuillez préciser une catégorie de pathologies.</p>
+                            </div>
                             <div class="row">
-                                <div class="col-xs-6">
-                                    <select class="form-control">
+                                <div class="col-xs-10 col-sm-6">
+                                    <select class="row small-spacer form-control">
                                         <option>Maladies du système ostéo-articulaire, des muscles et du tissu conjonctif</option>
                                         <option>Troubles mentaux et du comportement</option>
                                         <option>Lésions traumatiques</option>
@@ -142,7 +142,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <h4 class="modal-title">Liste complète des motifs d’arrêt de travail</h4>
+                <h4 class="modal-title">Liste complète des motifs</h4>
             </div>
             <div class="modal-body">
                 <p>Recherche d’un motif par choix alphabétique :</p>

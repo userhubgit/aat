@@ -90,6 +90,9 @@ $(document).ready(function () {
     $('.alphabet .lettre.active').click(function () {
         var position = $('#' + $(this).text()).offset().top - $('.liste-motifs').offset().top + $('.liste-motifs').scrollTop();
         $('.liste-motifs').animate({scrollTop: position}, 50);
+        
+        $('.alphabet .lettre.active').removeClass('selected'),
+        $(this).addClass('selected');
     });
 
     $('#complement-info-motif').on('keyup change', function () {

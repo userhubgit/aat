@@ -164,9 +164,9 @@ gulp.task('watch', function () {
 /* Lancer un serveur locale à partir  du dossier src */
 gulp.task('serve', ['watch'], function () {
 
-   /* gulp.start('styles');
+    gulp.start('styles');
     gulp.start('scripts');
-    gulp.start('html'); */
+    gulp.start('html');
 
     browserSyncInit([
         src]);
