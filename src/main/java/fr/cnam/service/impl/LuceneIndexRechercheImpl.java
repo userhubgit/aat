@@ -49,7 +49,6 @@ import org.apache.lucene.search.spans.SpanNearQuery;
 import org.apache.lucene.search.spans.SpanQuery;
 import org.apache.lucene.store.RAMDirectory;
 import org.apache.lucene.util.Version;
-import org.hibernate.validator.internal.constraintvalidators.bv.future.FutureValidatorForChronoZonedDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -150,16 +149,16 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			// + ramDirectory.ramBytesUsed());
 
 			// Affichage des tokens dans le libelle
-			logger.debug("****** DEBUT : Affichage des tokens dans le libelle *******");
-			TermEnum terms = writer.getReader().terms(new Term(CHAMP_LIBELLE));
-			if (terms.term() != null) {
-				do {
-					Term term = terms.term();
-					if (term.field().endsWith(CHAMP_LIBELLE))
-						logger.info("[" + term.field() + "] == " + term.text());
-				} while (terms.next());
-			}
-			logger.debug("****** FIN : Affichage des tokens dans le libelle *******");
+//			logger.debug("****** DEBUT : Affichage des tokens dans le libelle *******");
+//			TermEnum terms = writer.getReader().terms(new Term(CHAMP_LIBELLE));
+//			if (terms.term() != null) {
+//				do {
+//					Term term = terms.term();
+//					if (term.field().endsWith(CHAMP_LIBELLE))
+//						logger.info("[" + term.field() + "] == " + term.text());
+//				} while (terms.next());
+//			}
+//			logger.debug("****** FIN : Affichage des tokens dans le libelle *******");
 
 			if (!(ramDirectory.sizeInBytes() > 0)) {
 				while ((line = br.readLine()) != null) {
@@ -326,19 +325,20 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			}
 
 			// Affichage des tokens dans le libelle
-			logger.info("****** DEBUT : Affichage des tokens dans le libelle *******");
+//			logger.info("****** DEBUT : Affichage des tokens dans le libelle *******");
+//
+//			TermEnum terms = writer.getReader().terms(new Term(CHAMP_LIBELLE));
+//			if (null != terms.term()) {
+//				do {
+//					Term term = terms.term();
+//					if (term.field().endsWith(CHAMP_LIBELLE))
+//						logger.info("[" + term.field() + "] == " + term.text());
+//				} while (terms.next());
+//			}
+//			logger.info("****** FIN : Affichage des tokens dans le libelle *******");
 
-			TermEnum terms = writer.getReader().terms(new Term(CHAMP_LIBELLE));
-			if (null != terms.term()) {
-				do {
-					Term term = terms.term();
-					if (term.field().endsWith(CHAMP_LIBELLE))
-						logger.info("[" + term.field() + "] == " + term.text());
-				} while (terms.next());
-			}
-			logger.info("****** FIN : Affichage des tokens dans le libelle *******");
-
-			logger.info("Nombre de documents indexÃ©s : ".concat(String.valueOf(i)));
+			logger.info("Nombre de documents indexés : ".concat(String.valueOf(i)));
+			
 			logger.info("Taille (en byte) memoire du thesaurus := " + ramDirectory.sizeInBytes());
 			writer.close();
 		} catch (Exception e) {
@@ -506,11 +506,11 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			String[] termSaisie = pTerm.split(" ");
 			SpanQuery[] clauses = new SpanQuery[termSaisie.length];
 			for (int i = 0; i < termSaisie.length; i++) {
-				clauses[i] = new SpanMultiTermQueryWrapper(new FuzzyQuery(new Term(CHAMP_LIBELLE, termSaisie[i])));
+				clauses[i] = new SpanMultiTermQueryWrapper<>(new FuzzyQuery(new Term(CHAMP_LIBELLE, termSaisie[i])));
 			}
 			
 //			FuzzyQuery fuzzyQuery = new FuzzyQuery(new Term(CHAMP_LIBELLE, pTerm));
-			SpanNearQuery snq = new SpanNearQuery(clauses, 2, true);
+			SpanNearQuery snq = new SpanNearQuery(clauses, 2, false);
 
 			// Synonyme query
 			QueryParser qpSynonyme = new QueryParser(Version.LUCENE_36, CHAMP_SYNONYME,
@@ -643,18 +643,18 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 				}
 			}
 
-			// Affichage des tokens dans le libelle
-			logger.debug("****** DEBUT : Affichage des tokens dans le libelle *******");
-
-			TermEnum terms = writer.getReader().terms(new Term(CHAMP_LIBELLE));
-			if (null != terms.term()) {
-				do {
-					Term term = terms.term();
-					if (term.field().endsWith(CHAMP_LIBELLE))
-						logger.info("[" + term.field() + "] == " + term.text());
-				} while (terms.next());
-			}
-			logger.debug("****** FIN : Affichage des tokens dans le libelle *******");
+//			// Affichage des tokens dans le libelle
+//			logger.debug("****** DEBUT : Affichage des tokens dans le libelle *******");
+//
+//			TermEnum terms = writer.getReader().terms(new Term(CHAMP_LIBELLE));
+//			if (null != terms.term()) {
+//				do {
+//					Term term = terms.term();
+//					if (term.field().endsWith(CHAMP_LIBELLE))
+//						logger.info("[" + term.field() + "] == " + term.text());
+//				} while (terms.next());
+//			}
+//			logger.debug("****** FIN : Affichage des tokens dans le libelle *******");
 
 			logger.info("Nombre de documents indexés : ".concat(String.valueOf(i)));
 			logger.info("Taille (en byte) memoire du thesaurus := " + ramDirectory.sizeInBytes());
