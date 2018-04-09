@@ -42,13 +42,29 @@
 
         & button{
             border:none;
-            background: $blanc url("#{$image-url}/valid_saisie.svg") no-repeat center;
+            background: $blanc url("#{$image-url}/picto_coche_noOk.svg") no-repeat center;
+            background-size: 24px;
             height: 40px;
             width: 40px;
             position: absolute;
             right: 20px;
             top: 12px;
+
+            &.focus{
+                border:none;
+                background: $blanc url("#{$image-url}/coche_ok.svg") no-repeat center;
+                background-size: 24px;
+                height: 40px;
+                width: 40px;
+                position: absolute;
+                right: 20px;
+                top: 12px;
+            }
         }
+
+
+
+
     }
 
 }
@@ -60,6 +76,7 @@
     cursor: pointer;
     display: inline-block;
     max-width: 100%;
+    text-transform: uppercase;
 
     &-vert{
         color: $vert-1;

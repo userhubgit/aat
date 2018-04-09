@@ -90,10 +90,20 @@ $(document).ready(function () {
     $('.alphabet .lettre.active').click(function () {
         var position = $('#' + $(this).text()).offset().top - $('.liste-motifs').offset().top + $('.liste-motifs').scrollTop();
         $('.liste-motifs').animate({scrollTop: position}, 50);
-        
+
         $('.alphabet .lettre.active').removeClass('selected'),
-        $(this).addClass('selected');
+                $(this).addClass('selected');
     });
+
+
+    /* $('#motifs-plus-frequents .capsule, #motifs-en-ce-moment .capsule').hover(
+            function () {
+                $(this).html($(this).data('nom-long-motif'));
+            },
+            function () {
+                $(this).html($(this).data('nom-motif'));
+            }
+    ); */
 
     $('#complement-info-motif').on('keyup change', function () {
         var text = $(this).val();
@@ -126,6 +136,16 @@ $(document).ready(function () {
 
     $("#motif-aat-input").easyAutocomplete(optionsAutocompleteMotifs);
 
+    $("#motif-aat-input").keyup(
+            function () {
+                if ($(this).val().length >= 3) {
+                    $('#recherche-button').addClass('focus');
+                } else {
+                    $('#recherche-button').removeClass('focus');
+                }
+            }
+    );
+
     function selectMotif(idMotif, nomMotif) {
         if (nomMotif != '') {
             $('#options-recherche').hide();
@@ -146,6 +166,7 @@ $(document).ready(function () {
         $('#nom-motif-selectionne').text('');
         $('#id-motif-selectionne').val('');
         $('#motif-aat-input').val('');
+        $('#recherche-button').removeClass('focus');
     }
 
     $('#recherche-button').click(function () {
