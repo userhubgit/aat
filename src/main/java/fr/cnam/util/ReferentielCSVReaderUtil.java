@@ -11,7 +11,7 @@ import java.util.List;
 import fr.cnam.model.Motif;
 
 /**
- * Classe utilitaire qui permet de lire le rÃ©fÃ©rentiel(CSV) de motif AAT.
+ * Classe utilitaire qui permet de lire le référentiel(CSV) de motif AAT.
  *
  * @author ONDONGO-09929
  *
@@ -29,29 +29,13 @@ public final class ReferentielCSVReaderUtil {
     public static final String VIDE = "";
 
     /**
-     * Separateur des donnï¿½es.
+     * Separateur des données.
      */
     public static final String CSV_SERAPTOR = ";";
     /**
-     * Sï¿½parateur des synonymes.
+     * Séparateur des synonymes.
      */
     public static final String SYNONYME_SERAPTOR = ",";
-    /**
-     * Position de la valeur de l'attribut code.
-     */
-    public static final int CSV_CODE_INDEX = 0;
-    /**
-     * Position de la valeur de l'attribut libelle.
-     */
-    public static final int CSV_LIBELLE_INDEX = 1;
-    /**
-     * Position de la valeur de l'attribut codification.
-     */
-    public static final int CSV_CODIFICATION_INDEX = 2;
-    /**
-     * Position de la valeur de l'attribut synonymes.
-     */
-    public static final int CSV_SYNONYME_INDEX = 3;
 
     /**
      * Constructeur.
@@ -61,7 +45,7 @@ public final class ReferentielCSVReaderUtil {
     }
 
     /**
-     * MÃ©thode qui permet de lire une ligne spï¿½cifique du fichier CSV.
+     * Méthode qui permet de lire une ligne spécifique du fichier CSV.
      * @param pLigne : la ligne en cours de lecture
      * @return : une instance de {@link Motif}
      * qui encapsule les infos de la ligne
@@ -70,17 +54,17 @@ public final class ReferentielCSVReaderUtil {
         final String[] fields = pLigne.split(CSV_SERAPTOR);
         Motif motif = new Motif();
         
-        if (fields.length >= CSV_SYNONYME_INDEX) {
+        if (fields.length >= Constante.CSV_SYNONYME_INDEX) {
         	
-            motif.setCode(fields[CSV_CODE_INDEX]);
-            motif.setLibelle(fields[CSV_LIBELLE_INDEX]);
-            motif.setCodification(fields[CSV_CODIFICATION_INDEX]);
+            motif.setCode(fields[Constante.CSV_CODE_INDEX]);
+            motif.setLibelle(fields[Constante.CSV_LIBELLE_INDEX]);
+            motif.setCodification(fields[Constante.CSV_CODIFICATION_INDEX]);
 
             String syn = "";
-            if (fields.length > CSV_SYNONYME_INDEX) {
-                String synonymesString = fields[CSV_SYNONYME_INDEX];
+            if (fields.length > Constante.CSV_SYNONYME_INDEX) {
+                String synonymesString = fields[Constante.CSV_SYNONYME_INDEX];
                 String[] tableDeSynonyme = synonymesString
-                .split(SYNONYME_SERAPTOR);
+                .split(Constante.SYNONYME_SERAPTOR);
                 for (String synonyme : tableDeSynonyme) {
                     syn = syn + ESPACE + synonyme;
                 }
@@ -91,9 +75,9 @@ public final class ReferentielCSVReaderUtil {
     }
 
     /**
-     * MÃ©thode qui permet de lire toute
-     * les lignes du fichier (rï¿½fï¿½rentiel) CSV.
-     * @param pReferentielCSV : le fichier rÃ©fÃ©rentiel.
+     * Méthode qui permet de lire toute
+     * les lignes du fichier (référentiel) CSV.
+     * @param pReferentielCSV : le fichier référentiel.
      * @return : liste d'objet de la classe {@link Motif}.
      * @throws IOException : Notification d'une erreur technique
      * lors de la lecture du fichier.
@@ -110,27 +94,26 @@ public final class ReferentielCSVReaderUtil {
         while ((line = br.readLine()) != null) {
 
             String[] fields = line.split(CSV_SERAPTOR);
-            if (fields.length >= CSV_SYNONYME_INDEX) {
+            if (fields.length >= Constante.CSV_SYNONYME_INDEX) {
             	Motif motifEncours = new Motif();
-                motifEncours.setCode(fields[CSV_CODE_INDEX]);
-                motifEncours.setLibelle(fields[CSV_LIBELLE_INDEX]);
-                motifEncours.setCodification(fields[CSV_CODIFICATION_INDEX]);
+                motifEncours.setCode(fields[Constante.CSV_CODE_INDEX]);
+                motifEncours.setLibelle(fields[Constante.CSV_LIBELLE_INDEX]);
+                motifEncours.setCodification(fields[Constante.CSV_CODIFICATION_INDEX]);
+                
+                if (fields.length > Constante.CSV_ACRONYME_INDEX) {
+                    String acroonymesString = fields[Constante.CSV_ACRONYME_INDEX];
+                    String[] tableAcronyme = acroonymesString
+                        .split(SYNONYME_SERAPTOR);
+                    motifEncours.setAcronymes(Arrays.asList(tableAcronyme));
+                }
 
-                if (fields.length > CSV_SYNONYME_INDEX) {
-                    String synonymesString = fields[CSV_SYNONYME_INDEX];
+                if (fields.length > Constante.CSV_SYNONYME_INDEX) {
+                    String synonymesString = fields[Constante.CSV_SYNONYME_INDEX];
                     String[] tableDeSynonyme = synonymesString
                         .split(SYNONYME_SERAPTOR);
-//                    String syn = motifEncours.getSynonymes();
-//
-//                    if (null == syn) {
-//                        syn = "";
-//                    }
-//                    for (String synonyme : tableDeSynonyme) {
-//                        syn = syn + ESPACE + synonyme;
-//                    }
-//                    motifEncours.setSynonymes(syn);
                     motifEncours.setSynonymes(Arrays.asList(tableDeSynonyme));
                 }
+                
                 liste.add(motifEncours);
             }
         }

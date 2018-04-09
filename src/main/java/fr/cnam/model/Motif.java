@@ -23,6 +23,12 @@ public class Motif implements Serializable{
 	
 	private List<String> synonymes;
 	
+	private List<String> acronymes;
+	
+	private String generique;
+	
+	private String description;
+	
 	private byte[] dureeHTML;
 
 	private byte[] dureeXML;
@@ -99,5 +105,29 @@ public class Motif implements Serializable{
 	 */
 	public void setDureeNewXML(byte[] dureeNewXML) {
 		this.dureeNewXML = dureeNewXML;
+	}
+
+	public List<String> getAcronymes() {
+		return acronymes;
+	}
+
+	public void setAcronymes(List<String> acronymes) {
+		this.acronymes = acronymes;
+	}
+
+	public String getGenerique() {
+		return generique;
+	}
+
+	public void setGenerique(String generique) {
+		this.generique = generique;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

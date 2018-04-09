@@ -20,42 +20,57 @@ public class LuceneIndexRechercheTest {
 	@Autowired
 	private LuceneIndexRecherche service;
 	
+	// Test libelle a partir de 2 caracteres.
 	@Test
-	public void testSaisieExacte() {
-		List<Motif> resultat = service.rechercher("Angine");
+	public void testLibelleSansErreur() {
+		List<Motif> resultat = service.rechercher("fr");
+		Assert.assertTrue(resultat.size() == 6);
+		Assert.assertTrue(resultat.get(0).getLibelle().equalsIgnoreCase("Fracture de la clavicule ou de la scapula"));	
+	}
+
+	// Test libelle avec erreurs dans l'ordre.
+	@Test
+	public void testLibelleAvecErreur1() {
+		List<Motif> resultat = service.rechercher("Décolement dechirure");
 		Assert.assertTrue(resultat.size() == 1);
-		Assert.assertTrue(resultat.get(0).getLibelle().equalsIgnoreCase("Angine"));
-		
+		Assert.assertTrue(resultat.get(0).getLibelle().equalsIgnoreCase("Décollement et déchirure de la rétine"));	
 	}
 	
+	// Test libelle avec erreurs dans le d�sordre.
 	@Test
-	public void test2(){
-		
-//		String input ="M�me";
-//		TokenStream tokenStream = new StandardTokenizer(
-//                Version.LUCENE_36, new StringReader(input ));
-//		
-//		Set<String> normaliserListe = AATLuceneAnalyzerUtil.normaliserListe(AATLuceneAnalyzerUtil.etendreFrenchStopWordSet());
-//		tokenStream = new LowerCaseFilter(Version.LUCENE_36, tokenStream);
-//		tokenStream = new ASCIIFoldingFilter(tokenStream);
-//        tokenStream = new StopFilter(Version.LUCENE_36, tokenStream, normaliserListe);
-//        tokenStream = new SnowballFilter(tokenStream, new FrenchStemmer());
-// 
-//        StringBuilder sb = new StringBuilder();
-//        CharTermAttribute charTermAttr = tokenStream.getAttribute(CharTermAttribute.class);
-//        
-//        try{
-//            while (tokenStream.incrementToken()) {
-//                if (sb.length() > 0) {
-//                    sb.append(" ");
-//                }
-//                sb.append(charTermAttr.toString());
-//            }
-//        }
-//        catch (IOException e){
-//            System.out.println(e.getMessage());
-//        }
-//        System.out.println(sb.toString());
+	public void testLibelleAvecErreur2() {
+		List<Motif> resultat = service.rechercher("dechirure décoement");
+		Assert.assertTrue(resultat.size() == 1);
+		Assert.assertTrue(resultat.get(0).getLibelle().equalsIgnoreCase("Décollement et déchirure de la rétine"));	
 	}
 	
+	// Test passant sur un acronyme
+	@Test
+	public void testAcronymePassant(){
+		List<Motif> resultat = service.rechercher("DNID");
+		Assert.assertTrue(resultat.size() == 1);
+		Assert.assertTrue(resultat.get(0).getLibelle().equalsIgnoreCase("Diabète"));
+	}
+	
+	// Test passant sur un acronyme
+	@Test
+	public void testAcronymePassant2(){
+		List<Motif> resultat = service.rechercher("DES");
+		Assert.assertTrue(resultat.size() == 1);
+		Assert.assertTrue(resultat.get(0).getLibelle().equalsIgnoreCase("Diabète"));
+	}
+	
+	// Test nont passant sur un acronyme
+	@Test
+	public void testAcronymeNonPassant(){
+		List<Motif> resultat = service.rechercher("DNIDs");
+		Assert.assertTrue(resultat.size() == 0);
+	}
+	
+	// Test synonyme
+	@Test
+	public void testSynonyme(){
+		List<Motif> resultat = service.rechercher("DNIDs");
+		Assert.assertTrue(resultat.size() == 0);
+	}
 }
