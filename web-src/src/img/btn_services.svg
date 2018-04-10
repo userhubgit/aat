@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X7 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="34px" height="34px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 1825 1825"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil1 {fill:#0087CF}
+    .fil0 {fill:#EDEDED}
+   ]]>
+  </style>
+ </defs>
+ <g id="Plan_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_606928328">
+   <g id="_420306208">
+    <path class="fil0" d="M1825 912c0,-252 -103,-480 -268,-646 -164,-164 -393,-266 -645,-266 -252,0 -480,102 -644,266 -166,166 -268,394 -268,646 0,252 102,479 268,645 164,165 392,268 644,268 252,0 479,-103 645,-268 165,-166 268,-393 268,-645z"/>
+    <g>
+     <g>
+      <path class="fil1" d="M545 432l0 0c73,0 132,59 132,131l0 0c0,73 -59,131 -132,131l0 0c-72,0 -131,-58 -131,-131l0 0c0,-72 59,-131 131,-131z"/>
+      <path class="fil1" d="M912 432l0 0c72,0 131,59 131,131l0 0c0,73 -59,131 -131,131l0 0c-73,0 -132,-58 -132,-131l0 0c0,-72 59,-131 132,-131z"/>
+      <path class="fil1" d="M1279 432l0 0c73,0 131,59 131,131l0 0c0,73 -58,131 -131,131l0 0c-72,0 -131,-58 -131,-131l0 0c0,-72 59,-131 131,-131z"/>
+     </g>
+     <g>
+      <path class="fil1" d="M545 793l0 0c73,0 132,59 132,131l0 0c0,73 -59,132 -132,132l0 0c-72,0 -131,-59 -131,-132l0 0c0,-72 59,-131 131,-131z"/>
+      <path class="fil1" d="M912 793l0 0c72,0 131,59 131,131l0 0c0,73 -59,132 -131,132l0 0c-73,0 -132,-59 -132,-132l0 0c0,-72 59,-131 132,-131z"/>
+      <path class="fil1" d="M1279 793l0 0c73,0 131,59 131,131l0 0c0,73 -58,132 -131,132l0 0c-72,0 -131,-59 -131,-132l0 0c0,-72 59,-131 131,-131z"/>
+     </g>
+     <g>
+      <path class="fil1" d="M545 1154l0 0c73,0 132,59 132,131l0 0c0,73 -59,132 -132,132l0 0c-72,0 -131,-59 -131,-132l0 0c0,-72 59,-131 131,-131z"/>
+      <path class="fil1" d="M912 1154l0 0c72,0 131,59 131,131l0 0c0,73 -59,132 -131,132l0 0c-73,0 -132,-59 -132,-132l0 0c0,-72 59,-131 132,-131z"/>
+      <path class="fil1" d="M1279 1154l0 0c73,0 131,59 131,131l0 0c0,73 -58,132 -131,132l0 0c-72,0 -131,-59 -131,-132l0 0c0,-72 59,-131 131,-131z"/>
+     </g>
+    </g>
+   </g>
+  </g>
+ </g>
+</svg>

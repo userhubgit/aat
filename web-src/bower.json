@@ -1,0 +1,7 @@
+{
+    "name":"aat",
+    "devDependencies" : {
+        "bootstrap-sass-datepicker": "1.3.7",
+        "jquery-ui": "1.10.4"
+    }
+}

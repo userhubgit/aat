@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ARRÊT DE TRAVAIL</title>
+  <link href="css/amelipro.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="ajax-loader"></div>
+  <div class="global-container">
+    <header>
+      <div class="top-header-bg">
+        <div class="container-fluid">
+          <!--div class="row">
+                <div class="col-xs-2">
+                    <a class="lien-espacepro hidden-xs">
+                        <span class="glyphicon glyphicon-home"></span>
+                        ALLER SUR AMELIPRO 
+                    </a>
+                </div>
+            </div-->
+        </div>
+        <div id="top-header-logo" class="top-header-logo">
+          <a href="index.html"></a>
+        </div>
+      </div>
+      <div class="application-header">
+        <div class="container-fluid">
+          <div class="row navigation">
+            <div class="col-xs-6 text-left">
+            </div>
+            <!-- div class="col-xs-6 text-right popover-blanc info-user">
+                    <strong class="hidden-xs">Prénom NOM</strong>
+                    <button type="button" class="pictogramme-svg-user large margin-left-5"
+                            data-toggle="popover"
+                            data-trigger="click"
+                            data-placement="bottom"
+                            data-html="true"
+                            data-content="
+                            N° AM : 341999555<br/> marie.durand@fai.fr
+
+                            <div class='info-user-footer text-center'>
+                            <a class=''>DÉCONNEXION</a>
+                            </div>
+                            " >
+                    </button>
+                </div -->
+          </div>
+          <div class="row title">
+            <div class="col-xs-12">
+              <h1 class="no-margin-left"><a>ARRÊT DE TRAVAIL</a></h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <article class="recherche">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="panel panel-default spacer">
+              <div class="panel-heading">
+                <h2 class="panel-title">MOTIF</h2>
+              </div>
+              <div class="panel-body">
+
+                <!-- Recherche & select motif -->
+
+                <div id="options-recherche">
+                  <div class="recherche-box">
+                    <div class="recherche-label">Saisissez le motif d’arrêt de travail</div>
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-10 col-sm-offset-1 recherche-input">
+                        <input id="motif-aat-input" type="text" />
+                        <button id="recherche-button" type="button"></button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row small-spacer">
+                    <div class="col-xs-12">
+                      <p>Ou sélectionnez un des motifs suivants :</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-10">
+                      <div id="motifs-plus-frequents" class="row small-spacer">
+                        <div class="small-spacer col-xs-12 col-md-3 texte-courant-semi-gras texte-turquoise-3">
+                          LES PLUS FRÉQUENTS
+                        </div>
+                        <div class="col-xs-12 col-md-8">
+                          <span data-id-motif="1" data-nom-motif="Asthénie" data-nom-long-motif="Asthénie" class="capsule capsule-turquoise">ASTHÉNIE</span>
+                          <span data-id-motif="1" data-nom-motif="Episode dépressif" data-nom-long-motif="Episode dépressif" class="capsule capsule-turquoise">ÉPISODE DÉPRESSIF</span>
+                          <span data-id-motif="1" data-nom-motif="Lombalgie" data-nom-long-motif="Lombalgie" class="capsule capsule-turquoise">LOMBALGIE</span>
+                          <span data-id-motif="1" data-nom-motif="Trouble anxieux" data-nom-long-motif="Trouble anxieux" class="capsule capsule-turquoise">TROUBLE ANXIEUX</span>
+                        </div>
+                      </div>
+                      <div id="motifs-en-ce-moment" class="row small-spacer">
+                        <div class="small-spacer  col-xs-12 col-md-3 texte-courant-semi-gras texte-vert-1">
+                          <span class="pictogramme-svg-printemps large"></span> EN CE MOMENT
+                        </div>
+                        <div class="col-xs-12 col-md-8">
+                          <span data-id-motif="1" data-nom-motif="Angine" class="capsule capsule-vert">ANGINE</span>
+                          <span data-id-motif="1" data-nom-motif="Allergies" class="capsule capsule-vert">ALLERGIES</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-12 col-md-2 text-right">
+                      <a data-target="#liste-motifs-modal" data-toggle="modal">LISTE COMPLÈTE</a>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Motif sélectionné -->
+
+                <div id="validation-recherche" class="collapse">
+
+                  <div class="motif-selectionne">
+                    <input type="hidden" id="id-motif-selectionne" value="" />
+                    <span id="nom-motif-selectionne"></span>
+                    <a id="reset-motif" class="pictogramme-svg-suppression-2 large"></a>
+                  </div>
+
+                  <div id="categorie-motif" class="collapse">
+                    <div class="small-spacer texte-turquoise-3">
+                      <span class="pictogramme-svg-information pull-left"></span>
+                      <p>Le motif saisi est inconnu, veuillez préciser une catégorie de pathologies.</p>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-10 col-sm-6">
+                        <select class="row small-spacer form-control">
+                                        <option>-- Catégorie de pathologies --</option>
+                                        <option>Maladies du système ostéo-articulaire, des muscles et du tissu conjonctif</option>
+                                        <option>Troubles mentaux et du comportement</option>
+                                        <option>Lésions traumatiques</option>
+                                        <option>Tumeurs</option>
+                                        <option>Maladies de l'appareil circulatoire</option>
+                                        <option>Maladies infectieuses et parasitaires</option>
+                                        <option>Maladies du système nerveux</option>
+                                        <option>Maladies de l'appareil digestif</option>
+                                        <option>Maladies de l'appareil respiratoire</option>
+                                        <option>Autres maladies</option>
+                                    </select>
+                      </div>
+                      <div class="col-xs-1 small-spacer no-padding">*</div>
+                    </div>
+                  </div>
+
+                  <div class="small-spacer">
+                    Complément d’information :
+                    <div>
+                      <textarea id="complement-info-motif" data-compteur="#compteur-complement-info-motif" class="form-control" rows="4" maxlength="500"></textarea>
+                      <div class="text-right" id="compteur-complement-info-motif">0/500</div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="avis-recherche" class="row collapse">
+          <div class="col-xs-12 col-md-6 col-md-offset-3">
+            <div class="panel panel-default spacer">
+              <div class="panel-body text-center">
+                <h4>
+                  Le motif retourné correspond-t-il à votre recherche ?
+                </h4>
+                <div id="options-avis-recherche">
+                  <span data-parent="#options-avis-recherche" class="capsule capsule-jaune">OUI</span>
+                  <span data-parent="#options-avis-recherche" class="capsule capsule-jaune">NON</span>
+                  <span data-parent="#options-avis-recherche" class="capsule capsule-jaune">EN PARTIE</span>
+                </div>
+                <div class="small-spacer">
+                  <textarea class="form-control" rows="4" placeholder="Ajoutez un commentaire"></textarea>
+                </div>
+                <div class="spacer">
+                  <button id="btn-nuovelle-recherche" class="btn btn-default">
+                            Essayer un autre motif
+                        </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-center spacer">
+              <a class="capsule capsule-turquoise active" href="avis.html">
+                    Après les tests
+                    &nbsp;&nbsp;&nbsp;
+                    <strong>DONNEZ-NOUS VOTRE AVIS</strong>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="glyphicon glyphicon-play"></span>
+                </a>
+            </div>
+
+          </div>
+        </div>
+      </article>
+      <div id="liste-motifs-modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+              <h4 class="modal-title">Liste complète des motifs</h4>
+            </div>
+            <div class="modal-body">
+              <p>Recherche d’un motif par choix alphabétique :</p>
+              <div class="alphabet">
+                <a class="lettre active">A</a>
+                <a class="lettre active">B</a>
+                <a class="lettre active">C</a>
+                <a class="lettre active">D</a>
+                <a class="lettre active">E</a>
+                <a class="lettre active">F</a>
+                <a class="lettre active">G</a>
+                <a class="lettre active">H</a>
+                <a class="lettre active">I</a>
+                <a class="lettre">J</a>
+                <a class="lettre active">K</a>
+                <a class="lettre active">L</a>
+                <a class="lettre active">M</a>
+                <a class="lettre active">N</a>
+                <a class="lettre active">O</a>
+                <a class="lettre active">P</a>
+                <a class="lettre">Q</a>
+                <a class="lettre active">R</a>
+                <a class="lettre active">S</a>
+                <a class="lettre active">T</a>
+                <a class="lettre active">U</a>
+                <a class="lettre active">V</a>
+                <a class="lettre">W</a>
+                <a class="lettre">X</a>
+                <a class="lettre">Y</a>
+                <a class="lettre">Z</a>
+              </div>
+            </div>
+            <div class="modal-body liste-motifs">
+              <ul id="A">
+                <li class="lettre">A</li>
+                <li data-dismiss="modal" data-id-motif="01000035-999" data-nom-motif="Abcès cutané furoncle et anthrax">Abcès cutané furoncle et anthrax</li>
+                <li data-dismiss="modal" data-id-motif="00040031-057" data-nom-motif="Abrasion de la muqueuse utérine">Abrasion de la muqueuse utérine</li>
+                <li data-dismiss="modal" data-id-motif="01000012-999" data-nom-motif="Accident vasculaire cérébral">Accident vasculaire cérébral</li>
+                <li data-dismiss="modal" data-id-motif="01000003-999" data-nom-motif="Affection de la thyroïde - non opéré">Affection de la thyroïde - non opéré</li>
+                <li data-dismiss="modal" data-id-motif="01000109-999" data-nom-motif="Algodystrophie">Algodystrophie</li>
+                <li data-dismiss="modal" data-id-motif="00040018-045" data-nom-motif="Amygdalectomie">Amygdalectomie</li>
+                <li data-dismiss="modal" data-id-motif="00010001-008" data-nom-motif="Angine">Angine</li>
+                <li data-dismiss="modal" data-id-motif="00040019-034" data-nom-motif="Appendicectomie">Appendicectomie</li>
+                <li data-dismiss="modal" data-id-motif="01000001-999" data-nom-motif="Artériopathie oblitérante des membres inférieurs - non opéré">Artériopathie oblitérante des membres inférieurs - non opéré</li>
+                <li data-dismiss="modal" data-id-motif="00040032-061" data-nom-motif="Artériopathie oblitérante des membres inférieurs - opéré">Artériopathie oblitérante des membres inférieurs - opéré</li>
+                <li data-dismiss="modal" data-id-motif="00040010-027" data-nom-motif="Arthroplastie de la hanche par prothèse totale">Arthroplastie de la hanche par prothèse totale</li>
+                <li data-dismiss="modal" data-id-motif="00040011-026" data-nom-motif="Arthroplastie du genou par prothèse totale">Arthroplastie du genou par prothèse totale</li>
+                <li data-dismiss="modal" data-id-motif="00050001-999" data-nom-motif="Arthrose du genou">Arthrose du genou</li>
+                <li data-dismiss="modal" data-id-motif="01000013-999" data-nom-motif="Asthme">Asthme</li>
+                <li data-dismiss="modal" data-id-motif="01000097-999" data-nom-motif="Autres allergies">Autres allergies</li>
+                <li data-dismiss="modal" data-id-motif="01000105-999" data-nom-motif="Autres entorses du genou">Autres entorses du genou</li>
+                <li data-dismiss="modal" data-id-motif="01000089-999" data-nom-motif="Autres fractures">Autres fractures</li>
+                <li data-dismiss="modal" data-id-motif="01000088-999" data-nom-motif="Autres plaies de la main">Autres plaies de la main</li>
+                <li data-dismiss="modal" data-id-motif="01000086-999" data-nom-motif="Autres traumatismes du genou">Autres traumatismes du genou</li>
+              </ul>
+
+              <ul id="B">
+                <li class="lettre">B</li>
+                <li data-dismiss="modal" data-id-motif="01000111-999" data-nom-motif="Bouffée délirante">Bouffée délirante</li>
+                <li data-dismiss="modal" data-id-motif="00010002-010" data-nom-motif="Bronchite aiguë sans comorbidité">Bronchite aiguë sans comorbidité</li>
+                <li data-dismiss="modal" data-id-motif="01000062-999" data-nom-motif="Bronchite chronique">Bronchite chronique</li>
+                <li data-dismiss="modal" data-id-motif="01000036-999" data-nom-motif="Brûlures">Brûlures</li>
+              </ul>
+
+              <ul id="C">
+                <li class="lettre">C</li>
+                <li data-dismiss="modal" data-id-motif="00020001-012" data-nom-motif="Cervicalgie non spécifique">Cervicalgie non spécifique</li>
+                <li data-dismiss="modal" data-id-motif="00040025-046" data-nom-motif="Chirurgie de l'obésité morbide">Chirurgie de l'obésité morbide</li>
+                <li data-dismiss="modal" data-id-motif="00040012-028" data-nom-motif="Chirurgie de la cataracte">Chirurgie de la cataracte</li>
+                <li data-dismiss="modal" data-id-motif="00040003-014" data-nom-motif="Cholécystectomie">Cholécystectomie</li>
+                <li data-dismiss="modal" data-id-motif="01000010-999" data-nom-motif="Compression du nerf ulnaire au coude - non opéré">Compression du nerf ulnaire au coude - non opéré</li>
+                <li data-dismiss="modal" data-id-motif="00040015-033" data-nom-motif="Conisation du col de l'utérus">Conisation du col de l'utérus</li>
+                <li data-dismiss="modal" data-id-motif="01000037-999" data-nom-motif="Conjonctivite">Conjonctivite</li>
+                <li data-dismiss="modal" data-id-motif="00040033-053" data-nom-motif="Cornée - ablation de corps étranger profond">Cornée - ablation de corps étranger profond</li>
+                <li data-dismiss="modal" data-id-motif="01000064-999" data-nom-motif="Coxarthrose - hors chirurgie arthroplastie de hanche">Coxarthrose - hors chirurgie arthroplastie de hanche</li>
+                <li data-dismiss="modal" data-id-motif="01000102-999" data-nom-motif="Cruralgie">Cruralgie</li>
+                <li data-dismiss="modal" data-id-motif="00040021-035" data-nom-motif="Cure de hernie de la paroi abdominale">Cure de hernie de la paroi abdominale</li>
+                <li data-dismiss="modal" data-id-motif="00040004-015" data-nom-motif="Cure de hernie discale par discectomie - opéré">Cure de hernie discale par discectomie - opéré</li>
+                <li data-dismiss="modal" data-id-motif="00040005-021" data-nom-motif="Cure de hernies inguinales">Cure de hernies inguinales</li>
+                <li data-dismiss="modal" data-id-motif="01000055-999" data-nom-motif="Cystite">Cystite</li>
+              </ul>
+
+              <ul id="D">
+                <li class="lettre">D</li>
+                <li data-dismiss="modal" data-id-motif="01000038-999" data-nom-motif="Décollement et déchirure de la rétine">Décollement et déchirure de la rétine</li>
+                <li data-dismiss="modal" data-id-motif="01000014-999" data-nom-motif="Diabète">Diabète</li>
+              </ul>
+
+              <ul id="E">
+                <li class="lettre">E</li>
+                <li data-dismiss="modal" data-id-motif="01000060-999" data-nom-motif="Eczéma">Eczéma</li>
+                <li data-dismiss="modal" data-id-motif="01000058-999" data-nom-motif="Embolie pulmonaire">Embolie pulmonaire</li>
+                <li data-dismiss="modal" data-id-motif="01000054-999" data-nom-motif="Emphysème">Emphysème</li>
+                <li data-dismiss="modal" data-id-motif="01000039-999" data-nom-motif="Encéphalite">Encéphalite</li>
+                <li data-dismiss="modal" data-id-motif="01000087-999" data-nom-motif="Entorse - autres localisations">Entorse - autres localisations</li>
+                <li data-dismiss="modal" data-id-motif="00060001-011" data-nom-motif="Entorse de la cheville">Entorse de la cheville</li>
+                <li data-dismiss="modal" data-id-motif="00060002-017" data-nom-motif="Entorse du ligament collatéral médial du genou">Entorse du ligament collatéral médial du genou</li>
+                <li data-dismiss="modal" data-id-motif="01000011-999" data-nom-motif="Entorse du ligament croisé antérieur - non opéré">Entorse du ligament croisé antérieur - non opéré</li>
+                <li data-dismiss="modal" data-id-motif="00060013-063" data-nom-motif="Entorse du poignet">Entorse du poignet</li>
+                <li data-dismiss="modal" data-id-motif="01000005-999" data-nom-motif="Epicondylite latérale - non opéré">Epicondylite latérale - non opéré</li>
+                <li data-dismiss="modal" data-id-motif="00041001-058" data-nom-motif="Epicondylite latérale - traitement chirurgical - opéré">Epicondylite latérale - traitement chirurgical - opéré</li>
+                <li data-dismiss="modal" data-id-motif="01000065-999" data-nom-motif="Epilepsie">Epilepsie</li>
+                <li data-dismiss="modal" data-id-motif="01000112-999" data-nom-motif="Episode dépressif">Episode dépressif</li>
+                <li data-dismiss="modal" data-id-motif="01000059-999" data-nom-motif="Erysipèle">Erysipèle</li>
+                <li data-dismiss="modal" data-id-motif="00041002-059" data-nom-motif="Exérèse d'une tumeur lipomateuse bénigne">Exérèse d'une tumeur lipomateuse bénigne</li>
+                <li data-dismiss="modal" data-id-motif="00041003-054" data-nom-motif="Exérèse de polypes colorectaux par coloscopie">Exérèse de polypes colorectaux par coloscopie</li>
+              </ul>
+
+              <ul id="F">
+                <li class="lettre">F</li>
+                <li data-dismiss="modal" data-id-motif="01000078-999" data-nom-motif="Fausse couche">Fausse couche</li>
+                <li data-dismiss="modal" data-id-motif="01000050-999" data-nom-motif="Fibromyalgie">Fibromyalgie</li>
+                <li data-dismiss="modal" data-id-motif="00060014-066" data-nom-motif="Fracture de côte">Fracture de côte</li>
+                <li data-dismiss="modal" data-id-motif="00060008-039" data-nom-motif="Fracture de l'extrémité inférieure du radius">Fracture de l'extrémité inférieure du radius</li>
+                <li data-dismiss="modal" data-id-motif="00060009-044" data-nom-motif="Fracture de l'extrémité proximale de l'humérus">Fracture de l'extrémité proximale de l'humérus</li>
+                <li data-dismiss="modal" data-id-motif="00060004-049" data-nom-motif="Fracture de la cheville">Fracture de la cheville</li>
+                <li data-dismiss="modal" data-id-motif="00060007-043" data-nom-motif="Fracture de la clavicule ou de la scapula">Fracture de la clavicule ou de la scapula</li>
+                <li data-dismiss="modal" data-id-motif="00060010-050" data-nom-motif="Fracture des os de la main - phalange et métatarse">Fracture des os de la main - phalange et métatarse</li>
+                <li data-dismiss="modal" data-id-motif="00060015-065" data-nom-motif="Fracture du calcanéum">Fracture du calcanéum</li>
+                <li data-dismiss="modal" data-id-motif="00060011-042" data-nom-motif="Fracture du coude">Fracture du coude</li>
+                <li data-dismiss="modal" data-id-motif="00060016-064" data-nom-motif="Fracture du pied - phalange et métatarse">Fracture du pied - phalange et métatarse</li>
+                <li data-dismiss="modal" data-id-motif="00060012-040" data-nom-motif="Fracture du scaphoïde carpien">Fracture du scaphoïde carpien</li>
+                <li data-dismiss="modal" data-id-motif="00060006-023" data-nom-motif="Fracture du tibia et de la fibula - diaphyse">Fracture du tibia et de la fibula - diaphyse</li>
+              </ul>
+
+              <ul id="G">
+                <li class="lettre">G</li>
+                <li data-dismiss="modal" data-id-motif="00010003-005" data-nom-motif="Gastro-entérite virale">Gastro-entérite virale</li>
+                <li data-dismiss="modal" data-id-motif="01000056-999" data-nom-motif="Glaucome">Glaucome</li>
+                <li data-dismiss="modal" data-id-motif="01000057-999" data-nom-motif="Glomérulonéphrite">Glomérulonéphrite</li>
+                <li data-dismiss="modal" data-id-motif="00010004-009" data-nom-motif="Grippe saisonnière">Grippe saisonnière</li>
+                <li data-dismiss="modal" data-id-motif="00080000-999" data-nom-motif="Grossesse">Grossesse</li>
+              </ul>
+
+              <ul id="H">
+                <li class="lettre">H</li>
+                <li data-dismiss="modal" data-id-motif="00040008-020" data-nom-motif="Hallux valgus - ostéotomie">Hallux valgus - ostéotomie</li>
+                <li data-dismiss="modal" data-id-motif="01000006-999" data-nom-motif="Hémorroïdes - non opéré">Hémorroïdes - non opéré</li>
+                <li data-dismiss="modal" data-id-motif="00040022-036" data-nom-motif="Hémorroïdes - traitement chirurgical - opéré">Hémorroïdes - traitement chirurgical - opéré</li>
+                <li data-dismiss="modal" data-id-motif="01000073-999" data-nom-motif="Hépatite virale aigüe">Hépatite virale aigüe</li>
+                <li data-dismiss="modal" data-id-motif="01000015-999" data-nom-motif="Hépatite virale chronique">Hépatite virale chronique</li>
+                <li data-dismiss="modal" data-id-motif="01000004-999" data-nom-motif="Hernie discale - non opéré">Hernie discale - non opéré</li>
+                <li data-dismiss="modal" data-id-motif="01000016-999" data-nom-motif="Hypertension artérielle essentielle - HTA">Hypertension artérielle essentielle - HTA</li>
+                <li data-dismiss="modal" data-id-motif="01000007-999" data-nom-motif="Hypertrophie bénigne de prostate - non opéré">Hypertrophie bénigne de prostate - non opéré</li>
+                <li data-dismiss="modal" data-id-motif="00041004-055" data-nom-motif="Hypertrophie bénigne de prostate - opéré">Hypertrophie bénigne de prostate - opéré</li>
+                <li data-dismiss="modal" data-id-motif="00040014-031" data-nom-motif="Hystérectomie">Hystérectomie</li>
+              </ul>
+
+              <ul id="I">
+                <li class="lettre">I</li>
+                <li data-dismiss="modal" data-id-motif="01000017-999" data-nom-motif="Immunodéficience humaine virale - VIH">Immunodéficience humaine virale - VIH</li>
+                <li data-dismiss="modal" data-id-motif="00041005-056" data-nom-motif="Incontinence urinaire chez la femme - traitement chirurgical">Incontinence urinaire chez la femme - traitement chirurgical</li>
+                <li data-dismiss="modal" data-id-motif="00070001-024" data-nom-motif="Infarctus du myocarde - syndrome coronaire aigu">Infarctus du myocarde - syndrome coronaire aigu</li>
+                <li data-dismiss="modal" data-id-motif="01000110-999" data-nom-motif="Insuffisance cardiaque">Insuffisance cardiaque</li>
+                <li data-dismiss="modal" data-id-motif="01000074-999" data-nom-motif="Insuffisance rénale chronique ">Insuffisance rénale chronique </li>
+                <li data-dismiss="modal" data-id-motif="01000075-999" data-nom-motif="Insuffisance respiratoire chronique">Insuffisance respiratoire chronique</li>
+              </ul>
+
+              <ul id="K">
+                <li class="lettre">K</li>
+                <li data-dismiss="modal" data-id-motif="00040017-032" data-nom-motif="Kystectomie ovarienne - ovariectomie">Kystectomie ovarienne - ovariectomie</li>
+              </ul>
+
+              <ul id="L">
+                <li class="lettre">L</li>
+                <li data-dismiss="modal" data-id-motif="01000040-999" data-nom-motif="Labyrinthite">Labyrinthite</li>
+                <li data-dismiss="modal" data-id-motif="01000041-999" data-nom-motif="Laryngite">Laryngite</li>
+                <li data-dismiss="modal" data-id-motif="01000107-999" data-nom-motif="Lésion superficielle de l'oeil">Lésion superficielle de l'oeil</li>
+                <li data-dismiss="modal" data-id-motif="01000008-999" data-nom-motif="Lésions anales - non opéré">Lésions anales - non opéré</li>
+                <li data-dismiss="modal" data-id-motif="00040023-037" data-nom-motif="Lésions anales - opéré">Lésions anales - opéré</li>
+                <li data-dismiss="modal" data-id-motif="01000009-999" data-nom-motif="Lésions méniscales - non opéré">Lésions méniscales - non opéré</li>
+                <li data-dismiss="modal" data-id-motif="00040007-022" data-nom-motif="Lésions méniscales - opéré">Lésions méniscales - opéré</li>
+                <li data-dismiss="modal" data-id-motif="01000048-999" data-nom-motif="Lésions traumatiques de la tête">Lésions traumatiques de la tête</li>
+                <li data-dismiss="modal" data-id-motif="01000049-999" data-nom-motif="Lésions traumatiques de plusieurs parties du corps">Lésions traumatiques de plusieurs parties du corps</li>
+                <li data-dismiss="modal" data-id-motif="01000092-999" data-nom-motif="Leucémie">Leucémie</li>
+                <li data-dismiss="modal" data-id-motif="00040024-051" data-nom-motif="Libération du nerf ulnaire au coude - opéré">Libération du nerf ulnaire au coude - opéré</li>
+                <li data-dismiss="modal" data-id-motif="00040006-003" data-nom-motif="Ligamentoplastie du croisé antérieur du genou">Ligamentoplastie du croisé antérieur du genou</li>
+                <li data-dismiss="modal" data-id-motif="01000061-999" data-nom-motif="Lithiase urinaire">Lithiase urinaire</li>
+                <li data-dismiss="modal" data-id-motif="01000079-999" data-nom-motif="Lithiase vésiculaire">Lithiase vésiculaire</li>
+                <li data-dismiss="modal" data-id-motif="00020002-001" data-nom-motif="Lombalgie commune">Lombalgie commune</li>
+                <li data-dismiss="modal" data-id-motif="01000080-999" data-nom-motif="Luxation de l'épaule">Luxation de l'épaule</li>
+                <li data-dismiss="modal" data-id-motif="01000091-999" data-nom-motif="Lymphome">Lymphome</li>
+              </ul>
+
+              <ul id="M">
+                <li class="lettre">M</li>
+                <li data-dismiss="modal" data-id-motif="01000018-999" data-nom-motif="Maladie de Crohn">Maladie de Crohn</li>
+                <li data-dismiss="modal" data-id-motif="01000063-999" data-nom-motif="Maladie de Lyme">Maladie de Lyme</li>
+                <li data-dismiss="modal" data-id-motif="01000019-999" data-nom-motif="Maladie de Parkinson">Maladie de Parkinson</li>
+                <li data-dismiss="modal" data-id-motif="01000020-999" data-nom-motif="Maladies chroniques actives du foie et cirrhoses">Maladies chroniques actives du foie et cirrhoses</li>
+                <li data-dismiss="modal" data-id-motif="00040016-030" data-nom-motif="Mastoplastie de réduction">Mastoplastie de réduction</li>
+                <li data-dismiss="modal" data-id-motif="01000042-999" data-nom-motif="Méningite">Méningite</li>
+                <li data-dismiss="modal" data-id-motif="01000077-999" data-nom-motif="Migraine">Migraine</li>
+              </ul>
+
+              <ul id="N">
+                <li class="lettre">N</li>
+                <li data-dismiss="modal" data-id-motif="" "00020004-067" data-nom-motif="Névralgie cervico-brachiale commune">Névralgie cervico-brachiale commune</li>
+              </ul>
+
+              <ul id="O">
+                <li class="lettre">O</li>
+                <li data-dismiss="modal" data-id-motif="01000053-999" data-nom-motif="Otite">Otite</li>
+              </ul>
+
+              <ul id="P">
+                <li class="lettre">P</li>
+                <li data-dismiss="modal" data-id-motif="01000044-999" data-nom-motif="Panaris ou phlegmon">Panaris ou phlegmon</li>
+                <li data-dismiss="modal" data-id-motif="01000106-999" data-nom-motif="Péritonite">Péritonite</li>
+                <li data-dismiss="modal" data-id-motif="01000082-999" data-nom-motif="Pharyngite">Pharyngite</li>
+                <li data-dismiss="modal" data-id-motif="01000103-999" data-nom-motif="Phlébite des membres inférieurs">Phlébite des membres inférieurs</li>
+                <li data-dismiss="modal" data-id-motif="01000043-999" data-nom-motif="Phlébite et thrombophlébite">Phlébite et thrombophlébite</li>
+                <li data-dismiss="modal" data-id-motif="01000096-999" data-nom-motif="Plaie - autres localisations">Plaie - autres localisations</li>
+                <li data-dismiss="modal" data-id-motif="01000093-999" data-nom-motif="Plaie de la face">Plaie de la face</li>
+                <li data-dismiss="modal" data-id-motif="01000094-999" data-nom-motif="Plaie de la jambe">Plaie de la jambe</li>
+                <li data-dismiss="modal" data-id-motif="01000095-999" data-nom-motif="Plaie du pied">Plaie du pied</li>
+                <li data-dismiss="modal" data-id-motif="00040026-048" data-nom-motif="Plaies des tendons de la main">Plaies des tendons de la main</li>
+                <li data-dismiss="modal" data-id-motif="00040030-047" data-nom-motif="Plaies profondes de la main et des doigts">Plaies profondes de la main et des doigts</li>
+                <li data-dismiss="modal" data-id-motif="01000051-999" data-nom-motif="Pneumopathie">Pneumopathie</li>
+                <li data-dismiss="modal" data-id-motif="01000021-999" data-nom-motif="Polyarthrite rhumatoïde">Polyarthrite rhumatoïde</li>
+                <li data-dismiss="modal" data-id-motif="01000066-999" data-nom-motif="Polynévrite">Polynévrite</li>
+                <li data-dismiss="modal" data-id-motif="01000081-999" data-nom-motif="Polytraumatisme">Polytraumatisme</li>
+                <li data-dismiss="modal" data-id-motif="01000090-999" data-nom-motif="Prostatite">Prostatite</li>
+                <li data-dismiss="modal" data-id-motif="01000108-999" data-nom-motif="Pseudarthrose du scaphoïde">Pseudarthrose du scaphoïde</li>
+                <li data-dismiss="modal" data-id-motif="01000045-999" data-nom-motif="Psoriasis">Psoriasis</li>
+                <li data-dismiss="modal" data-id-motif="01000025-999" data-nom-motif="Psychose maniaco-dépressive">Psychose maniaco-dépressive</li>
+                <li data-dismiss="modal" data-id-motif="01000104-999" data-nom-motif="Pubalgie">Pubalgie</li>
+                <li data-dismiss="modal" data-id-motif="01000052-999" data-nom-motif="Pyélonéphrite">Pyélonéphrite</li>
+              </ul>
+
+              <ul id="R">
+                <li class="lettre">R</li>
+                <li data-dismiss="modal" data-id-motif="00042001-062" data-nom-motif="Recalibrage de la colonne vertébrale">Recalibrage de la colonne vertébrale</li>
+                <li data-dismiss="modal" data-id-motif="01000022-999" data-nom-motif="Rectocolite hémorragique">Rectocolite hémorragique</li>
+                <li data-dismiss="modal" data-id-motif="00070002-025" data-nom-motif="Revascularisation coronarienne">Revascularisation coronarienne</li>
+                <li data-dismiss="modal" data-id-motif="01000083-999" data-nom-motif="Rhinite allergique">Rhinite allergique</li>
+                <li data-dismiss="modal" data-id-motif="01000072-999" data-nom-motif="Rhinopharyngite">Rhinopharyngite</li>
+                <li data-dismiss="modal" data-id-motif="00050002-018" data-nom-motif="Rupture des tendons de la coiffe des rotateurs">Rupture des tendons de la coiffe des rotateurs</li>
+                <li data-dismiss="modal" data-id-motif="00040029-052" data-nom-motif="Rupture du tendon d'Achille - traitement chirurgical">Rupture du tendon d'Achille - traitement chirurgical</li>
+              </ul>
+
+              <ul id="S">
+                <li class="lettre">S</li>
+                <li data-dismiss="modal" data-id-motif="01000067-999" data-nom-motif="Schizophrénie">Schizophrénie</li>
+                <li data-dismiss="modal" data-id-motif="00020003-016" data-nom-motif="Sciatique">Sciatique</li>
+                <li data-dismiss="modal" data-id-motif="01000076-999" data-nom-motif="Sclérose en plaques">Sclérose en plaques</li>
+                <li data-dismiss="modal" data-id-motif="00040013-029" data-nom-motif="Septoplastie nasale">Septoplastie nasale</li>
+                <li data-dismiss="modal" data-id-motif="00040027-038" data-nom-motif="Sinus pilonidal - traitement chirurgical">Sinus pilonidal - traitement chirurgical</li>
+                <li data-dismiss="modal" data-id-motif="01000084-999" data-nom-motif="Sinusite frontale">Sinusite frontale</li>
+                <li data-dismiss="modal" data-id-motif="00010005-007" data-nom-motif="Sinusite maxillaire">Sinusite maxillaire</li>
+                <li data-dismiss="modal" data-id-motif="01000100-999" data-nom-motif="Souffrance due à une situation de travail">Souffrance due à une situation de travail</li>
+                <li data-dismiss="modal" data-id-motif="01000023-999" data-nom-motif="Spondylarthrite ankylosante">Spondylarthrite ankylosante</li>
+                <li data-dismiss="modal" data-id-motif="01000099-999" data-nom-motif="Suites de couches compliquées">Suites de couches compliquées</li>
+                <li data-dismiss="modal" data-id-motif="00090000-999" data-nom-motif="Symptômes généraux">Symptômes généraux</li>
+                <li data-dismiss="modal" data-id-motif="01000024-999" data-nom-motif="Syndrome de Guillain Barré">Syndrome de Guillain Barré</li>
+                <li data-dismiss="modal" data-id-motif="00040001-002" data-nom-motif="Syndrome du canal carpien">Syndrome du canal carpien</li>
+              </ul>
+
+              <ul id="T">
+                <li class="lettre">T</li>
+                <li data-dismiss="modal" data-id-motif="00050003-019" data-nom-motif="Tendinopathie de la coiffe des rotateurs">Tendinopathie de la coiffe des rotateurs</li>
+                <li data-dismiss="modal" data-id-motif="01000002-999" data-nom-motif="Ténosynovectomie des muscles de la main - non opéré">Ténosynovectomie des muscles de la main - non opéré</li>
+                <li data-dismiss="modal" data-id-motif="00040028-041" data-nom-motif="Ténosynovectomie des muscles de la main - opéré">Ténosynovectomie des muscles de la main - opéré</li>
+                <li data-dismiss="modal" data-id-motif="00040009-013" data-nom-motif="Thyroïdectomie - opéré">Thyroïdectomie - opéré</li>
+                <li data-dismiss="modal" data-id-motif="01000046-999" data-nom-motif="Trachéite">Trachéite</li>
+                <li data-dismiss="modal" data-id-motif="01000085-999" data-nom-motif="Trouble anxieux">Trouble anxieux</li>
+                <li data-dismiss="modal" data-id-motif="01000026-999" data-nom-motif="Trouble obsessionnel compulsif">Trouble obsessionnel compulsif</li>
+                <li data-dismiss="modal" data-id-motif="00030001-004" data-nom-motif="Troubles anxio-dépressifs mineurs">Troubles anxio-dépressifs mineurs</li>
+                <li data-dismiss="modal" data-id-motif="01000068-999" data-nom-motif="Troubles du rythme cardiaque">Troubles du rythme cardiaque</li>
+                <li data-dismiss="modal" data-id-motif="01000069-999" data-nom-motif="Troubles mentaux et du comportement liés à l'utilisation d'alcool">Troubles mentaux et du comportement liés à l'utilisation d'alcool</li>
+                <li data-dismiss="modal" data-id-motif="01000027-999" data-nom-motif="Troubles spécifiques de la personnalité">Troubles spécifiques de la personnalité</li>
+                <li data-dismiss="modal" data-id-motif="01000070-999" data-nom-motif="Tuberculose">Tuberculose</li>
+                <li data-dismiss="modal" data-id-motif="01000098-999" data-nom-motif="Tumeur maligne de l'ovaire">Tumeur maligne de l'ovaire</li>
+                <li data-dismiss="modal" data-id-motif="01000028-999" data-nom-motif="Tumeur maligne du col de l'utérus">Tumeur maligne du col de l'utérus</li>
+                <li data-dismiss="modal" data-id-motif="01000029-999" data-nom-motif="Tumeur maligne du colon">Tumeur maligne du colon</li>
+                <li data-dismiss="modal" data-id-motif="01000030-999" data-nom-motif="Tumeur maligne du corps de l'utérus">Tumeur maligne du corps de l'utérus</li>
+                <li data-dismiss="modal" data-id-motif="01000031-999" data-nom-motif="Tumeur maligne du poumon ">Tumeur maligne du poumon </li>
+                <li data-dismiss="modal" data-id-motif="01000032-999" data-nom-motif="Tumeur maligne du sein">Tumeur maligne du sein</li>
+                <li data-dismiss="modal" data-id-motif="01000033-999" data-nom-motif="Tumeur maligne prostate">Tumeur maligne prostate</li>
+                <li data-dismiss="modal" data-id-motif="01000034-999" data-nom-motif="Tumeur maligne thyroïde">Tumeur maligne thyroïde</li>
+                <li data-dismiss="modal" data-id-motif="00040020-999" data-nom-motif="Tumorectomie du sein - mastectomie partielle">Tumorectomie du sein - mastectomie partielle</li>
+              </ul>
+
+              <ul id="U">
+                <li class="lettre">U</li>
+                <li data-dismiss="modal" data-id-motif="00070003-060" data-nom-motif="Ulcère de jambe à prédominance veineuse">Ulcère de jambe à prédominance veineuse</li>
+                <li data-dismiss="modal" data-id-motif="01000047-999" data-nom-motif="Urétrite">Urétrite</li>
+              </ul>
+
+              <ul id="V">
+                <li class="lettre">V</li>
+                <li data-dismiss="modal" data-id-motif="01000071-999" data-nom-motif="Valvulopathies">Valvulopathies</li>
+                <li data-dismiss="modal" data-id-motif="00040002-006" data-nom-motif="Varices des membres inférieurs">Varices des membres inférieurs</li>
+                <li data-dismiss="modal" data-id-motif="01000101-999" data-nom-motif="Virose">Virose</li>
+              </ul>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" title="Fermer">
+                    Fermer
+                </button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+    </main>
+
+
+
+
+    <footer id="footer" class="container-fluid bg-gris-5">
+      <div class="row footer-copy-right">
+        <div class="col-xs-12 col-sm-6 ">
+          <a>Mentions légales</a> | <a><abbr title="Condition générale d’utilisation">CGU</abbr></a>
+        </div>
+        <div class="col-xs-12  col-sm-6 text-right">
+          V1.0 <span class="hidden-xs">|</span> <br class="visible-xs-block" />© CNAMTS 2017. Tous droits réservés
+        </div>
+      </div>
+    </footer>
+
+
+  </div>
+  <!-- JS library -->
+  <script src="js/amelipro.min.js" type="text/javascript"></script>
+</body>
+
+</html>
