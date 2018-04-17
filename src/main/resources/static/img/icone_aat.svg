@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X7 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="44px" height="44px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 4788 4788"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil1 {fill:none}
+    .fil0 {fill:#1CB0BA}
+    .fil2 {fill:#FEFEFE;fill-rule:nonzero}
+   ]]>
+  </style>
+    <clipPath id="id0">
+     <path d="M2394 0c-1322,0 -2394,1072 -2394,2394 0,1322 1072,2394 2394,2394 1322,0 2394,-1072 2394,-2394 0,-1322 -1072,-2394 -2394,-2394z"/>
+    </clipPath>
+ </defs>
+ <g id="popin">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_645429568">
+   <path class="fil0" d="M2394 0c-1322,0 -2394,1072 -2394,2394 0,1322 1072,2394 2394,2394 1322,0 2394,-1072 2394,-2394 0,-1322 -1072,-2394 -2394,-2394z"/>
+   <g style="clip-path:url(#id0)">
+   </g>
+   <path id="1" class="fil1" d="M2394 0c-1322,0 -2394,1072 -2394,2394 0,1322 1072,2394 2394,2394 1322,0 2394,-1072 2394,-2394 0,-1322 -1072,-2394 -2394,-2394z"/>
+   <path class="fil2" d="M2825 2300c0,0 -24,-8 -66,-18 -31,30 -63,57 -96,81l327 642c124,44 199,123 218,235 20,114 -43,327 -258,327 -159,0 -1247,0 -1247,0 -103,0 -209,-88 -209,-227 0,-46 12,-99 40,-157 8,-16 488,-843 516,-888 -4,-4 -9,-8 -13,-12 -59,12 -118,26 -176,44 -414,131 -534,437 -543,768 -3,99 4,219 37,327 34,109 94,204 197,251 44,19 103,37 151,37 0,0 1291,0 1291,0 183,0 401,-99 443,-271 29,-113 33,-240 33,-344 -10,-356 -147,-684 -645,-795z"/>
+   <path class="fil2" d="M2181 2109c1,1 1,1 2,1 26,19 52,34 79,47 46,21 93,33 136,33 4,0 7,0 11,0 67,-3 139,-32 208,-82 5,-4 10,-7 16,-12 135,-105 247,-288 247,-497 0,-327 -215,-541 -482,-541 -266,0 -482,214 -482,541 0,217 122,407 265,510z"/>
+   <path class="fil2" d="M2398 2382c-41,-1 -81,-7 -121,-18l370 739 214 427c0,0 65,-1 139,-1 137,0 220,-138 187,-256 -30,-109 -181,-204 -374,-204l0 0 -348 -694c-22,4 -44,6 -67,7z"/>
+  </g>
+ </g>
+</svg>

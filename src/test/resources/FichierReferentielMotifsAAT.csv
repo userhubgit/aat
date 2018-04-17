@@ -2,7 +2,7 @@
 01000031;Angine;008;;amygdalite,infection de l'oropharynx,inflammation des amygdales, amygdale, erythemato-pultacée, erythematopultacée, erythemato, pultacée,oro-pharynx,amigdales, amygdale ;;;;;
 01000032;Diabète;009;DT1, DSID, DNID, DT2, DSNID,NOUS,DES;DT1 adulte, DSID adulte, DNID, DT2, DSNID;;;;;
 01000033;Décollement et déchirure de la rétine;010;;rétinien,rétinienne,rétines;;;;;
-01000034;Fracture de la cheville;;049;;extrémité inférieure du péroné,extrémité inférieure du tibia,malléole interne,malléole externe, bi malléolaire, tri malléolaire,complexe de cheville, supramalléolaire, dupuytren,péronée;;;;;
+01000034;Fracture de la cheville;049;;extrémité inférieure du péroné,extrémité inférieure du tibia,malléole interne,malléole externe, bi malléolaire, tri malléolaire,complexe de cheville, supramalléolaire, dupuytren,péronée;;;;;
 00060007;Fracture de la clavicule ou de la scapula;043;;fracture de l'épaule,fracture de l'omoplate,fracture de la ceinture scapulaire,fracture de la diaphyse claviculaire,fracture de l'extrémité de la clavicule,acromion,fracture de l'apophyse coracoïde de l'omoplate;;;;;
 00060008;Fracture de l'extrémité inférieure du radius;039;;fracture du poignet, fracture de Pouteau Colles,fracture de Goyrand Smith;;;;;
 00060009;Fracture de l'extrémité proximale de l'humérus;044;;épaule, extremité supérieure de l'humérus,fracture de la tête de l'humérus, fracture du col de l'humérus, épaule, fracture trochiter;;;;;

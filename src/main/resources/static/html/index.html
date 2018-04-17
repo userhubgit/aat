@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="fr">
+    @@include('./partials/head.html')
+    <body>
+        <div class="ajax-loader"></div>
+        <div class="global-container">
+            @@include('./partials/header.html',{ "exemple": "default" })
+            <main>
+                @@include('./partials/index.html')
+            </main>
+            @@include('./partials/footer.html', { "exemple" : "footer-simple" } )
+        </div>
+        @@include('./partials/js-lib.html')
+    </body>
+</html>

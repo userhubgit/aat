@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X7 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="34px" height="34px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 1570 1570"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil0 {fill:#0087CF}
+    .fil1 {fill:white}
+   ]]>
+  </style>
+ </defs>
+ <g id="Plan_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_606931376">
+   <path class="fil0" d="M1570 786c0,-218 -87,-414 -230,-556 -141,-142 -338,-230 -554,-230 -218,0 -414,88 -556,230 -142,142 -230,338 -230,556 0,216 88,412 230,554 142,143 338,230 556,230 216,0 412,-87 554,-230 143,-142 230,-338 230,-554z"/>
+   <g id="_347912128">
+    <g>
+     <path class="fil1" d="M469 372l1 0c63,0 113,51 113,113l0 1c0,63 -50,113 -113,113l-1 0c-62,0 -113,-50 -113,-113l0 -1c0,-62 51,-113 113,-113z"/>
+     <path class="fil1" d="M785 372l1 0c62,0 113,51 113,113l0 1c0,63 -51,113 -113,113l-1 0c-63,0 -113,-50 -113,-113l0 -1c0,-62 50,-113 113,-113z"/>
+     <path class="fil1" d="M1101 372l1 0c63,0 113,51 113,113l0 1c0,63 -50,113 -113,113l-1 0c-62,0 -112,-50 -112,-113l0 -1c0,-62 50,-113 112,-113z"/>
+    </g>
+    <g>
+     <path class="fil1" d="M469 683l1 0c63,0 113,51 113,113l0 1c0,62 -50,113 -113,113l-1 0c-62,0 -113,-51 -113,-113l0 -1c0,-62 51,-113 113,-113z"/>
+     <path class="fil1" d="M785 683l1 0c62,0 113,51 113,113l0 1c0,62 -51,113 -113,113l-1 0c-63,0 -113,-51 -113,-113l0 -1c0,-62 50,-113 113,-113z"/>
+     <path class="fil1" d="M1101 683l1 0c63,0 113,51 113,113l0 1c0,62 -50,113 -113,113l-1 0c-62,0 -112,-51 -112,-113l0 -1c0,-62 50,-113 112,-113z"/>
+    </g>
+    <g>
+     <path class="fil1" d="M469 994l1 0c63,0 113,51 113,113l0 1c0,62 -50,113 -113,113l-1 0c-62,0 -113,-51 -113,-113l0 -1c0,-62 51,-113 113,-113z"/>
+     <path class="fil1" d="M785 994l1 0c62,0 113,51 113,113l0 1c0,62 -51,113 -113,113l-1 0c-63,0 -113,-51 -113,-113l0 -1c0,-62 50,-113 113,-113z"/>
+     <path class="fil1" d="M1101 994l1 0c63,0 113,51 113,113l0 1c0,62 -50,113 -113,113l-1 0c-62,0 -112,-51 -112,-113l0 -1c0,-62 50,-113 112,-113z"/>
+    </g>
+   </g>
+  </g>
+ </g>
+</svg>

@@ -13,6 +13,21 @@ public class IndexController {
 
     @GetMapping("/moteur")
     public String index() {
-        return "formulaire";
+        return "index";
+    }
+    
+    @GetMapping("/formulaire")
+    public String form() {
+        return "recherche";
+    }
+    
+    @GetMapping("/avis")
+    public String avis() {
+        return "avis";
+    }
+    
+    @GetMapping("/remerciements")
+    public String remercier() {
+        return "remerciements";
     }
 }

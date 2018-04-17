@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X7 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="50px" height="61px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 3317 4075"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil1 {fill:none}
+    .fil0 {fill:#EF8402}
+    .fil2 {fill:white}
+   ]]>
+  </style>
+    <clipPath id="id0">
+     <path d="M1658 0l1 0c912,0 1658,746 1658,1658l0 1c0,912 -746,1658 -1658,1658l-1 0c-912,0 -1658,-746 -1658,-1658l0 -1c0,-912 746,-1658 1658,-1658z"/>
+    </clipPath>
+ </defs>
+ <g id="Plan_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_571629040">
+   <path class="fil0" d="M1658 0l1 0c912,0 1658,746 1658,1658l0 1c0,912 -746,1658 -1658,1658l-1 0c-912,0 -1658,-746 -1658,-1658l0 -1c0,-912 746,-1658 1658,-1658z"/>
+   <g style="clip-path:url(#id0)">
+   </g>
+   <path id="1" class="fil1" d="M1658 0l1 0c912,0 1658,746 1658,1658l0 1c0,912 -746,1658 -1658,1658l-1 0c-912,0 -1658,-746 -1658,-1658l0 -1c0,-912 746,-1658 1658,-1658z"/>
+   <g id="Icon">
+    <path class="fil2" d="M1840 2331l67 167c-79,23 -162,35 -248,35 -496,0 -898,-402 -898,-897 0,-496 402,-898 898,-898 495,0 897,402 897,898 0,86 -12,169 -35,248l-167 -67c15,-58 23,-119 23,-181 0,-397 -322,-719 -718,-719 -397,0 -719,322 -719,719 0,396 322,718 719,718 62,0 123,-8 181,-23zm-181 -336c-199,0 -360,-161 -360,-359 0,-199 161,-360 360,-360 198,0 359,161 359,360 0,15 -2,30 -3,45l170 68c8,-36 12,-74 12,-113 0,-298 -241,-539 -538,-539 -298,0 -539,241 -539,539 0,297 241,538 539,538 39,0 77,-4 113,-12l-68 -170c-15,1 -30,3 -45,3zm0 -180c99,0 179,-80 179,-179 0,-100 -80,-180 -179,-180 -100,0 -180,80 -180,180 0,99 80,179 180,179zm551 223l227 -103 -778 -299 299 778 103 -227 256 257 150 -150 -257 -256z"/>
+   </g>
+  </g>
+  <polygon class="fil0" points="1659,4075 1787,3852 1916,3629 1659,3629 1401,3629 1530,3852 "/>
+ </g>
+</svg>

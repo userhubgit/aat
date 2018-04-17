@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X7 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="34px" height="34px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 2028 2035"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil1 {fill:none}
+    .fil0 {fill:#C26B00}
+    .fil2 {fill:white}
+   ]]>
+  </style>
+    <clipPath id="id0">
+     <path d="M1014 0l0 0c558,0 1014,458 1014,1017l0 0c0,560 -456,1018 -1014,1018l0 0c-558,0 -1014,-458 -1014,-1018l0 0c0,-559 456,-1017 1014,-1017z"/>
+    </clipPath>
+ </defs>
+ <g id="Plan_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_519404712">
+   <path class="fil0" d="M1014 0l0 0c558,0 1014,458 1014,1017l0 0c0,560 -456,1018 -1014,1018l0 0c-558,0 -1014,-458 -1014,-1018l0 0c0,-559 456,-1017 1014,-1017z"/>
+   <g>
+   </g>
+   <g style="clip-path:url(#id0)">
+   </g>
+   <path class="fil1" d="M1014 0l0 0c558,0 1014,458 1014,1017l0 0c0,560 -456,1018 -1014,1018l0 0c-558,0 -1014,-458 -1014,-1018l0 0c0,-559 456,-1017 1014,-1017z"/>
+   <g id="_527783872">
+    <g>
+     <path class="fil2" d="M1063 983c13,15 12,38 -3,51l0 0c-15,13 -38,10 -51,-5l-205 -240c-13,-16 -11,-39 4,-51l0 0c14,-13 37,-11 50,5l205 240 0 0z"/>
+     <path class="fil2" d="M834 1161c-13,11 -13,32 0,46l0 0c13,15 33,19 46,8l197 -169c12,-11 12,-32 0,-46l0 0c-13,-15 -33,-19 -46,-8l-197 169 0 0z"/>
+    </g>
+    <rect class="fil2" x="581" y="1014" width="89.4958" height="37.1562"/>
+    <rect class="fil2" x="1355" y="1014" width="89.4958" height="37.1562"/>
+    <g>
+     <rect class="fil2" x="1000" y="577" width="37.0323" height="89.7951"/>
+     <rect class="fil2" x="997" y="1366" width="37.0323" height="89.7951"/>
+    </g>
+    <polygon class="fil2" points="1232,697 1465,743 1406,501 "/>
+    <path class="fil2" d="M1455 860c18,49 27,102 27,157 0,259 -210,470 -468,470 -258,0 -468,-211 -468,-470 0,-259 210,-469 468,-469 121,0 232,46 315,122l75 -51c-100,-99 -238,-160 -390,-160 -307,0 -557,250 -557,558 0,308 250,559 557,559 307,0 557,-251 557,-559 0,-69 -13,-136 -36,-197l-80 40 0 0z"/>
+   </g>
+  </g>
+ </g>
+</svg>

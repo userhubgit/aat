@@ -33,11 +33,11 @@ import org.tartarus.snowball.ext.FrenchStemmer;
 public final class AATLuceneAnalyzerUtil {
 
 	/**
-	 * Liste des termes ignores à l'indexation et pour la recherche dans lucene.
+	 * Liste des termes ignores ï¿½ l'indexation et pour la recherche dans lucene.
 	 * Elle permet d'etendre la liste de base FrenchAnalyzer.getDefaultStopSet()
 	 */
 	public static final String[] STOP_WORD = new String[] { "chez","-","droite","droit","gauche","drt","drte","gche","gches",
-			"gch","gauches","droites","dte","bilatéral","bilatérale","bilater","bilat","gau"};
+			"gch","gauches","droites","dte","bilatï¿½ral","bilatï¿½rale","bilater","bilat","gau"};
 
 	/**
 	 * Constructeur privï¿½.
@@ -80,7 +80,7 @@ public final class AATLuceneAnalyzerUtil {
 			@Override
 			public TokenStream tokenStream(String fieldName, Reader reader) {
 				
-				Tokenizer aatTokenizer = new WhitespaceTokenizer(Version.LUCENE_36, reader);
+				Tokenizer aatTokenizer = new LetterTokenizer(Version.LUCENE_36, reader);
 				TokenStream filter = new StandardFilter(Version.LUCENE_36, aatTokenizer);
 				Set<String> normaliserListe = normaliserListe(etendreFrenchStopWordSet());
 				filter = new LowerCaseFilter(Version.LUCENE_36, filter);
