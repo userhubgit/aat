@@ -697,7 +697,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 		String[] termSaisie = userInput.split(" ");
 
 		for (int i = 0; i < termSaisie.length; i++) {
-			FuzzyQuery fuzz = new FuzzyQuery(new Term(CHAMP_LIBELLE, termSaisie[i]), 0.0f, 2, 10);
+			FuzzyQuery fuzz = new FuzzyQuery(new Term(CHAMP_LIBELLE, termSaisie[i]), 0.5f, 2, 10);
 			approximativeRecherche.setBoost(Constante.LIBELLE_SCORE);
 			approximativeRecherche.add(fuzz, Occur.MUST);
 		}
