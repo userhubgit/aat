@@ -61,15 +61,17 @@ public class IndexController {
 
 		try {
 
-			connection = DriverManager.getConnection(
-					"jdbc:postgresql://"
-							+ System.getenv("POSTGRESQL_SERVICE_HOST") 
-							+ ":" 
-							+ System.getenv("POSTGRESQL_SERVICE_PORT_POSTGRESQL") 
-							+ "/" 
-							+ System.getenv("POSTGRESQL_DATABASE"), 
-							System.getenv("POSTGRESQL_USER"), 
-							System.getenv("POSTGRESQL_PASSWORD"));
+			String url = "jdbc:postgresql://" + System.getenv("POSTGRESQL_SERVICE_HOST") + ":"
+					+ System.getenv("POSTGRESQL_SERVICE_PORT_POSTGRESQL") + "/" + System.getenv("POSTGRESQL_DATABASE");
+
+			String user = System.getenv("POSTGRESQL_USER");
+			String pwd = System.getenv("POSTGRESQL_PASSWORD");
+			
+			System.out.println("----- URL  ---------------------- " + url);
+			System.out.println("----- USER ---------------------- " + user);
+			System.out.println("----- PWD  ---------------------- " + pwd);
+
+			connection = DriverManager.getConnection(url, user, pwd);
 
 		} catch (SQLException e) {
 
