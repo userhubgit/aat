@@ -83,7 +83,7 @@ public class IndexController {
 				System.out.println("-----"+ next +"--------------- : " + envprop.get(next));
 			}
 
-			connection = DriverManager.getConnection(url, user, pwd);
+			connection = DriverManager.getConnection(url, "user83M", "WD1VOhUtrtvikiPU");
 
 		} catch (SQLException e) {
 
