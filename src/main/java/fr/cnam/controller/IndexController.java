@@ -3,6 +3,9 @@ package fr.cnam.controller;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -70,6 +73,15 @@ public class IndexController {
 			System.out.println("----- URL  ---------------------- " + url);
 			System.out.println("----- USER ---------------------- " + user);
 			System.out.println("----- PWD  ---------------------- " + pwd);
+			
+			Map<String, String> envprop = System.getenv();
+			
+			Set<String> keySet = envprop.keySet();
+			Iterator<String> iterator = keySet.iterator();
+			while (iterator.hasNext()) {
+				String next = iterator.next();
+				System.out.println("-----"+ next +"--------------- : " + envprop.get(next));
+			}
 
 			connection = DriverManager.getConnection(url, user, pwd);
 
