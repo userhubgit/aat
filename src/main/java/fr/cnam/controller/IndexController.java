@@ -62,8 +62,14 @@ public class IndexController {
 		try {
 
 			connection = DriverManager.getConnection(
-					"jdbc:postgresql://"+ System.getenv("MYDATABASENAME_SERVICE_HOST") + ":" + "" + "/" + System.getenv("MYDATABASENAME_SERVICE_PORT_POSTGRESQL"), System.getenv("POSTGRESQL_USER"),
-					System.getenv("POSTGRESQL_PASSWORD"));
+					"jdbc:postgresql://"
+							+ System.getenv("POSTGRESQL_SERVICE_HOST") 
+							+ ":" 
+							+ System.getenv("POSTGRESQL_SERVICE_PORT_POSTGRESQL") 
+							+ "/" 
+							+ System.getenv("POSTGRESQL_DATABASE"), 
+							System.getenv("POSTGRESQL_USER"), 
+							System.getenv("POSTGRESQL_PASSWORD"));
 
 		} catch (SQLException e) {
 
