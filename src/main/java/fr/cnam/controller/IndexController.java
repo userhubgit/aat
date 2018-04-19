@@ -15,8 +15,8 @@ public class IndexController {
 
     @GetMapping("/")
     public String indexV0() {
-    	System.out.println("TENTATIVE DE CONNEXION VIA JDBC *********");
-    	pgsqlConnexion();
+//    	System.out.println("TENTATIVE DE CONNEXION VIA JDBC *********");
+//    	pgsqlConnexion();
         return "formulaireV0";
     }
 

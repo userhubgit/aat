@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import javax.sql.DataSource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
+import fr.cnam.dao.AvisRepository;
 import fr.cnam.dto.MotifView;
+import fr.cnam.model.Avis;
 import fr.cnam.model.Motif;
 import fr.cnam.service.LuceneIndexRecherche;
 import fr.cnam.util.Constante;
@@ -43,10 +47,11 @@ public class MotifController {
     @Autowired
     private ResourceLoader resourceLoader;
     
-//	@Autowired
-//	DataSource dataSource;
-//	
-//	@Autowired
+	@Autowired
+	DataSource dataSource;
+	
+	@Autowired
+	AvisRepository avisRepository;
 //	EnqueteRepository enqueteRepository;
 
 	private Gson gson = new Gson();
@@ -129,5 +134,43 @@ public class MotifController {
 		mapMotif = MotifMapper.listMotifToSortedMap(listeTrieeMotif);
 		outStream.close();
 		return gson.toJson(mapMotif);
+	}
+	
+	@GetMapping("/aat/register")
+	public ResponseEntity<?> loadAvis() throws IOException {
+		logger.info("ENREGISTREMENT DES AVIS ...........");
+		Avis avis = new Avis();
+		
+		avis.setCommentaire("Comment 1");
+		avis.setReponse1("OUI");
+		avis.setReponse2("NON");
+		avis.setReponse3("EN PARTIE");
+		
+		avisRepository.save(avis);
+		
+		Avis avis2 = new Avis();
+		avis2.setCommentaire("Comment 2");
+		avis2.setReponse1("NON");
+		avis2.setReponse2("OUI");
+		avis2.setReponse3("EN PARTIE");
+		
+		avisRepository.save(avis2);
+		
+		Avis avis3 = new Avis();		
+		avis3.setCommentaire("Comment 3");
+		avis3.setReponse1("EN PARTIE");
+		avis3.setReponse2("EN PARTIE");
+		avis3.setReponse3("EN PARTIE");
+		
+		avisRepository.save(avis3);
+		
+		logger.info("ENREGISTREMENT DES AVIS SUCCESSFULL ...........");
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@GetMapping("/aat/enquetes")
+	public ResponseEntity<Iterable<Avis>> listeAvis() throws IOException {
+		Iterable<Avis> avis = avisRepository.findAll();
+		return new ResponseEntity<Iterable<Avis>>(avis, HttpStatus.OK);
 	}
 }
