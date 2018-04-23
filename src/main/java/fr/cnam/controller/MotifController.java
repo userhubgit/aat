@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
@@ -169,7 +170,7 @@ public class MotifController {
 	}
 	
 	@GetMapping("/aat/enquetes")
-	public ResponseEntity<Iterable<Avis>> listeAvis() throws IOException {
+	public ResponseEntity<Iterable<Avis>> listeAvis(HttpSession session) throws IOException {
 		Iterable<Avis> avis = avisRepository.findAll();
 		return new ResponseEntity<Iterable<Avis>>(avis, HttpStatus.OK);
 	}

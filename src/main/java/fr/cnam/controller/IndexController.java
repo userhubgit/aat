@@ -7,26 +7,47 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
+
+import fr.cnam.model.Avis;
+import fr.cnam.model.Enquete;
+import fr.cnam.model.MotifAAT;
 
 @Controller
 public class IndexController {
+	
+	private final Logger logger = LoggerFactory.getLogger(IndexController.class);
 
     @GetMapping("/")
     public String indexV0() {
-    	System.out.println("TENTATIVE DE CONNEXION VIA JDBC *********");
-    	pgsqlConnexion();
         return "formulaireV0";
     }
 
     @GetMapping("/moteur")
-    public String index() {
+    public String index(HttpSession session, @RequestHeader HttpHeaders headers) {
+    	if(null == session){
+    		logger.info("La session est null");
+    	}else{
+    		logger.info("UI SESSION : {} ", session.getId());
+    		if(session.isNew()){
+    			initSession(session, headers);
+    		}else{
+    			
+    			logger.info("Mise a jour des donnees");
+    		}
+    	}
         return "index";
     }
     
     @GetMapping("/formulaire")
-    public String form() {
+    public String form(HttpSession session) {
         return "recherche";
     }
     
@@ -98,5 +119,22 @@ public class IndexController {
 		} else {
 			System.out.println("Failed to make connection!");
 		}
+	}
+	
+	private void initSession(HttpSession session, HttpHeaders headers){
+		logger.info("Initialisation des donnees");
+		logger.info("Navigateur : {}", headers.get("user-agent").get(0));
+		
+		Enquete enquete = new Enquete();
+		enquete.setIdentifiant(session.getId());
+		enquete.setNavigateur(headers.get("user-agent").get(0));
+		
+		MotifAAT motif = new MotifAAT();
+		
+		Avis avis = new Avis();
+		
+		session.setAttribute("enquete", enquete);
+		session.setAttribute("motif", motif);
+		session.setAttribute("avis", avis);
 	}
 }

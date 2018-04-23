@@ -10,7 +10,6 @@ import java.util.Set;
 
 import org.apache.lucene.analysis.ASCIIFoldingFilter;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.KeywordTokenizer;
 import org.apache.lucene.analysis.LetterTokenizer;
 import org.apache.lucene.analysis.LowerCaseFilter;
 import org.apache.lucene.analysis.StopFilter;
@@ -18,11 +17,8 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.WhitespaceTokenizer;
 import org.apache.lucene.analysis.fr.FrenchAnalyzer;
-import org.apache.lucene.analysis.snowball.SnowballFilter;
 import org.apache.lucene.analysis.standard.StandardFilter;
-import org.apache.lucene.analysis.standard.StandardTokenizer;
 import org.apache.lucene.util.Version;
-import org.tartarus.snowball.ext.FrenchStemmer;
 
 
 /**
@@ -37,7 +33,7 @@ public final class AATLuceneAnalyzerUtil {
 	 * Elle permet d'etendre la liste de base FrenchAnalyzer.getDefaultStopSet()
 	 */
 	public static final String[] STOP_WORD = new String[] { "chez","-","droite","droit","gauche","drt","drte","gche","gches",
-			"gch","gauches","droites","dte","bilat�ral","bilat�rale","bilater","bilat","gau"};
+			"gch","gauches","droites","dte","bilatéral","bilatérale","bilater","bilat","gau"};
 
 	/**
 	 * Constructeur priv�.
