@@ -17,8 +17,7 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.WhitespaceTokenizer;
 import org.apache.lucene.analysis.fr.FrenchAnalyzer;
-import org.apache.lucene.analysis.fr.FrenchLightStemmer;
-import org.apache.lucene.analysis.snowball.SnowballFilter;
+import org.apache.lucene.analysis.fr.FrenchLightStemFilter;
 import org.apache.lucene.analysis.standard.StandardFilter;
 import org.apache.lucene.util.Version;
 
@@ -134,6 +133,28 @@ public final class AATLuceneAnalyzerUtil {
 			}
 		};
 		return customAnalyzer;
+	}
+	
+	/**
+	 *
+	 * @return {@link Analyzer}
+	 * @throws IOException
+	 */
+	public static Analyzer getGeneriqueAnalyzer() {
+
+		Analyzer generiqueAnalyzer = new Analyzer() {			
+			@Override
+			public TokenStream tokenStream(String fieldName, Reader reader) {
+				
+				Tokenizer generiqueTokenizer = new WhitespaceTokenizer(Version.LUCENE_36, reader);
+				TokenStream filter = new StandardFilter(Version.LUCENE_36, generiqueTokenizer);
+				filter = new LowerCaseFilter(Version.LUCENE_36, filter);
+				filter = new ASCIIFoldingFilter(filter);
+				filter = new FrenchLightStemFilter(filter);
+				return filter;
+			}
+		};
+		return generiqueAnalyzer;
 	}
 	
 	/**

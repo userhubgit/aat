@@ -13,6 +13,8 @@ public class Constante {
     public static final int CSV_CODIFICATION_INDEX = 2;
     public static final int CSV_ACRONYME_INDEX = 3;
     public static final int CSV_SYNONYME_INDEX = 4;
+    public static final int CSV_GENERIQUE_INDEX = 5;
+    public static final int CSV_DESCRIPTION_INDEX = 6;
     public static final String FICH_PDF_NAME_PATTERN = "arret_motif_%s.pdf";
     public static final String FICH_HTML_NAME_PATTERN = "arret_motif_%s.html";
     public static final String FICH_XML_NAME_PATTERN = "Motif-%s.xml";

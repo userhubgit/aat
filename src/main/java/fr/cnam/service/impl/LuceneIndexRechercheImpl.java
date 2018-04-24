@@ -109,6 +109,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 	/** Le champ synonyme du motif. */
 	public static final String CHAMP_ACRONYME = "acronyme";
 
+	public static final String CHAMP_GENERIQUE = "generique";
 	/*
 	 * (non-Javadoc)
 	 *
@@ -342,6 +343,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			analyzerPerField.put(CHAMP_LIBELLE, AATLuceneAnalyzerUtil.getAnalyzer());
 			analyzerPerField.put(CHAMP_SYNONYME, AATLuceneAnalyzerUtil.getAnalyzer());
 			analyzerPerField.put(CHAMP_ACRONYME, AATLuceneAnalyzerUtil.getAcronymeAnalyzer());
+			analyzerPerField.put(CHAMP_GENERIQUE, AATLuceneAnalyzerUtil.getGeneriqueAnalyzer());
 			PerFieldAnalyzerWrapper analyzers = new PerFieldAnalyzerWrapper(new StandardAnalyzer(Version.LUCENE_36),
 					analyzerPerField);
 
@@ -496,6 +498,15 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 					syn = syn + " " + synonyme;
 				}
 				doc.add(new Field(CHAMP_SYNONYME, syn, Store.YES, Index.ANALYZED));
+			}
+			
+			if (null != pMotif.getGenerique()) {
+				List<String> tableGenerique = pMotif.getGenerique();
+				String syn = "";
+				for (String synonyme : tableGenerique) {
+					syn = syn + " " + synonyme;
+				}
+				doc.add(new Field(CHAMP_GENERIQUE, syn, Store.YES, Index.ANALYZED));
 			}
 			pWriter.addDocument(doc);
 		}

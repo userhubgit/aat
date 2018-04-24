@@ -25,7 +25,7 @@ public class Motif implements Serializable{
 	
 	private List<String> acronymes;
 	
-	private String generique;
+	private List<String> generique;
 	
 	private String description;
 	
@@ -115,11 +115,11 @@ public class Motif implements Serializable{
 		this.acronymes = acronymes;
 	}
 
-	public String getGenerique() {
+	public List<String> getGenerique() {
 		return generique;
 	}
 
-	public void setGenerique(String generique) {
+	public void setGenerique(List<String> generique) {
 		this.generique = generique;
 	}
 

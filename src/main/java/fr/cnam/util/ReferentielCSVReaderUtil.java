@@ -114,6 +114,12 @@ public final class ReferentielCSVReaderUtil {
                     motifEncours.setSynonymes(Arrays.asList(tableDeSynonyme));
                 }
                 
+                if (fields.length > Constante.CSV_GENERIQUE_INDEX) {
+                	String generiqueString = fields[Constante.CSV_GENERIQUE_INDEX];
+                	String[] tableGenerique = generiqueString.split(SYNONYME_SERAPTOR);
+                	motifEncours.setGenerique(Arrays.asList(tableGenerique));
+                }
+                
                 liste.add(motifEncours);
             }
         }
