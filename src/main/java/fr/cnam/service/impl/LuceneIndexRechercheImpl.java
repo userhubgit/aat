@@ -703,7 +703,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 //		SpanQuery[] clauses = new SpanQuery[termSaisie.length];
 		
 		for (int i = 0; i < termSaisie.length; i++) {
-			FuzzyQuery fuzz = new FuzzyQuery(new Term(CHAMP_LIBELLE, termSaisie[i]), 0.0f, 1);
+			FuzzyQuery fuzz = new FuzzyQuery(new Term(CHAMP_LIBELLE, termSaisie[i]), 0.5f, 2);
 //			clauses[i] = new SpanMultiTermQueryWrapper<MultiTermQuery>(fuzz);
 			
 			approximativeRecherche.setBoost(Constante.LIBELLE_SCORE);
