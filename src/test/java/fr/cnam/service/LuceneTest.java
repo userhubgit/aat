@@ -1,9 +1,17 @@
 package fr.cnam.service;
 
 import java.io.IOException;
+import java.io.Reader;
 
+import org.apache.lucene.analysis.ASCIIFoldingFilter;
 import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.LowerCaseFilter;
+import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.Tokenizer;
+import org.apache.lucene.analysis.WhitespaceTokenizer;
+import org.apache.lucene.analysis.fr.FrenchLightStemFilter;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.standard.StandardFilter;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.Field.Index;
@@ -33,6 +41,8 @@ import org.apache.lucene.store.RAMDirectory;
 import org.apache.lucene.util.Version;
 import org.springframework.util.StringUtils;
 
+import fr.cnam.util.Constante;
+
 public class LuceneTest {
 
 	
@@ -42,7 +52,7 @@ public class LuceneTest {
 		//  1 create the index
 		Directory d = new RAMDirectory();
 
-		Analyzer analyzer =  new StandardAnalyzer(Version.LUCENE_36);
+		Analyzer analyzer =  getGeneriqueAnalyzer();
 
 				// AATLuceneAnalyzerUtil.getAnalyzer();
 		IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_36, analyzer);
@@ -50,19 +60,19 @@ public class LuceneTest {
 	
 
 		IndexWriter w = new IndexWriter(d, config);
-		addDoc(w, "Lucene in Action", "193398817");
-        addDoc(w, "Lucene for Dummies", "55320055Z");
-        addDoc(w, "Managing Gigabytes", "55063554A");
-        addDoc(w, "The Art of Computer Science", "9900333X");
+		addDoc(w, "douleure chirurgicale", "193398817");
+        addDoc(w, "syndrôme épaule main", "55320055Z");
+        addDoc(w, "chirurgie", "55063554A");
+        addDoc(w, "traumatisme", "9900333X");
         displayIndex(w);
         
         w.close();
         
         
         // 2 query
-		String querystr = args.length > 0 ? args[0] : "luc";		
-		Query q = new QueryParser(Version.LUCENE_36, "libelle", analyzer).parse(querystr);
-		q = getLibelleWithApproximatifQuery(querystr);
+		String querystr = args.length > 0 ? args[0] : "epa";		
+		Query q = new QueryParser(Version.LUCENE_36, "libelle", analyzer).parse(querystr+"*");
+//		q = getLibelleWithApproximatifQuery(querystr);
 		
 		// 3. search
         int hitsPerPage = 10;
@@ -148,16 +158,39 @@ public class LuceneTest {
 		return snq;
 	}
 	
-	private static BooleanQuery getLibelleWithApproximatifQuery(String userInput) {
+	public static BooleanQuery getLibelleWithApproximatifQuery(String userInput) {
 
 		BooleanQuery approximativeRecherche = new BooleanQuery();
 		String[] termSaisie = userInput.split(" ");
 
 		for (int i = 0; i < termSaisie.length; i++) {
 			FuzzyQuery fuzz = new FuzzyQuery(new Term("libelle", termSaisie[i]), 0.5f, 2, 100);
-//			approximativeRecherche.setBoost(Constante.LIBELLE_SCORE);
+			approximativeRecherche.setBoost(Constante.LIBELLE_SCORE);
 			approximativeRecherche.add(fuzz, Occur.MUST);
 		}
 		return approximativeRecherche;
+	}
+	
+	
+	/**
+	 *
+	 * @return {@link Analyzer}
+	 * @throws IOException
+	 */
+	public static Analyzer getGeneriqueAnalyzer() {
+
+		Analyzer generiqueAnalyzer = new Analyzer() {			
+			@Override
+			public TokenStream tokenStream(String fieldName, Reader reader) {
+				
+				Tokenizer aatTokenizer = new WhitespaceTokenizer(Version.LUCENE_36, reader);
+				TokenStream filter = new StandardFilter(Version.LUCENE_36, aatTokenizer);
+				filter = new LowerCaseFilter(Version.LUCENE_36, filter);
+				filter = new ASCIIFoldingFilter(filter);
+				filter = new FrenchLightStemFilter(filter);
+				return filter;
+			}
+		};
+		return generiqueAnalyzer;
 	}
 }
