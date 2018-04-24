@@ -40,10 +40,15 @@ import org.apache.lucene.search.BooleanClause.Occur;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.FuzzyQuery;
 import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.MatchAllDocsQuery;
+import org.apache.lucene.search.MultiTermQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TopScoreDocCollector;
+import org.apache.lucene.search.spans.SpanMultiTermQueryWrapper;
+import org.apache.lucene.search.spans.SpanNearQuery;
+import org.apache.lucene.search.spans.SpanQuery;
 import org.apache.lucene.store.RAMDirectory;
 import org.apache.lucene.util.Version;
 import org.slf4j.Logger;
@@ -691,18 +696,24 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 		return query;
 	}
 
-	private BooleanQuery getLibelleWithApproximatifQuery(String userInput) {
+	private BooleanQuery getLibelleWithApproximatifQuery(String userInput) throws org.apache.lucene.queryParser.ParseException {
 
 		BooleanQuery approximativeRecherche = new BooleanQuery();
 		String[] termSaisie = userInput.split(" ");
-
+//		SpanQuery[] clauses = new SpanQuery[termSaisie.length];
+		
 		for (int i = 0; i < termSaisie.length; i++) {
-			FuzzyQuery fuzz = new FuzzyQuery(new Term(CHAMP_LIBELLE, termSaisie[i]), 0.5f, 2, 10);
+			FuzzyQuery fuzz = new FuzzyQuery(new Term(CHAMP_LIBELLE, termSaisie[i]), 0.0f, 1);
+//			clauses[i] = new SpanMultiTermQueryWrapper<MultiTermQuery>(fuzz);
+			
 			approximativeRecherche.setBoost(Constante.LIBELLE_SCORE);
-			approximativeRecherche.add(fuzz, Occur.MUST);
+			approximativeRecherche.add(fuzz, Occur.MUST);			
 		}
+		
+//		SpanNearQuery snq = new SpanNearQuery(clauses , 3, false);
 		return approximativeRecherche;
 	}
+
 
 	private Query getSynonymeQuery(String userInput) throws org.apache.lucene.queryParser.ParseException {
 

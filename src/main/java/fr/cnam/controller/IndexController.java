@@ -3,6 +3,7 @@ package fr.cnam.controller;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -13,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 
@@ -24,7 +26,10 @@ import fr.cnam.model.MotifAAT;
 public class IndexController {
 	
 	private final Logger logger = LoggerFactory.getLogger(IndexController.class);
-
+	private final static String SESSION_ATTR_ENQUETE = "enquete";
+	private final static String SESSION_ATTR_MOTIF = "motif";
+	private final static String SESSION_ATTR_AVIS = "avis";
+	
     @GetMapping("/")
     public String indexV0() {
         return "formulaireV0";
@@ -48,11 +53,37 @@ public class IndexController {
     
     @GetMapping("/formulaire")
     public String form(HttpSession session) {
+    	if(null != session){
+    		if(null != session.getAttribute(SESSION_ATTR_ENQUETE)){
+    			
+    			// Renseignement de l'heure de de debut de l'enquête
+    			// L'initialisation ce fait juste au premier passage.
+    			 Enquete enquete = (Enquete) session.getAttribute(SESSION_ATTR_ENQUETE);
+    			if(null == enquete.getHorodateur1()){
+    				enquete.setHorodateur1(new Date(System.currentTimeMillis()));
+    			}
+    		}
+    	}
         return "recherche";
     }
     
     @GetMapping("/avis")
-    public String avis() {
+    public String avis(HttpSession session, @CookieValue("libelle") String info) {
+    	logger.info("AFFICHAGE COOKIE ************* {} ", info);
+    	if(null != session){
+    		if(null != session.getAttribute(SESSION_ATTR_ENQUETE)){
+    			
+    			// Renseignement de l'heure de de debut de l'enquête
+    			// L'initialisation ce fait juste au premier passage.
+    			 Enquete enquete = (Enquete) session.getAttribute(SESSION_ATTR_ENQUETE);
+    			if(null == enquete.getHorodateur1()){
+    				enquete.setHorodateur2(new Date(System.currentTimeMillis()));
+    			}
+    			// Motif
+    			MotifAAT motifAAT = (MotifAAT) session.getAttribute(SESSION_ATTR_MOTIF);
+//    			motifAAT.setLibelle(inf);
+    		}
+    	}
         return "avis";
     }
     
@@ -133,8 +164,8 @@ public class IndexController {
 		
 		Avis avis = new Avis();
 		
-		session.setAttribute("enquete", enquete);
-		session.setAttribute("motif", motif);
-		session.setAttribute("avis", avis);
+		session.setAttribute(SESSION_ATTR_ENQUETE, enquete);
+		session.setAttribute(SESSION_ATTR_MOTIF, motif);
+		session.setAttribute(SESSION_ATTR_AVIS, avis);
 	}
 }

@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+    
     // Scripts charte-amelipro
     // Initialise les popover
     $('[data-toggle="popover"]').popover();
@@ -86,15 +86,99 @@ $(document).ready(function () {
 
 
     /****************************** AAT *********************************/
-
     $('.alphabet .lettre.active').click(function () {
         var position = $('#' + $(this).text()).offset().top - $('.liste-motifs').offset().top + $('.liste-motifs').scrollTop();
         $('.liste-motifs').animate({scrollTop: position}, 50);
+        
+        $('.alphabet .lettre.active').removeClass('selected'),
+        $(this).addClass('selected');
+    });
+    /**
+     * La fonction qui permet de créer dynamiquement la popIn
+     */
+    function createPopIn(data) {
+    	/*
+    	 * L'alphabet. 
+    	 */
+    	var lettreAlphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+    	
+    	for(var j = 0; j < 26; j++){
+    		
+    		var lettreEncours = lettreAlphabet[j];
+    		
+    		if(data[lettreEncours].length > 0){
+    	    	var listMotif = data[lettreEncours];
+    	    	var taille = data[lettreEncours].length;
+    	    	elmt2 = document.createElement("a");
+    	    	elmt2.setAttribute("class", "lettre active");
+//    	    	elmt2.setAttribute("onClick","elementClick(this)");
+    	    	elmt2.innerHTML=lettreEncours;
+    			
+    	    	$("#liste-motifs-modal div.alphabet").append(elmt2);
+    	    	
+    	    	/* Remplissage des libellés*/
+    			divModalBody = $("#liste-motifs-modal div.modal-body.liste-motifs");
+    			
+    	    	ulLettre = document.createElement("ul");
+    	    	ulLettre.setAttribute("id", lettreEncours);
+    	    	
+    	    	liCurrentLettre = document.createElement("li");
+    	    	liCurrentLettre.setAttribute("class","lettre");
+    	    	
+    	    	liCurrentLettre.innerHTML=lettreEncours;
+    	    	ulLettre.appendChild(liCurrentLettre);
+    	    	
+    	    	//---------------- foreach block remplissage des libelle de la lettre courante-------------------------------------//		            	
+    	    	for(var i=0; i<taille; i++){
+    	    		
+    				liLettre = document.createElement("li");
+    				liLettre.setAttribute("data-dismiss","modal");
+    				liLettre.setAttribute("data-id-motif",listMotif[i].label);
+    				liLettre.setAttribute("data-nom-motif",listMotif[i].value);
+
+    				text = listMotif[i].value;
+    	        	liLettre.innerHTML=text;
+    	        	
+    	        	ulLettre.appendChild(liLettre);
+    	    	}
+    	    	//--------------- Fin block foreach ---------------------------------------//
+    	    	
+    	    	divModalBody.append(ulLettre);
+    	    	
+    		}
+    		else {
+    	    	elt = document.createElement("a");
+    	    	elt.setAttribute("class", "lettre");
+    	    	elt.innerHTML=lettreEncours;    		
+    	    	$("#liste-motifs-modal div.alphabet").append(elt);
+    		}
+    	}
+    }
+    
+    //afficheListeMotifs
+//    $(function (){
+//		$.ajax({
+//			type: 'GET',
+//			url: '/aat/motif/liste/',
+//			dataType : 'json',
+//            success: function(data) {
+//            	$("#liste-motifs-modal div.alphabet").html("");
+//            	$("#liste-motifs-modal div.modal-body.liste-motifs").html("");
+//            	createPopIn(data);
+//            },
+//            error: function() {
+//	              alert('La requête n\'a pas abouti'); 
+//			}
+//        });	
+//	});
+    
+    $('.alphabet .lettre.active').click(function () {
+//        var position = $('#' + $(this).text()).offset().top - $('.liste-motifs').offset().top + $('.liste-motifs').scrollTop();
+//        $('.liste-motifs').animate({scrollTop: position}, 50);
 
         $('.alphabet .lettre.active').removeClass('selected'),
                 $(this).addClass('selected');
     });
-
 
     /* $('#motifs-plus-frequents .capsule, #motifs-en-ce-moment .capsule').hover(
             function () {
@@ -118,27 +202,123 @@ $(document).ready(function () {
         }
     });
 
+//    var optionsAutocompleteMotifs = {
+//        url: "ressources/motifs.json",
+//        getValue: "motif",
+//        adjustWidth: false,
+//        list: {
+//            match: {
+//                enabled: true
+//            },
+//            onChooseEvent: function () {
+//                var idMotif = $("#motif-aat-input").getSelectedItemData().id;
+//                var nomMotif = $("#motif-aat-input").getSelectedItemData().motif;
+//                selectMotif(idMotif, nomMotif);
+//            }
+//        }
+//    };
+    
+    var codeSelection=null;
+    var libelleSelection=null;
+    
+
+	
+    function autofocus(code, libelle){
+    	codeSelection = code;
+    	libelleSelection = libelle;
+    }
+	
     var optionsAutocompleteMotifs = {
-        url: "ressources/motifs.json",
-        getValue: "motif",
-        adjustWidth: false,
-        list: {
-            match: {
-                enabled: true
+            url: function(){
+            	return "/aat/motif?param="+ $("#motif-aat-input").val();
             },
-            onChooseEvent: function () {
-                var idMotif = $("#motif-aat-input").getSelectedItemData().id;
-                var nomMotif = $("#motif-aat-input").getSelectedItemData().motif;
-                selectMotif(idMotif, nomMotif);
+            getValue: "value",
+            adjustWidth: false,
+            minCharNumber: 2,            
+            list: {
+            	maxNumberOfElements: 10,
+            	match: {
+                    enabled: false
+                },
+                
+                onShowListEvent: function() {
+                	
+                	var selectedItem = $("#motif-aat-input").getSelectedItemIndex();
+                	var resultList = $("#motif-aat-input").getItems();
+                	
+                	if (selectedItem == -1 && resultList.length > 0){
+                		var selectedData = resultList[0];
+                		autofocus(selectedData.label, selectedData.value);
+                	}
+                },
+                
+                onChooseEvent: function () {
+                    var idMotif = $("#motif-aat-input").getSelectedItemData().label;
+                    var nomMotif = $("#motif-aat-input").getSelectedItemData().value;
+                    selectMotif(idMotif, nomMotif);
+                },
             }
-        }
+    		
     };
 
     $("#motif-aat-input").easyAutocomplete(optionsAutocompleteMotifs);
-
+    
+    $('#motif-aat-input').on('keypress', function (event) {
+    	var isEntry = event.which;
+    	if(isEntry == 13){
+    		if(codeSelection && libelleSelection){
+    			selectMotif(codeSelection, libelleSelection);
+    		}
+    	}
+        
+    });
+	
+//    $("#motif-aat-input").autocomplete({
+//
+//		source: function(requete, reponse){ // les deux arguments représentent les données nécessaires au plugin
+//			$.ajax({
+//				type: 'GET',
+//				url: '/aat/motif?param='+$('#motif-aat-input').val(),
+//				dataType : 'json',
+//	            success: function(data) {
+//	                reponse($.map(data, function(objet){
+//	                    return objet;
+//	                }));
+//	            },
+//	            error: function() {
+//		              alert('La requête n\'a pas abouti'); 
+//				}
+//	        });
+//	    },			    		    
+//		minLength: 3,
+//		delay : 0,
+//	    select : function(event,ui){
+//	    	
+//	    	if(event.keyCode != 9){
+//	    		motifSelectionne = document.getElementById('#motif-aat-input').value;
+//		    	if(ui.item.value.length > 0){
+//					motifSelectionne = ui.item.value;
+//					codeLibelle = ui.item.label;
+//					ui.item.value = "";
+//		    	}
+//		    	validationSaisie();
+//	    	}
+//	    },
+//
+//		<!-- gestion du no resultat -->
+//		response : function(event,ui){
+//			var resultSize = ui.content.length;
+//			if(resultSize == 0){
+//				motifSelectionne = "";
+//			}
+//		}
+//	});
+    
     $("#motif-aat-input").keyup(
             function () {
-                if ($(this).val().length >= 3) {
+                codeSelection=null;
+                libelleSelection=null;
+                if ($(this).val().length >= 2) {
                     $('#recherche-button').addClass('focus');
                 } else {
                     $('#recherche-button').removeClass('focus');
@@ -167,6 +347,8 @@ $(document).ready(function () {
         $('#id-motif-selectionne').val('');
         $('#motif-aat-input').val('');
         $('#recherche-button').removeClass('focus');
+        codeSelection=null;
+        libelleSelection=null;
     }
 
     $('#recherche-button').click(function () {
@@ -196,4 +378,41 @@ $(document).ready(function () {
         }
     });
 
+    function checkCookie() {
+        var username = getCookie("libelle");
+        if (username != "") {
+            alert("Welcome again " + username);
+        } else {
+            username = prompt("Please enter your libelle:", "");
+            if (username != "" && username != null) {
+                setCookie("libelle", username, 365);
+            }
+        }
+    }
+    
+    function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+    
+    function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        var expires = "expires="+d.toUTCString();
+        if (document.cookie.length == 0){
+        	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        } else {
+        	document.cookie = ";" + cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+    }
 });

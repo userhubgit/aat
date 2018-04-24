@@ -1,16 +1,9 @@
 package fr.cnam.service;
 
 import java.io.IOException;
-import java.io.Reader;
 
-import org.apache.lucene.analysis.ASCIIFoldingFilter;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.LowerCaseFilter;
-import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.Tokenizer;
-import org.apache.lucene.analysis.fr.FrenchAnalyzer;
-import org.apache.lucene.analysis.ngram.NGramTokenizer;
-import org.apache.lucene.analysis.standard.StandardFilter;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.Field.Index;
@@ -49,21 +42,8 @@ public class LuceneTest {
 		//  1 create the index
 		Directory d = new RAMDirectory();
 
-		Analyzer analyzer =  new FrenchAnalyzer(Version.LUCENE_36);
-		
-//		Analyzer analyzer =  new Analyzer() {
-			
-//		@Override
-//		public TokenStream tokenStream(String fieldName, Reader reader) {
-//				Tokenizer aatTokenizer = new NGramTokenizer(reader, 2, 20);
-////				Tokenizer aatTokenizer = new LetterTokenizer(Version.LUCENE_36, reader);
-//				TokenStream filter = new StandardFilter(Version.LUCENE_36, aatTokenizer);
-//				filter = new LowerCaseFilter(Version.LUCENE_36, filter);
-//				filter = new ASCIIFoldingFilter(filter);
-////				filter = new SnowballFilter(filter, new FrenchStemmer());
-//				return filter;
-//			}
-//		};
+		Analyzer analyzer =  new StandardAnalyzer(Version.LUCENE_36);
+
 				// AATLuceneAnalyzerUtil.getAnalyzer();
 		IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_36, analyzer);
 		
@@ -72,7 +52,7 @@ public class LuceneTest {
 		IndexWriter w = new IndexWriter(d, config);
 		addDoc(w, "Lucene in Action", "193398817");
         addDoc(w, "Lucene for Dummies", "55320055Z");
-        addDoc(w, "Organiser Managing Gigabytes", "55063554A");
+        addDoc(w, "Managing Gigabytes", "55063554A");
         addDoc(w, "The Art of Computer Science", "9900333X");
         displayIndex(w);
         
@@ -80,7 +60,7 @@ public class LuceneTest {
         
         
         // 2 query
-		String querystr = args.length > 0 ? args[0] : "organisent";		
+		String querystr = args.length > 0 ? args[0] : "luc";		
 		Query q = new QueryParser(Version.LUCENE_36, "libelle", analyzer).parse(querystr);
 		q = getLibelleWithApproximatifQuery(querystr);
 		
@@ -174,7 +154,7 @@ public class LuceneTest {
 		String[] termSaisie = userInput.split(" ");
 
 		for (int i = 0; i < termSaisie.length; i++) {
-			FuzzyQuery fuzz = new FuzzyQuery(new Term("libelle", termSaisie[i]), 0.6f, 2, 100);
+			FuzzyQuery fuzz = new FuzzyQuery(new Term("libelle", termSaisie[i]), 0.5f, 2, 100);
 //			approximativeRecherche.setBoost(Constante.LIBELLE_SCORE);
 			approximativeRecherche.add(fuzz, Occur.MUST);
 		}
