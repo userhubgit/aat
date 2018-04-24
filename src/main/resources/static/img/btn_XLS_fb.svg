@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X7 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="34px" height="34px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 1583 1573"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil0 {fill:#137D33}
+    .fil1 {fill:white}
+   ]]>
+  </style>
+ </defs>
+ <g id="Plan_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <ellipse class="fil0" cx="792" cy="787" rx="792" ry="787"/>
+  <path id="document-file-xls" class="fil1" d="M398 534c-51,0 -92,41 -92,92l0 322c0,51 42,92 92,92l787 0c51,0 93,-41 93,-92l0 -322c0,-51 -42,-92 -93,-92l-787 0 0 0z"/>
+  <path id="document-file-xls_0" class="fil0" d="M1047 626c-51,0 -93,40 -93,92 0,51 41,92 93,92l45 0c26,0 47,20 47,46 0,25 -20,46 -46,46l-46 0c-26,0 -47,-21 -47,-46l0 0 -46 0 0 0c0,50 41,92 93,92l46 0c51,0 92,-41 92,-92 0,-51 -41,-92 -92,-92l-46 0c-26,0 -47,-21 -47,-46 0,-25 21,-46 47,-46l46 0c25,0 46,21 46,46l46 0c0,-51 -41,-92 -92,-92l-46 0 0 0z"/>
+  <polygon id="document-file-xls_1" class="fil0" points="907,902 907,948 676,948 676,626 722,626 722,902 "/>
+  <polygon id="document-file-xls_2" class="fil0" points="491,787 398,626 445,626 514,747 584,626 630,626 537,787 630,948 584,948 514,827 445,948 398,948 "/>
+ </g>
+</svg>

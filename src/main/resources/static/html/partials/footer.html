@@ -1,0 +1,88 @@
+@@if( exemple === 'default') {
+
+<footer id="footer" class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-xs-12 col-sm-3 col-md-2">
+            <div class="footer-logo"></div>
+        </div>
+
+        <div class="col-xs-12 col-xs-12 col-sm-5 col-md-4">
+
+            <div class="footer-contact">
+
+                <span lang= "en">HOTLINE</span>
+
+                <h3 class="very-small-spacer">0811 709 710</h3>
+
+                <p>
+                    du lundi au vendredi de 8h30 à 17h30.<br/>
+                    0,06€/mn + prix d'un appel
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-xs-12 col-sm-4 col-md-3 ">
+            <ul class="list-unstyled">
+                <li>
+                    <a>
+                        <span class="glyphicon glyphicon-chevron-right"></span>&nbsp;Lien contextuel
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <span class="glyphicon glyphicon-chevron-right"></span>&nbsp;Lien contextuel
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-xs-12 col-md-3 text-center">
+
+            <span class="popover-jaune">
+                <a data-toggle="modal" data-target="#modal-notation">
+                    <span class="rating" id="rating-footer" 
+
+                          data-toggle="popover"
+                          data-trigger="hover"
+                          data-content="Note moyenne attribuée à ce service par vos confrères"
+                          data-container="#rating-footer"
+                          data-placement="auto"
+
+                          data-nb-stars="5" 
+                          data-moyenne="3" 
+                          data-hover-change="false"                                 
+                          >
+                    </span>
+                </a>
+            </span>
+
+            <div>Donnez votre avis</div>
+        </div>
+    </div>
+    <div class="row footer-copy-right">
+        <div class="col-xs-12 col-sm-6 ">
+            <a>Mentions légales</a> | <a><abbr title="Condition générale d’utilisation">CGU</abbr></a>
+        </div>
+        <div class="col-xs-12  col-sm-6 text-right">
+            V1.0 | © CNAMTS 2017. Tous droits réservés
+        </div>
+    </div>
+</footer>
+}
+
+@@if( exemple === 'footer-simple') {
+
+<footer id="footer" class="container-fluid bg-gris-5">
+    <div class="row footer-copy-right">
+        <div class="col-xs-12 col-sm-6 ">
+            <a>Mentions légales</a> | <a><abbr title="Condition générale d’utilisation">CGU</abbr></a>
+        </div>
+        <div class="col-xs-12  col-sm-6 text-right">
+            V1.0 <span class="hidden-xs">|</span> <br class="visible-xs-block"/>© CNAMTS 2017. Tous droits réservés
+        </div>
+    </div>
+</footer>
+
+}

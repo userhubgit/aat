@@ -6,6 +6,7 @@ var $ = require('gulp-load-plugins')();
 var npm = './node_modules';
 var bower = './bower_components';
 var src = './src/';
+//var src = '../src/main/resources/static/';
 var dist = './dist/';
 
 var symfonyWeb = '../web/aat/';
@@ -76,6 +77,7 @@ gulp.task('styles', function () {
             .pipe(browserSync.stream())
             .on('end', function () {
                 $.util.log($.util.colors.yellow('La tache CSS est terminee.'));
+                $.util.log($.util.colors.yellow(sourceRoot));
             });
 });
 
@@ -137,7 +139,7 @@ gulp.task('html', function () {
         "indent_size": 2,
         "indent_char": " "
     };
-
+    
     return gulp.src([src + '/html/**/*.*html', '!' + src + '/html/partials/**/*.*'])
             .pipe($.fileInclude({
                 prefix: '@@'

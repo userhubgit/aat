@@ -40,10 +40,15 @@ import org.apache.lucene.search.BooleanClause.Occur;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.FuzzyQuery;
 import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.MatchAllDocsQuery;
+import org.apache.lucene.search.MultiTermQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TopScoreDocCollector;
+import org.apache.lucene.search.spans.SpanMultiTermQueryWrapper;
+import org.apache.lucene.search.spans.SpanNearQuery;
+import org.apache.lucene.search.spans.SpanQuery;
 import org.apache.lucene.store.RAMDirectory;
 import org.apache.lucene.util.Version;
 import org.slf4j.Logger;
@@ -358,20 +363,20 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			}
 
 			// Affichage des tokens dans le libelle
-			logger.info("****** DEBUT : Affichage des tokens dans le libelle *******");
+//			logger.info("****** DEBUT : Affichage des tokens dans le libelle *******");
+//
+//			TermEnum terms = writer.getReader().terms(new Term(CHAMP_LIBELLE));
+//			if (null != terms.term()) {
+//				do {
+//					Term term = terms.term();
+//					if (term.field().endsWith(CHAMP_LIBELLE)) {
+//						logger.info("[" + term.field() + "] == " + term.text());
+//					}
+//				} while (terms.next());
+//			}
+//			logger.info("****** FIN : Affichage des tokens dans le libelle *******");
 
-			TermEnum terms = writer.getReader().terms(new Term(CHAMP_ACRONYME));
-			if (null != terms.term()) {
-				do {
-					Term term = terms.term();
-					if (term.field().endsWith(CHAMP_ACRONYME)) {
-						logger.info("[" + term.field() + "] == " + term.text());
-					}
-				} while (terms.next());
-			}
-			logger.info("****** FIN : Affichage des tokens dans le libelle *******");
-
-			logger.info("Nombre de documents indexés : ".concat(String.valueOf(i)));
+			logger.info("Nombre de documents indexï¿½s : ".concat(String.valueOf(i)));
 
 			logger.info("Taille (en byte) memoire du thesaurus := " + ramDirectory.sizeInBytes());
 			writer.close();
@@ -439,7 +444,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			// logger.debug("****** FIN : Affichage des tokens dans le libelle
 			// *******");
 
-			logger.info("Nombre de documents indexés : ".concat(String.valueOf(i)));
+			logger.info("Nombre de documents indexï¿½s : ".concat(String.valueOf(i)));
 			logger.info("Taille (en byte) memoire du thesaurus := " + ramDirectory.sizeInBytes());
 
 			writer.close();
@@ -513,8 +518,8 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 		StringBuilder valideSaisie = new StringBuilder();
 		// Parcours des termes contenus dans la saisie
 		for (int i = 0; i < saisieTermes.length; i++) {
-			// verifier que le terme n'est pas insignifiant
-			String terme = saisieTermes[i];
+			// Verifier que le terme n'est pas insignifiant
+			String terme = valideLibelleToken(saisieTermes[i]);
 			terme = supprAccent(terme.toLowerCase());
 			Set<String> listeInterdite = AATLuceneAnalyzerUtil.etendreFrenchStopWordSet();
 			Set<String> listeSansAccent = normaliserListe(listeInterdite);
@@ -596,11 +601,11 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 				bq.add(queryAcronyme, Occur.SHOULD);
 			}
 			
-			TopScoreDocCollector collector = TopScoreDocCollector.create(MAX_RESULT, false);
+			TopScoreDocCollector collector = TopScoreDocCollector.create(MAX_RESULT, true);
 			pSearcher.search(bq, collector);
 			ScoreDoc[] hits = collector.topDocs().scoreDocs;
 
-			logger.info("======= { Nombre de motif trouvé := " + hits.length + " } ===========\n");
+			logger.info("======= { Nombre de motif trouvï¿½ := " + hits.length + " } ===========\n");
 
 			for (int i = 0; i < hits.length; i++) {
 				ScoreDoc doc = hits[i];
@@ -655,7 +660,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			pSearcher.search(bq, collector);
 			ScoreDoc[] hits = collector.topDocs().scoreDocs;
 
-			logger.info("======= { Nombre de motif trouvé " + hits.length + " } ===========\n");
+			logger.info("======= { Nombre de motif trouvï¿½ " + hits.length + " } ===========\n");
 
 			for (int i = 0; i < hits.length; i++) {
 				ScoreDoc doc = hits[i];
@@ -691,18 +696,24 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 		return query;
 	}
 
-	private BooleanQuery getLibelleWithApproximatifQuery(String userInput) {
+	private BooleanQuery getLibelleWithApproximatifQuery(String userInput) throws org.apache.lucene.queryParser.ParseException {
 
 		BooleanQuery approximativeRecherche = new BooleanQuery();
 		String[] termSaisie = userInput.split(" ");
-
+//		SpanQuery[] clauses = new SpanQuery[termSaisie.length];
+		
 		for (int i = 0; i < termSaisie.length; i++) {
-			FuzzyQuery fuzz = new FuzzyQuery(new Term(CHAMP_LIBELLE, termSaisie[i]), 0.5f, 3, 5);
+			FuzzyQuery fuzz = new FuzzyQuery(new Term(CHAMP_LIBELLE, termSaisie[i]), 0.5f, 2);
+//			clauses[i] = new SpanMultiTermQueryWrapper<MultiTermQuery>(fuzz);
+			
 			approximativeRecherche.setBoost(Constante.LIBELLE_SCORE);
-			approximativeRecherche.add(fuzz, Occur.MUST);
+			approximativeRecherche.add(fuzz, Occur.MUST);			
 		}
+		
+//		SpanNearQuery snq = new SpanNearQuery(clauses , 3, false);
 		return approximativeRecherche;
 	}
+
 
 	private Query getSynonymeQuery(String userInput) throws org.apache.lucene.queryParser.ParseException {
 
@@ -720,5 +731,14 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 		TermQuery termQuery = new TermQuery(new Term(CHAMP_ACRONYME, userInput));
 		termQuery.setBoost(Constante.ACRONYME_SCORE);
 		return termQuery;
+	}
+	
+	private String valideLibelleToken(final String input){
+		String trim = input.trim();
+		String[] split = trim.split("'");
+		if(split.length == 2 && split[0].length() == 1){
+			return split[1].trim();
+		}
+		return input;
 	}
 }

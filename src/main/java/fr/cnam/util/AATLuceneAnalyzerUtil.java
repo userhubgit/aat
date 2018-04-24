@@ -10,7 +10,6 @@ import java.util.Set;
 
 import org.apache.lucene.analysis.ASCIIFoldingFilter;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.KeywordTokenizer;
 import org.apache.lucene.analysis.LetterTokenizer;
 import org.apache.lucene.analysis.LowerCaseFilter;
 import org.apache.lucene.analysis.StopFilter;
@@ -18,11 +17,10 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.WhitespaceTokenizer;
 import org.apache.lucene.analysis.fr.FrenchAnalyzer;
+import org.apache.lucene.analysis.fr.FrenchLightStemmer;
 import org.apache.lucene.analysis.snowball.SnowballFilter;
 import org.apache.lucene.analysis.standard.StandardFilter;
-import org.apache.lucene.analysis.standard.StandardTokenizer;
 import org.apache.lucene.util.Version;
-import org.tartarus.snowball.ext.FrenchStemmer;
 
 
 /**
@@ -33,11 +31,11 @@ import org.tartarus.snowball.ext.FrenchStemmer;
 public final class AATLuceneAnalyzerUtil {
 
 	/**
-	 * Liste des termes ignores à l'indexation et pour la recherche dans lucene.
+	 * Liste des termes ignores ï¿½ l'indexation et pour la recherche dans lucene.
 	 * Elle permet d'etendre la liste de base FrenchAnalyzer.getDefaultStopSet()
 	 */
 	public static final String[] STOP_WORD = new String[] { "chez","-","droite","droit","gauche","drt","drte","gche","gches",
-			"gch","gauches","droites","dte","bilatéral","bilatérale","bilater","bilat","gau"};
+			"gch","gauches","droites","dte","bilatÃ©ral","bilatÃ©rale","bilater","bilat","gau"};
 
 	/**
 	 * Constructeur privï¿½.
@@ -80,7 +78,7 @@ public final class AATLuceneAnalyzerUtil {
 			@Override
 			public TokenStream tokenStream(String fieldName, Reader reader) {
 				
-				Tokenizer aatTokenizer = new WhitespaceTokenizer(Version.LUCENE_36, reader);
+				Tokenizer aatTokenizer = new LetterTokenizer(Version.LUCENE_36, reader);
 				TokenStream filter = new StandardFilter(Version.LUCENE_36, aatTokenizer);
 				Set<String> normaliserListe = normaliserListe(etendreFrenchStopWordSet());
 				filter = new LowerCaseFilter(Version.LUCENE_36, filter);
@@ -110,6 +108,7 @@ public final class AATLuceneAnalyzerUtil {
 				filter = new StopFilter(Version.LUCENE_36, filter, etendreFrenchStopWordSet());
 				filter = new LowerCaseFilter(Version.LUCENE_36, filter);
 				filter = new ASCIIFoldingFilter(filter);
+//				filter = new SnowballFilter(filter, new FrenchLightStemmer());
 				return filter;
 			}
 		};

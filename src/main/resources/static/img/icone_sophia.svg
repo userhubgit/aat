@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X7 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="44px" height="44px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 9382 9382"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil1 {fill:none}
+    .fil0 {fill:#4AA444}
+    .fil2 {fill:white}
+   ]]>
+  </style>
+    <clipPath id="id0">
+     <path d="M4691 0c-2591,0 -4691,2100 -4691,4691 0,2591 2100,4691 4691,4691 2591,0 4691,-2100 4691,-4691 0,-2591 -2100,-4691 -4691,-4691z"/>
+    </clipPath>
+ </defs>
+ <g id="popin">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_639981176">
+   <path class="fil0" d="M4691 0c-2591,0 -4691,2100 -4691,4691 0,2591 2100,4691 4691,4691 2591,0 4691,-2100 4691,-4691 0,-2591 -2100,-4691 -4691,-4691z"/>
+   <g style="clip-path:url(#id0)">
+   </g>
+   <path id="1" class="fil1" d="M4691 0c-2591,0 -4691,2100 -4691,4691 0,2591 2100,4691 4691,4691 2591,0 4691,-2100 4691,-4691 0,-2591 -2100,-4691 -4691,-4691z"/>
+   <g>
+    <ellipse class="fil2" cx="4738" cy="3099" rx="1582" ry="518"/>
+    <ellipse class="fil2" cx="4963" cy="4574" rx="1885" ry="664"/>
+    <path class="fil2" d="M4963 3910c633,0 1194,110 1535,279 -332,106 -768,170 -1245,170 -631,0 -1189,-112 -1532,-285 332,-102 766,-164 1242,-164l0 0z"/>
+    <g>
+     <ellipse class="fil2" cx="4911" cy="6078" rx="2696" ry="723"/>
+     <ellipse class="fil0" cx="4650" cy="5636" rx="2875" ry="959"/>
+    </g>
+    <ellipse class="fil2" cx="4650" cy="5611" rx="2713" ry="710"/>
+   </g>
+  </g>
+ </g>
+</svg>

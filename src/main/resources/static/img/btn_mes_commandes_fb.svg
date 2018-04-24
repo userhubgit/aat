@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X7 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="119944px" height="119944px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 8676592 8676592"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil0 {fill:#005DA8}
+    .fil1 {fill:white}
+   ]]>
+  </style>
+ </defs>
+ <g id="Plan_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <path class="fil0" d="M4338149 0c-2395849,0 -4338149,1942593 -4338149,4338442 0,2395850 1942300,4338150 4338149,4338150 2395850,0 4338443,-1942300 4338443,-4338150 0,-2395849 -1942593,-4338442 -4338443,-4338442z"/>
+  <g id="_557188488">
+   <path class="fil1" d="M4559947 4053985l481951 -712240c15372,-22838 20643,-50947 14348,-77738 -6296,-26792 -23571,-49630 -47434,-63246l-1771304 -995379 425587 -227946 1879201 1072240c14787,8345 31476,12737 48313,12737 732,0 1464,0 2049,0l753086 -15373 -1785797 1006945z"/>
+   <polygon class="fil1" points="4293204,1689026 6447053,2903568 5689576,2918940 3535726,1704545 "/>
+   <rect class="fil1" transform="matrix(0.974027 0.57735 -0 1 1.94933E+006 3.10809E+006)" width="2262332" height="2575923"/>
+   <polygon class="fil1" points="2591441,2003056 4891105,3298557 4263924,4209463 1994126,2899029 "/>
+   <rect class="fil1" transform="matrix(-0.988158 0.57735 -0 1 6.55612E+006 3.10809E+006)" width="2262332" height="2575923"/>
+   <path class="fil0" d="M5903028 4346055l-268353 -186515c-22838,-15811 -51240,-21374 -78324,-15079 -26938,6149 -50069,23571 -63685,47727l-276990 493078c-26645,47287 -9809,107312 37625,133957 15226,8637 31769,12590 48166,12590 34404,0 67783,-18007 85937,-50215l92672 -164848 0 1226693c0,54461 44067,98528 98381,98528 54315,0 98382,-44067 98382,-98528l0 -1414818 113753 79057c44652,31037 105994,19910 137031,-24742 31037,-44506 20057,-105994 -24595,-136885z"/>
+  </g>
+ </g>
+</svg>

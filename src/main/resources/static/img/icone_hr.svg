@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X7 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="44px" height="44px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 2422 2422"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil1 {fill:none}
+    .fil0 {fill:#01B9F5}
+    .fil2 {fill:white}
+   ]]>
+  </style>
+    <clipPath id="id0">
+     <path d="M1211 0c-669,0 -1211,542 -1211,1211 0,669 542,1211 1211,1211 669,0 1211,-542 1211,-1211 0,-669 -542,-1211 -1211,-1211z"/>
+    </clipPath>
+ </defs>
+ <g id="popin">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_640809944">
+   <path class="fil0" d="M1211 0c-669,0 -1211,542 -1211,1211 0,669 542,1211 1211,1211 669,0 1211,-542 1211,-1211 0,-669 -542,-1211 -1211,-1211z"/>
+   <g style="clip-path:url(#id0)">
+   </g>
+   <path id="1" class="fil1" d="M1211 0c-669,0 -1211,542 -1211,1211 0,669 542,1211 1211,1211 669,0 1211,-542 1211,-1211 0,-669 -542,-1211 -1211,-1211z"/>
+   <polygon id="Shape" class="fil2" points="1138,883 1138,1255 1481,1459 1539,1364 1247,1189 1247,883 1138,883 "/>
+   <path id="Shape_0" class="fil2" d="M1243 601c-225,0 -424,122 -527,308l-148 -148 0 418 418 0 -180 -180c84,-161 244,-270 437,-270 264,0 482,219 482,482 0,263 -218,482 -482,482 -212,0 -385,-135 -456,-321l-135 0c71,257 308,449 591,449 341,0 611,-276 611,-610 0,-334 -277,-610 -611,-610l0 0z"/>
+  </g>
+ </g>
+</svg>

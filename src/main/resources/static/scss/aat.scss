@@ -1,0 +1,211 @@
+/********************** AMELIPRO - SASS *********************/
+
+/* inject:imports */
+/* endinject */
+
+/********************** AAT - SASS **************************/
+.recherche{
+
+    & .panel-heading{
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    &-box{
+        background: $bleu-8;
+        padding: 25px;
+    }
+
+    &-label{
+        color: #074778;
+        font-family: $opensans-semi-bold;
+        font-size: 1rem;
+        text-align: center;
+        padding: 0;
+        margin: 0;
+    }
+
+    &-input{
+
+        position: relative;
+
+        & input{
+            font-family: $opensans-semi-bold;
+            font-size: .81rem;
+            height: 44px;
+            width: 100%;
+            border: none !important;
+            padding-left:10px;
+            padding-right:44px;
+            margin-top: 10px;
+        }
+
+        & button{
+            border:none;
+            background: $blanc url("#{$image-url}/picto_coche_noOk.svg") no-repeat center;
+            background-size: 24px;
+            height: 40px;
+            width: 40px;
+            position: absolute;
+            right: 20px;
+            top: 12px;
+
+            &.focus{
+                border:none;
+                background: $blanc url("#{$image-url}/coche_ok.svg") no-repeat center;
+                background-size: 24px;
+                height: 40px;
+                width: 40px;
+                position: absolute;
+                right: 20px;
+                top: 12px;
+            }
+        }
+
+
+
+
+    }
+
+}
+
+.capsule{
+    background: $gris-6;
+    padding: 9px 15px;
+    margin-top: 5px;
+    cursor: pointer;
+    display: inline-block;
+    max-width: 100%;
+    text-transform: uppercase;
+
+    &-vert{
+        color: $vert-1;
+        &:hover, &.active{
+            color: $blanc;
+            background: $vert-1;
+        }
+    }
+
+    &-turquoise{
+        color: $turquoise-3;
+        &:hover, &.active{
+            color: $blanc;
+            background: $turquoise-3;
+        }
+    }
+
+    &-jaune{
+        color: $noir; 
+        &:hover, &.active{
+            color: $blanc;
+            background: $jaune-1;
+        }
+    }
+
+    &:hover{
+        text-decoration: none;
+    }
+}
+
+.alphabet{
+
+    clear: both;
+
+    & .lettre{
+        color: $gris-3;
+        background-color:$gris-6 ;
+        font-family: $opensans-semi-bold;
+        font-size: 1.13rem;
+        text-align: center;
+        height: 34px;
+        width: 34px;
+        padding: 5px;
+        margin: 5px;
+        display: inline-block;
+        border-radius: 100%;
+        text-decoration: none;
+        cursor: default;
+
+        &.active{
+            color: $bleu-3;
+            cursor: pointer;
+            &:hover{
+                color: $blanc;
+                background-color: $bleu-3;
+            }
+        }
+
+        &.selected{
+            color: $blanc;
+            background-color: $bleu-3;
+        }
+    }
+}
+
+.liste-motifs{
+
+    border-top: 1px solid $gris-5;
+    height: 300px;
+    overflow: auto;
+    padding-left: 30px;
+
+    & ul{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        & li{
+            padding-left:25px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+
+            &.lettre{
+                padding-left:0;
+                font-size: 1.75rem;
+                color: $gris-2;
+                &:hover{
+                    background-color: transparent;
+                }
+            }
+
+            &.active{
+                font-family: $opensans-semi-bold;
+            }
+
+            &:hover{
+                background-color: #EBF8FF;
+            }
+        }
+    }
+
+}
+
+.motif-selectionne{
+    font-family: $opensans-semi-bold;
+    color: $bleu-5;
+    font-size: 1rem;
+}
+
+.motif-selectionne a{
+    &:hover{
+        text-decoration: none;
+    }
+}
+
+[data-nom-motif]{
+    cursor: pointer;
+}
+
+textarea{
+    resize: none;
+}
+
+.pictogramme{
+    @include pictogramme-svg("printemps","picto_printemps","","");
+    @include pictogramme-svg("votre-avis","picto_votreAvis","","");
+}
+
+h3{
+    font-size: 1rem;
+}
