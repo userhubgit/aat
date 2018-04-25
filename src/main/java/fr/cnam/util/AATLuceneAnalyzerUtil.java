@@ -18,8 +18,10 @@ import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.WhitespaceTokenizer;
 import org.apache.lucene.analysis.fr.FrenchAnalyzer;
 import org.apache.lucene.analysis.fr.FrenchLightStemFilter;
+import org.apache.lucene.analysis.snowball.SnowballFilter;
 import org.apache.lucene.analysis.standard.StandardFilter;
 import org.apache.lucene.util.Version;
+import org.tartarus.snowball.ext.FrenchStemmer;
 
 
 /**
@@ -150,7 +152,7 @@ public final class AATLuceneAnalyzerUtil {
 				TokenStream filter = new StandardFilter(Version.LUCENE_36, generiqueTokenizer);
 				filter = new LowerCaseFilter(Version.LUCENE_36, filter);
 				filter = new ASCIIFoldingFilter(filter);
-				filter = new FrenchLightStemFilter(filter);
+				filter = new SnowballFilter(filter, new FrenchStemmer());
 				return filter;
 			}
 		};

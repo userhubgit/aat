@@ -9,8 +9,7 @@ import org.apache.lucene.analysis.LowerCaseFilter;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.WhitespaceTokenizer;
-import org.apache.lucene.analysis.fr.FrenchLightStemFilter;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.snowball.SnowballFilter;
 import org.apache.lucene.analysis.standard.StandardFilter;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
@@ -40,20 +39,41 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.RAMDirectory;
 import org.apache.lucene.util.Version;
 import org.springframework.util.StringUtils;
+import org.tartarus.snowball.ext.FrenchStemmer;
 
-import fr.cnam.util.AATLuceneAnalyzerUtil;
 import fr.cnam.util.Constante;
 
 public class LuceneTest {
 
-	
+	/**
+	 *
+	 * @return {@link Analyzer}
+	 * @throws IOException
+	 */
+	public static Analyzer getGeneriqueAnalyzer() {
+
+		Analyzer generiqueAnalyzer = new Analyzer() {			
+
+			@Override
+			public TokenStream tokenStream(String fieldName, Reader reader) {
+				
+				Tokenizer generiqueTokenizer = new WhitespaceTokenizer(Version.LUCENE_36, reader);
+				TokenStream filter = new StandardFilter(Version.LUCENE_36, generiqueTokenizer);
+				filter = new LowerCaseFilter(Version.LUCENE_36, filter);
+				filter = new ASCIIFoldingFilter(filter);				
+				filter = new SnowballFilter(filter, new FrenchStemmer());
+				return filter;
+			}
+		};
+		return generiqueAnalyzer;
+	}
 	
 	public static void main(String[] args) throws Exception {
 
 		//  1 create the index
 		Directory d = new RAMDirectory();
 
-		Analyzer analyzer =  AATLuceneAnalyzerUtil.getGeneriqueAnalyzer();
+		Analyzer analyzer =  getGeneriqueAnalyzer();
 
 				// AATLuceneAnalyzerUtil.getAnalyzer();
 		IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_36, analyzer);
@@ -64,14 +84,14 @@ public class LuceneTest {
 		addDoc(w, "douleure chirurgicale", "193398817");
         addDoc(w, "syndrôme épaule main", "55320055Z");
         addDoc(w, "chirurgie", "55063554A");
-        addDoc(w, "traumatisme", "9900333X");
+        addDoc(w, "allergie", "9900333X");
         displayIndex(w);
         
         w.close();
         
         
         // 2 query
-		String querystr = args.length > 0 ? args[0] : "syndrome";		
+		String querystr = args.length > 0 ? args[0] : "aller*";		
 		Query q = new QueryParser(Version.LUCENE_36, "libelle", analyzer).parse(querystr);
 //		q = getLibelleWithApproximatifQuery(querystr);
 		
@@ -170,28 +190,5 @@ public class LuceneTest {
 			approximativeRecherche.add(fuzz, Occur.MUST);
 		}
 		return approximativeRecherche;
-	}
-	
-	
-	/**
-	 *
-	 * @return {@link Analyzer}
-	 * @throws IOException
-	 */
-	public static Analyzer getGeneriqueAnalyzer() {
-
-		Analyzer generiqueAnalyzer = new Analyzer() {			
-			@Override
-			public TokenStream tokenStream(String fieldName, Reader reader) {
-				
-				Tokenizer aatTokenizer = new WhitespaceTokenizer(Version.LUCENE_36, reader);
-				TokenStream filter = new StandardFilter(Version.LUCENE_36, aatTokenizer);
-				filter = new LowerCaseFilter(Version.LUCENE_36, filter);
-				filter = new ASCIIFoldingFilter(filter);
-				filter = new FrenchLightStemFilter(filter);
-				return filter;
-			}
-		};
-		return generiqueAnalyzer;
 	}
 }
