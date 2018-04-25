@@ -40,15 +40,10 @@ import org.apache.lucene.search.BooleanClause.Occur;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.FuzzyQuery;
 import org.apache.lucene.search.IndexSearcher;
-import org.apache.lucene.search.MatchAllDocsQuery;
-import org.apache.lucene.search.MultiTermQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TopScoreDocCollector;
-import org.apache.lucene.search.spans.SpanMultiTermQueryWrapper;
-import org.apache.lucene.search.spans.SpanNearQuery;
-import org.apache.lucene.search.spans.SpanQuery;
 import org.apache.lucene.store.RAMDirectory;
 import org.apache.lucene.util.Version;
 import org.slf4j.Logger;
@@ -538,11 +533,13 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 
 				pSaisieUtilisateur.replace(terme, ReferentielCSVReaderUtil.VIDE);
 			} else {
-				if (i < (saisieTermes.length - 1)) {
-					valideSaisie.append(terme).append(" ");
-				} else {
-					valideSaisie.append(terme);
-				}
+//				if (terme.length() >=2){					
+					if (i < (saisieTermes.length - 1)) {
+						valideSaisie.append(terme).append(" ");
+					} else {
+						valideSaisie.append(terme);
+					}
+//				}
 			}
 		}
 		return valideSaisie.toString();
@@ -734,10 +731,23 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 		String str = userInput.trim().concat("*");
 		// Synonyme query
 		QueryParser qpSynonyme = new QueryParser(Version.LUCENE_36, CHAMP_SYNONYME,
-				AATLuceneAnalyzerUtil.getAnalyzer());
+				AATLuceneAnalyzerUtil.getSynonymeAnalyzer());
 		qpSynonyme.setDefaultOperator(Operator.AND);
-		Query querySynonyme = qpSynonyme.parse(str);
+		Query querySynonyme = qpSynonyme.parse("(" + str + ") OR (" + userInput.trim() + ")" );
 		querySynonyme.setBoost(Constante.SYNONYME_SCORE);
+		
+//		QueryParser qpSynonyme2 = new QueryParser(Version.LUCENE_36, CHAMP_SYNONYME,
+//				AATLuceneAnalyzerUtil.getSynonymeAnalyzer());
+//		qpSynonyme.setDefaultOperator(Operator.AND);
+//		Query querySynonyme2 = qpSynonyme2.parse( userInput.trim());
+//		qpSynonyme2.setAutoGeneratePhraseQueries(false);
+//		querySynonyme2.setBoost(Constante.SYNONYME_SCORE);
+		
+//		BooleanQuery booleanQuery = new BooleanQuery();
+//		booleanQuery.add(querySynonyme, Occur.MUST);
+//		booleanQuery.add(querySynonyme2, Occur.SHOULD);
+//		booleanQuery.setBoost(Constante.SYNONYME_SCORE);
+		
 		return querySynonyme;
 	}
 
@@ -749,6 +759,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 	
 	
 	private Query getGeneriqueQuery(final String userInput) throws org.apache.lucene.queryParser.ParseException{
+		
 		String str = userInput.trim().concat("*");
 		QueryParser qpGenerique = new QueryParser(Version.LUCENE_36, CHAMP_GENERIQUE, 
 				AATLuceneAnalyzerUtil.getGeneriqueAnalyzer());

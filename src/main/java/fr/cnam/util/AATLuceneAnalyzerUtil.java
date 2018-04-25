@@ -5,20 +5,23 @@ import java.io.Reader;
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.lucene.analysis.ASCIIFoldingFilter;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.LetterTokenizer;
 import org.apache.lucene.analysis.LowerCaseFilter;
+import org.apache.lucene.analysis.PerFieldAnalyzerWrapper;
 import org.apache.lucene.analysis.StopFilter;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.WhitespaceTokenizer;
 import org.apache.lucene.analysis.fr.FrenchAnalyzer;
-import org.apache.lucene.analysis.fr.FrenchLightStemFilter;
 import org.apache.lucene.analysis.snowball.SnowballFilter;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.analysis.standard.StandardFilter;
 import org.apache.lucene.util.Version;
 import org.tartarus.snowball.ext.FrenchStemmer;
@@ -85,12 +88,11 @@ public final class AATLuceneAnalyzerUtil {
 				filter = new LowerCaseFilter(Version.LUCENE_36, filter);
 				filter = new ASCIIFoldingFilter(filter);
 				filter = new StopFilter(Version.LUCENE_36, filter, normaliserListe);
-//				filter = new SnowballFilter(filter, new FrenchStemmer());
+				filter = new SnowballFilter(filter, new FrenchStemmer());
 				return filter;
 				
 			}
 		};
-//		FrenchAnalyzer frenchAnalyzer = new FrenchAnalyzer(Version.LUCENE_36);
 		return customAnalyzer;
 	}
 
@@ -109,7 +111,7 @@ public final class AATLuceneAnalyzerUtil {
 				filter = new StopFilter(Version.LUCENE_36, filter, etendreFrenchStopWordSet());
 				filter = new LowerCaseFilter(Version.LUCENE_36, filter);
 				filter = new ASCIIFoldingFilter(filter);
-//				filter = new SnowballFilter(filter, new FrenchLightStemmer());
+				filter = new SnowballFilter(filter, new FrenchStemmer());
 				return filter;
 			}
 		};
@@ -179,6 +181,18 @@ public final class AATLuceneAnalyzerUtil {
 		};
 		return customAnalyzer;
 	}
+	
+	public static Analyzer getGlobalAnalyzer(){
+		Map<String, Analyzer> analyzerPerField = new HashMap<String, Analyzer>();
+		analyzerPerField.put(Constante.CHAMP_LIBELLE, AATLuceneAnalyzerUtil.getAnalyzer());
+		analyzerPerField.put(Constante.CHAMP_SYNONYME, AATLuceneAnalyzerUtil.getAnalyzer());
+		analyzerPerField.put(Constante.CHAMP_ACRONYME, AATLuceneAnalyzerUtil.getAcronymeAnalyzer());
+		analyzerPerField.put(Constante.CHAMP_GENERIQUE, AATLuceneAnalyzerUtil.getGeneriqueAnalyzer());
+		PerFieldAnalyzerWrapper analyzers = new PerFieldAnalyzerWrapper(new StandardAnalyzer(Version.LUCENE_36),
+				analyzerPerField);
+		return analyzers;
+	}
+	
 	/**
 	 * Cette methode permet d'etendre la liste, par defaut, des mots fran�ais,
 	 * insignifiants pour etre indexes. Ex : le, la une etc..
@@ -221,5 +235,6 @@ public final class AATLuceneAnalyzerUtil {
     		listeSansAccent.add(motStr);
 		}
     	return listeSansAccent;
-	} 
+	}
+    
 }

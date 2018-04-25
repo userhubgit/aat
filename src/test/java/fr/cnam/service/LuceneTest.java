@@ -41,6 +41,7 @@ import org.apache.lucene.util.Version;
 import org.springframework.util.StringUtils;
 import org.tartarus.snowball.ext.FrenchStemmer;
 
+import fr.cnam.util.AATLuceneAnalyzerUtil;
 import fr.cnam.util.Constante;
 
 public class LuceneTest {
@@ -73,7 +74,7 @@ public class LuceneTest {
 		//  1 create the index
 		Directory d = new RAMDirectory();
 
-		Analyzer analyzer =  getGeneriqueAnalyzer();
+		Analyzer analyzer =  AATLuceneAnalyzerUtil.getSynonymeAnalyzer();
 
 				// AATLuceneAnalyzerUtil.getAnalyzer();
 		IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_36, analyzer);
@@ -81,7 +82,7 @@ public class LuceneTest {
 	
 
 		IndexWriter w = new IndexWriter(d, config);
-		addDoc(w, "douleure chirurgicale", "193398817");
+		addDoc(w, "amygdalite thyroïde", "193398817");
         addDoc(w, "syndrôme épaule main", "55320055Z");
         addDoc(w, "chirurgie", "55063554A");
         addDoc(w, "allergie", "9900333X");
@@ -91,7 +92,7 @@ public class LuceneTest {
         
         
         // 2 query
-		String querystr = args.length > 0 ? args[0] : "aller*";		
+		String querystr = args.length > 0 ? args[0] : "amygd";		
 		Query q = new QueryParser(Version.LUCENE_36, "libelle", analyzer).parse(querystr);
 //		q = getLibelleWithApproximatifQuery(querystr);
 		

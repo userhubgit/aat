@@ -27,4 +27,18 @@ public class Constante {
     public static final int ACRONYME_SCORE = 50;
     public static final int SYNONYME_SCORE = 25;
     
+	/** Le champ libelle du motif. */
+	public static final String CHAMP_LIBELLE = "libelle";
+
+	/** Le champ synonyme du motif. */
+	public static final String CHAMP_SYNONYME = "synonyme";
+
+	/** Le champ codeFonctionnel du motif. */
+	public static final String CHAMP_CODE_FONCTIONNEL = "codeFonctionnel";
+
+	/** Le champ synonyme du motif. */
+	public static final String CHAMP_ACRONYME = "acronyme";
+
+	public static final String CHAMP_GENERIQUE = "generique";
+    
 }
