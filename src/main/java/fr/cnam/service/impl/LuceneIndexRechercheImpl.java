@@ -365,20 +365,20 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			}
 
 			// Affichage des tokens dans le libelle
-//			logger.info("****** DEBUT : Affichage des tokens dans le libelle *******");
-//
-//			TermEnum terms = writer.getReader().terms(new Term(CHAMP_LIBELLE));
-//			if (null != terms.term()) {
-//				do {
-//					Term term = terms.term();
-//					if (term.field().endsWith(CHAMP_LIBELLE)) {
-//						logger.info("[" + term.field() + "] == " + term.text());
-//					}
-//				} while (terms.next());
-//			}
-//			logger.info("****** FIN : Affichage des tokens dans le libelle *******");
+			logger.info("****** DEBUT : Affichage des tokens dans le libelle *******");
 
-			logger.info("Nombre de documents index�s : ".concat(String.valueOf(i)));
+			TermEnum terms = writer.getReader().terms(new Term(CHAMP_GENERIQUE));
+			if (null != terms.term()) {
+				do {
+					Term term = terms.term();
+					if (term.field().endsWith(CHAMP_GENERIQUE)) {
+						logger.info("[" + term.field() + "] == " + term.text());
+					}
+				} while (terms.next());
+			}
+			logger.info("****** FIN : Affichage des tokens dans le libelle *******");
+
+			logger.info("Nombre de documents indexés : ".concat(String.valueOf(i)));
 
 			logger.info("Taille (en byte) memoire du thesaurus := " + ramDirectory.sizeInBytes());
 			writer.close();
@@ -602,6 +602,9 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 				if (saisieValide.length() > 2) {
 					Query querySynonyme = getSynonymeQuery(saisieNormalise);
 					bq.add(querySynonyme, Occur.SHOULD);
+					
+					Query queryGenerique = getGeneriqueQuery(saisieNormalise);
+					bq.add(queryGenerique, Occur.SHOULD);
 				}
 			}
 			
@@ -734,7 +737,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 				AATLuceneAnalyzerUtil.getAnalyzer());
 		qpSynonyme.setDefaultOperator(Operator.AND);
 		Query querySynonyme = qpSynonyme.parse(str);
-
+		querySynonyme.setBoost(Constante.SYNONYME_SCORE);
 		return querySynonyme;
 	}
 
@@ -742,6 +745,26 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 		TermQuery termQuery = new TermQuery(new Term(CHAMP_ACRONYME, userInput));
 		termQuery.setBoost(Constante.ACRONYME_SCORE);
 		return termQuery;
+	}
+	
+	
+	private Query getGeneriqueQuery(final String userInput) throws org.apache.lucene.queryParser.ParseException{
+		String str = userInput.trim().concat("*");
+		QueryParser qpGenerique = new QueryParser(Version.LUCENE_36, CHAMP_GENERIQUE, 
+				AATLuceneAnalyzerUtil.getGeneriqueAnalyzer());
+		qpGenerique.setDefaultOperator(Operator.AND);
+		Query queryGenerique = qpGenerique.parse(str);
+		
+		QueryParser qpGenerique2 = new QueryParser(Version.LUCENE_36, CHAMP_GENERIQUE, 
+				AATLuceneAnalyzerUtil.getGeneriqueAnalyzer());
+		qpGenerique.setDefaultOperator(Operator.AND);
+		
+		Query queryGenerique2 = qpGenerique2.parse(userInput.trim());
+		
+		BooleanQuery booleanQuery = new BooleanQuery();
+		booleanQuery.add(queryGenerique, Occur.SHOULD);
+		booleanQuery.add(queryGenerique2, Occur.SHOULD);
+		return booleanQuery;
 	}
 	
 	private String valideLibelleToken(final String input){

@@ -73,4 +73,9 @@ public class LuceneIndexRechercheTest {
 		List<Motif> resultat = service.rechercher("DNIDs");
 		Assert.assertTrue(resultat.size() == 0);
 	}
+	
+	@Test
+	public void testGeneriquePassant(){
+		
+	}
 }

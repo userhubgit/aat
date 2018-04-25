@@ -41,6 +41,7 @@ import org.apache.lucene.store.RAMDirectory;
 import org.apache.lucene.util.Version;
 import org.springframework.util.StringUtils;
 
+import fr.cnam.util.AATLuceneAnalyzerUtil;
 import fr.cnam.util.Constante;
 
 public class LuceneTest {
@@ -52,7 +53,7 @@ public class LuceneTest {
 		//  1 create the index
 		Directory d = new RAMDirectory();
 
-		Analyzer analyzer =  getGeneriqueAnalyzer();
+		Analyzer analyzer =  AATLuceneAnalyzerUtil.getGeneriqueAnalyzer();
 
 				// AATLuceneAnalyzerUtil.getAnalyzer();
 		IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_36, analyzer);
@@ -70,8 +71,8 @@ public class LuceneTest {
         
         
         // 2 query
-		String querystr = args.length > 0 ? args[0] : "epa";		
-		Query q = new QueryParser(Version.LUCENE_36, "libelle", analyzer).parse(querystr+"*");
+		String querystr = args.length > 0 ? args[0] : "syndrome";		
+		Query q = new QueryParser(Version.LUCENE_36, "libelle", analyzer).parse(querystr);
 //		q = getLibelleWithApproximatifQuery(querystr);
 		
 		// 3. search
