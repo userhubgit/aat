@@ -12,6 +12,10 @@
 <body>
   <div class="ajax-loader"></div>
   <div class="global-container">
+
+
+
+
     <header>
       <div class="top-header-bg">
         <div class="container-fluid">
@@ -164,37 +168,59 @@
           </div>
         </div>
 
-        <div id="avis-recherche" class="row collapse">
+        <div id="avis-recherche" class="row">
           <div class="col-xs-12 col-md-6 col-md-offset-3">
             <div class="panel panel-default spacer">
               <div class="panel-body text-center">
-                <h4>
-                  Le motif retourné correspond-t-il à votre recherche ?
-                </h4>
-                <div id="options-avis-recherche">
-                  <span data-parent="#options-avis-recherche" class="capsule capsule-jaune">OUI</span>
-                  <span data-parent="#options-avis-recherche" class="capsule capsule-jaune">NON</span>
-                  <span data-parent="#options-avis-recherche" class="capsule capsule-jaune">EN PARTIE</span>
-                </div>
-                <div class="small-spacer">
-                  <textarea class="form-control" rows="4" placeholder="Ajoutez un commentaire"></textarea>
-                </div>
-                <div class="spacer">
-                  <button id="btn-nuovelle-recherche" class="btn btn-default">
-                            Essayer un autre motif
-                        </button>
+
+                <div class="row">
+                  <div class="col-xs-10 col-xs-offset-1">
+
+                    <h4>
+                      Êtes-vous satisfait du résultat de cette recherche
+                    </h4>
+
+                    <div id="options-avis-recherche" class="spacer row ">
+
+                      <div class="row">
+                        <div class="col-xs-2 col-xs-offset-3 show-hide smiles" data-parent="#options-avis-recherche" data-hide="#commentaire-avis">
+                          <span class="pictogramme-svg-smile-positif x-large center"></span>
+                          <div class="very-small-spacer">OUI</div>
+                        </div>
+                        <div class="col-xs-2 show-hide smiles" data-parent="#options-avis-recherche" data-show="#commentaire-avis">
+                          <span class="pictogramme-svg-smile-negatif x-large center"></span>
+                          <div class="very-small-spacer">NON</div>
+                        </div>
+                        <div class="col-xs-2 show-hide smiles" data-parent="#options-avis-recherche" data-hide="#commentaire-avis">
+                          <span class="pictogramme-svg-smile-passif  x-large center"></span>
+                          <div class="very-small-spacer">MOYEN</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div id="commentaire-avis" class="collapse small-spacer">
+                      <p class="medium-spacer">Pouvez-vous nous indiquer pour quelles raisons</p>
+                      <textarea class="form-control" rows="4"></textarea>
+                    </div>
+
+                    <div class="spacer">
+                      <button id="btn-nuovelle-recherche" class="btn btn-default">
+                                    Rechercher un autre motif
+                                </button>
+                    </div>
+
+                    <div class="spacer">
+                      <a href="avis.html" class="btn btn-default btn-multiligne">
+                                    <span class="lowercase">J’ai fini mes recherches de motifs
+</span> 
+                                    <br/>
+                                    <span class="texte-courant-semi-gras">je partage mon avis</span>
+                                </a>
+                    </div>
+
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <div class="text-center spacer">
-              <a class="capsule capsule-turquoise active" href="avis.html">
-                    Après les tests
-                    &nbsp;&nbsp;&nbsp;
-                    <strong>DONNEZ-NOUS VOTRE AVIS</strong>
-                    &nbsp;&nbsp;&nbsp;
-                    <span class="glyphicon glyphicon-play"></span>
-                </a>
             </div>
 
           </div>
@@ -514,6 +540,9 @@
         <!-- /.modal-dialog -->
       </div>
     </main>
+
+
+
 
 
 
