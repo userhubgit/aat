@@ -218,8 +218,24 @@ textarea{
 .smiles{
     
     cursor: pointer;
-    &.active{
-       font-weight: bold;
+    
+    &.positif{
+        &.active{
+           font-family: $opensans-semi-bold;
+           color: #50BD9C;
+        }
+    }
+    &.negatif{
+        &.active{
+           font-family: $opensans-semi-bold;
+           color: #F16667;
+        }
+    }
+    &.passif{
+        &.active{
+           font-family: $opensans-semi-bold;
+           color: #FECE09;
+        }
     }
 }
 
