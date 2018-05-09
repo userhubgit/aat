@@ -10,7 +10,7 @@ var src = './src/';
 var dist = './dist/';
 
 var symfonyWeb = '../web/aat/';
-var designSrc = '../../design/aat/';
+var designSrc = '../../design/AAT/';
 
 /**
  *   Initialisation de BrowserSync et définition du serveur

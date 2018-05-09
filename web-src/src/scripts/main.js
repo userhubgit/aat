@@ -190,10 +190,10 @@ $(document).ready(function () {
         resetMotif();
     });
 
-    $('.capsule').click(function () {
+    $('.capsule, .smiles').click(function () {
         var parent = $(this).data('parent');
         if (parent) {
-            $($(this).data('parent') + ' .capsule').removeClass('active');
+            $($(this).data('parent') + ' .capsule' + ',' + $(this).data('parent') + ' .smiles').removeClass('active');
             $(this).addClass('active');
         }
     });
