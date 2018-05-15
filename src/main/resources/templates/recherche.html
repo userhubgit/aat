@@ -2,20 +2,25 @@
 <html lang="fr">
 
 <head>
-<meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ARRÊT DE TRAVAIL</title>
-<link href="css/amelipro.min.css" rel="stylesheet" />
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>ARRÊT DE TRAVAIL</title>
+  <link href="css/amelipro.min.css" rel="stylesheet" />
+  <link href="css/jquery-ui.css" rel="stylesheet" />
 </head>
 
 <body>
-	<div class="ajax-loader"></div>
-	<div class="global-container">
-		<header>
-			<div class="top-header-bg">
-				<div class="container-fluid">
-					<!--div class="row">
+  <div class="ajax-loader"></div>
+  <div class="global-container">
+
+
+
+
+    <header>
+      <div class="top-header-bg">
+        <div class="container-fluid">
+          <!--div class="row">
                 <div class="col-xs-2">
                     <a class="lien-espacepro hidden-xs">
                         <span class="glyphicon glyphicon-home"></span>
@@ -23,16 +28,17 @@
                     </a>
                 </div>
             </div-->
-				</div>
-				<div id="top-header-logo" class="top-header-logo">
-					<a href="/moteur"></a>
-				</div>
-			</div>
-			<div class="application-header">
-				<div class="container-fluid">
-					<div class="row navigation">
-						<div class="col-xs-6 text-left"></div>
-						<!-- div class="col-xs-6 text-right popover-blanc info-user">
+        </div>
+        <div id="top-header-logo" class="top-header-logo">
+          <a href="index.html"></a>
+        </div>
+      </div>
+      <div class="application-header">
+        <div class="container-fluid">
+          <div class="row navigation">
+            <div class="col-xs-6 text-left">
+            </div>
+            <!-- div class="col-xs-6 text-right popover-blanc info-user">
                     <strong class="hidden-xs">Prénom NOM</strong>
                     <button type="button" class="pictogramme-svg-user large margin-left-5"
                             data-toggle="popover"
@@ -48,208 +54,222 @@
                             " >
                     </button>
                 </div -->
-					</div>
-					<div class="row title">
-						<div class="col-xs-12">
-							<h1 class="no-margin-left">
-								<a>ARRÊT DE TRAVAIL</a>
-							</h1>
-						</div>
-					</div>
-				</div>
-			</div>
-		</header>
+          </div>
+          <div class="row title">
+            <div class="col-xs-12">
+              <h1 class="no-margin-left"><a>ARRÊT DE TRAVAIL</a></h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
 
-		<main>
-		<article class="recherche">
-			<div class="row">
-				<div class="col-xs-12">
-					<div class="panel panel-default spacer">
-						<div class="panel-heading">
-							<h2 class="panel-title">MOTIF</h2>
-						</div>
-						<div class="panel-body">
+    <main>
+      <article class="recherche">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="panel panel-default spacer">
+              <div class="panel-heading">
+                <h2 class="panel-title">MOTIF</h2>
+              </div>
+              <div class="panel-body">
 
-							<!-- Recherche & select motif -->
+                <!-- Recherche & select motif -->
 
-							<div id="options-recherche">
-								<div class="recherche-box">
-									<div class="recherche-label">Saisissez le motif d’arrêt
-										de travail</div>
-									<div class="row">
-										<div
-											class="col-xs-12 col-sm-10 col-sm-offset-1 recherche-input">
-											<input id="motif-aat-input" type="text" />
-											<button id="recherche-button" type="button"></button>
-										</div>
-									</div>
-								</div>
-								<div class="row small-spacer">
-									<div class="col-xs-12">
-										<p>Ou sélectionnez un des motifs suivants :</p>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-xs-12 col-sm-10">
-										<div id="motifs-plus-frequents" class="row small-spacer">
-											<div
-												class="small-spacer col-xs-12 col-md-3 texte-courant-semi-gras texte-turquoise-3">
-												LES PLUS FRÉQUENTS</div>
-											<div class="col-xs-12 col-md-8">
-												<span data-id-motif="1" data-nom-motif="Asthénie"
-													data-nom-long-motif="Asthénie"
-													class="capsule capsule-turquoise">ASTHÉNIE</span> <span
-													data-id-motif="1" data-nom-motif="Episode dépressif"
-													data-nom-long-motif="Episode dépressif"
-													class="capsule capsule-turquoise">ÉPISODE DÉPRESSIF</span>
-												<span data-id-motif="1" data-nom-motif="Lombalgie"
-													data-nom-long-motif="Lombalgie"
-													class="capsule capsule-turquoise">LOMBALGIE</span> <span
-													data-id-motif="1" data-nom-motif="Trouble anxieux"
-													data-nom-long-motif="Trouble anxieux"
-													class="capsule capsule-turquoise">TROUBLE ANXIEUX</span>
-											</div>
-										</div>
-										<div id="motifs-en-ce-moment" class="row small-spacer">
-											<div
-												class="small-spacer  col-xs-12 col-md-3 texte-courant-semi-gras texte-vert-1">
-												<span class="pictogramme-svg-printemps large"></span> EN CE
-												MOMENT
-											</div>
-											<div class="col-xs-12 col-md-8">
-												<span data-id-motif="1" data-nom-motif="Angine"
-													class="capsule capsule-vert">ANGINE</span> <span
-													data-id-motif="1" data-nom-motif="Allergies"
-													class="capsule capsule-vert">ALLERGIES</span>
-											</div>
-										</div>
-									</div>
-									<div class="col-xs-12 col-md-2 text-right">
-										<a data-target="#liste-motifs-modal" data-toggle="modal">LISTE
-											COMPLÈTE</a>
-									</div>
-								</div>
-							</div>
+                <div id="options-recherche">
+                  <div class="recherche-box">
+                    <div class="recherche-label">Saisissez le motif d’arrêt de travail</div>
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-10 col-sm-offset-1 recherche-input">
+                        <input id="motif-aat-input" type="text" />
+                        <button id="recherche-button" type="button"></button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row small-spacer">
+                    <div class="col-xs-12">
+                      <p>Ou sélectionnez un des motifs suivants :</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-12 text-right small-spacer">
+                      <a data-target="#liste-motifs-modal" data-toggle="modal">LISTE COMPLÈTE</a>
+                    </div>
 
-							<!-- Motif sélectionné -->
+                    <div class="col-xs-12">
+                      <div id="motifs-plus-frequents" class="row small-spacer">
+                        <div class="small-spacer col-xs-12 col-md-2 texte-courant-semi-gras texte-turquoise-3">
+                          LES PLUS FRÉQUENTS
+                        </div>
+                        <div class="col-xs-9">
+                          <span data-id-motif="1" data-nom-motif="Asthénie" data-nom-long-motif="Asthénie" class="capsule capsule-turquoise">ASTHÉNIE</span>
+                          <span data-id-motif="1" data-nom-motif="Episode dépressif" data-nom-long-motif="Episode dépressif" class="capsule capsule-turquoise">ÉPISODE DÉPRESSIF</span>
+                          <span data-id-motif="1" data-nom-motif="Lombalgie" data-nom-long-motif="Lombalgie" class="capsule capsule-turquoise">LOMBALGIE</span>
+                          <span data-id-motif="1" data-nom-motif="Trouble anxieux" data-nom-long-motif="Trouble anxieux" class="capsule capsule-turquoise">TROUBLE ANXIEUX</span>
+                          <span data-id-motif="1" data-nom-motif="Douleurs dentaires" data-nom-long-motif="Douleurs dentaires" class="capsule capsule-turquoise">Douleurs dentaires</span>
+                        </div>
+                      </div>
+                      <div id="motifs-en-ce-moment" class="row small-spacer">
+                        <div class="small-spacer  col-xs-12 col-md-2 texte-courant-semi-gras texte-vert-1">
+                          <span class="pictogramme-svg-printemps large"></span> EN CE MOMENT
+                        </div>
+                        <div class="col-xs-9">
+                          <span data-id-motif="1" data-nom-motif="Angine" class="capsule capsule-vert">ANGINE</span>
+                          <span data-id-motif="1" data-nom-motif="Allergies" class="capsule capsule-vert">ALLERGIES</span>
+                          <span data-id-motif="1" data-nom-motif="Gastro-entérite" class="capsule capsule-vert">Gastro-entérite</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-							<div id="validation-recherche" class="collapse">
+                <!-- Motif sélectionné -->
 
-								<div class="motif-selectionne">
-									<input type="hidden" id="id-motif-selectionne" value="" /> <span
-										id="nom-motif-selectionne"></span> <a id="reset-motif"
-										class="pictogramme-svg-suppression-2 large"></a>
-								</div>
+                <div id="validation-recherche" class="collapse">
 
-								<div id="categorie-motif" class="collapse">
-									<div class="small-spacer texte-turquoise-3">
-										<span class="pictogramme-svg-information pull-left"></span>
-										<p>Le motif saisi est inconnu, veuillez préciser une
-											catégorie de pathologies.</p>
-									</div>
-									<div class="row">
-										<div class="col-xs-10 col-sm-6">
-											<select class="row small-spacer form-control">
-												<option>-- Catégorie de pathologies --</option>
-												<option>Maladies du système ostéo-articulaire, des
-													muscles et du tissu conjonctif</option>
-												<option>Troubles mentaux et du comportement</option>
-												<option>Lésions traumatiques</option>
-												<option>Tumeurs</option>
-												<option>Maladies de l'appareil circulatoire</option>
-												<option>Maladies infectieuses et parasitaires</option>
-												<option>Maladies du système nerveux</option>
-												<option>Maladies de l'appareil digestif</option>
-												<option>Maladies de l'appareil respiratoire</option>
-												<option>Autres maladies</option>
-											</select>
-										</div>
-										<div class="col-xs-1 small-spacer no-padding">*</div>
-									</div>
-								</div>
+                  <div class="motif-selectionne">
+                    <input type="hidden" id="id-motif-selectionne" value="" />
+                    <span id="nom-motif-selectionne"></span>
+                    <a id="reset-motif" class="pictogramme-svg-suppression-2 large"></a>
+                  </div>
 
-								<div class="small-spacer">
-									Complément d’information :
-									<div>
-										<textarea id="complement-info-motif"
-											data-compteur="#compteur-complement-info-motif"
-											class="form-control" rows="4" maxlength="500"></textarea>
-										<div class="text-right" id="compteur-complement-info-motif">0/500</div>
-									</div>
-								</div>
-							</div>
+                  <div id="categorie-motif" class="collapse">
+                    <div class="small-spacer texte-turquoise-3">
+                      <span class="pictogramme-svg-information pull-left"></span>
+                      <p>Le motif saisi est inconnu, veuillez préciser une catégorie de pathologies.</p>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-10 col-sm-6">
+                        <select class="row small-spacer form-control">
+                                        <option>-- Catégorie de pathologies --</option>
+                                        <option>Maladies du système ostéo-articulaire, des muscles et du tissu conjonctif</option>
+                                        <option>Troubles mentaux et du comportement</option>
+                                        <option>Lésions traumatiques</option>
+                                        <option>Tumeurs</option>
+                                        <option>Maladies de l'appareil circulatoire</option>
+                                        <option>Maladies infectieuses et parasitaires</option>
+                                        <option>Maladies du système nerveux</option>
+                                        <option>Maladies de l'appareil digestif</option>
+                                        <option>Maladies de l'appareil respiratoire</option>
+                                        <option>Autres maladies</option>
+                                    </select>
+                      </div>
+                      <div class="col-xs-1 small-spacer no-padding">*</div>
+                    </div>
+                  </div>
 
-						</div>
-					</div>
-				</div>
-			</div>
+                  <div class="small-spacer">
+                    Complément d’information :
+                    <div>
+                      <textarea id="complement-info-motif" data-compteur="#compteur-complement-info-motif" class="form-control" rows="4" maxlength="500"></textarea>
+                      <div class="text-right" id="compteur-complement-info-motif">0/500</div>
+                    </div>
+                  </div>
+                </div>
 
-			<div id="avis-recherche" class="row collapse">
-				<div class="col-xs-12 col-md-6 col-md-offset-3">
-					<div class="panel panel-default spacer">
-						<div class="panel-body text-center">
-							<h4>Le motif retourné correspond-t-il à votre recherche ?</h4>
-							<div id="options-avis-recherche">
-								<span data-parent="#options-avis-recherche"
-									class="capsule capsule-jaune">OUI</span> <span
-									data-parent="#options-avis-recherche"
-									class="capsule capsule-jaune">NON</span> <span
-									data-parent="#options-avis-recherche"
-									class="capsule capsule-jaune">EN PARTIE</span>
-							</div>
-							<div class="small-spacer">
-								<textarea class="form-control" rows="4"
-									placeholder="Ajoutez un commentaire"></textarea>
-							</div>
-							<div class="spacer">
-								<button id="btn-nuovelle-recherche" class="btn btn-default">
-									Essayer un autre motif</button>
-							</div>
-						</div>
-					</div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-					<div class="text-center spacer">
-						<a class="capsule capsule-turquoise active" href="/avis">
-							Après les tests &nbsp;&nbsp;&nbsp; <strong>DONNEZ-NOUS
-								VOTRE AVIS</strong> &nbsp;&nbsp;&nbsp; <span
-							class="glyphicon glyphicon-play"></span>
-						</a>
-					</div>
+        <div id="avis-recherche" class="row collapse">
+          <div class="col-xs-12 col-md-6 col-md-offset-3">
+            <div class="panel panel-default spacer">
+              <div class="panel-body text-center">
 
-				</div>
-			</div>
-		</article>
-		<div id="liste-motifs-modal" class="modal fade" tabindex="-1"
-			role="dialog">
-			<div class="modal-dialog modal-lg" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">×</span>
-						</button>
-						<h4 class="modal-title">Liste complète des motifs</h4>
-					</div>
-					<div class="modal-body">
-						<p>Recherche d’un motif par choix alphabétique :</p>
-						<div class="alphabet">
-							<a class="lettre active">A</a> <a class="lettre active">B</a> <a
-								class="lettre active">C</a> <a class="lettre active">D</a> <a
-								class="lettre active">E</a> <a class="lettre active">F</a> <a
-								class="lettre active">G</a> <a class="lettre active">H</a> <a
-								class="lettre active">I</a> <a class="lettre">J</a> <a
-								class="lettre active">K</a> <a class="lettre active">L</a> <a
-								class="lettre active">M</a> <a class="lettre active">N</a> <a
-								class="lettre active">O</a> <a class="lettre active">P</a> <a
-								class="lettre">Q</a> <a class="lettre active">R</a> <a
-								class="lettre active">S</a> <a class="lettre active">T</a> <a
-								class="lettre active">U</a> <a class="lettre active">V</a> <a
-								class="lettre">W</a> <a class="lettre">X</a> <a class="lettre">Y</a>
-							<a class="lettre">Z</a>
-						</div>
-					</div>
-					<div class="modal-body liste-motifs">
-						<ul id="A">
+                <div class="row">
+                  <div class="col-xs-10 col-xs-offset-1">
+
+                    <h4>
+                      Êtes-vous satisfait du résultat de cette recherche
+                    </h4>
+
+                    <div id="options-avis-recherche" class="spacer row ">
+
+                      <div class="row">
+                        <div class="col-xs-2 col-xs-offset-3 show-hide smiles positif" data-parent="#options-avis-recherche" data-hide="#commentaire-avis">
+                          <span class="pictogramme-svg-smile-positif x-large center"></span>
+                          <div class="very-small-spacer">OUI</div>
+                        </div>
+                        <div class="col-xs-2 show-hide smiles negatif" data-parent="#options-avis-recherche" data-show="#commentaire-avis">
+                          <span class="pictogramme-svg-smile-negatif x-large center"></span>
+                          <div class="very-small-spacer">NON</div>
+                        </div>
+                        <div class="col-xs-2 show-hide smiles passif" data-parent="#options-avis-recherche" data-show="#commentaire-avis">
+                          <span class="pictogramme-svg-smile-passif  x-large center"></span>
+                          <div class="very-small-spacer">MOYEN</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div id="commentaire-avis" class="collapse small-spacer">
+                      <p class="medium-spacer">Pouvez-vous nous indiquer le motif attendu</p>
+                      <textarea class="form-control" rows="4" placeholder="Motif attendu..."></textarea>
+                    </div>
+
+                    <div class="spacer">
+                      <button id="btn-nuovelle-recherche" class="btn btn-default">
+                                    Rechercher un autre motif
+                                </button>
+                    </div>
+
+                    <div class="spacer">
+                      <a href="avis.html" class="btn btn-default btn-multiligne">
+                                    <span class="lowercase">J’ai fini mes recherches de motifs
+</span> 
+                                    <br/>
+                                    <span class="texte-courant-semi-gras">je partage mon avis</span>
+                                </a>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </article>
+      <div id="liste-motifs-modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+              <h4 class="modal-title">Liste complète des motifs</h4>
+            </div>
+            <div class="modal-body">
+              <p>Recherche d’un motif par choix alphabétique :</p>
+              <div class="alphabet">
+                <a class="lettre active">A</a>
+                <a class="lettre active">B</a>
+                <a class="lettre active">C</a>
+                <a class="lettre active">D</a>
+                <a class="lettre active">E</a>
+                <a class="lettre active">F</a>
+                <a class="lettre active">G</a>
+                <a class="lettre active">H</a>
+                <a class="lettre active">I</a>
+                <a class="lettre">J</a>
+                <a class="lettre active">K</a>
+                <a class="lettre active">L</a>
+                <a class="lettre active">M</a>
+                <a class="lettre active">N</a>
+                <a class="lettre active">O</a>
+                <a class="lettre active">P</a>
+                <a class="lettre">Q</a>
+                <a class="lettre active">R</a>
+                <a class="lettre active">S</a>
+                <a class="lettre active">T</a>
+                <a class="lettre active">U</a>
+                <a class="lettre active">V</a>
+                <a class="lettre">W</a>
+                <a class="lettre">X</a>
+                <a class="lettre">Y</a>
+                <a class="lettre">Z</a>
+              </div>
+            </div>
+            <div class="modal-body liste-motifs">
+<ul id="A">
 							<li class="lettre">A</li>
 							<li data-dismiss="modal" data-id-motif="01000035"
 								data-nom-motif="Abcès cutané furoncle et anthrax">Abcès
@@ -794,37 +814,39 @@
 						</ul>
 					</div>
 
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal"
-							title="Fermer">Fermer</button>
-					</div>
-				</div>
-				<!-- /.modal-content -->
-			</div>
-			<!-- /.modal-dialog -->
-		</div>
-		</main>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" title="Fermer">
+                    Fermer
+                </button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+    </main>
 
 
 
 
-		<footer id="footer" class="container-fluid bg-gris-5">
-			<div class="row footer-copy-right">
-				<div class="col-xs-12 col-sm-6 ">
-					<a>Mentions légales</a> | <a><abbr
-						title="Condition générale d’utilisation">CGU</abbr></a>
-				</div>
-				<div class="col-xs-12  col-sm-6 text-right">
-					V1.0 <span class="hidden-xs">|</span> <br class="visible-xs-block" />©
-					CNAMTS 2017. Tous droits réservés
-				</div>
-			</div>
-		</footer>
 
 
-	</div>
-	<!-- JS library -->
-	<script src="static/js/amelipro.min.js" type="text/javascript"></script>
+
+    <footer id="footer" class="container-fluid bg-gris-5">
+      <div class="row footer-copy-right">
+        <div class="col-xs-12 col-sm-6 ">
+          <a>Mentions légales</a> | <a><abbr title="Condition générale d’utilisation">CGU</abbr></a>
+        </div>
+        <div class="col-xs-12  col-sm-6 text-right">
+          V1.0 <span class="hidden-xs">|</span> <br class="visible-xs-block" />© CNAMTS 2018. Tous droits réservés
+        </div>
+      </div>
+    </footer>
+
+
+  </div>
+  <!-- JS library -->
+  <script src="js/amelipro.min.js" type="text/javascript"></script>
 </body>
 
 </html>

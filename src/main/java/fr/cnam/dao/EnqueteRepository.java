@@ -12,7 +12,5 @@ public interface EnqueteRepository extends CrudRepository<Enquete, Long> {
 
 	List<Enquete> findByNavigateur(String navigateur);
 
-	List<Enquete> findByTransmission(String transmission);
-
 	Enquete findByIdentifiant(String identifiant);
 }

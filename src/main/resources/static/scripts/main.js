@@ -336,6 +336,8 @@ $(document).ready(function () {
             if (!idMotif) {
                 $('#categorie-motif').show();
             }
+            
+            setCookie("libelle", nomMotif.replace(/ /g,"_"), 1);
         }
     }
 
@@ -375,6 +377,15 @@ $(document).ready(function () {
         if (parent) {
             $($(this).data('parent') + ' .capsule').removeClass('active');
             $(this).addClass('active');
+            var parentId = $(this).parent().attr('id');
+            var reponse = $(this).text(); 
+            if(parentId === "options-avis-recherche-1"){
+            	setCookie("avis-reponse1", reponse, 1);
+//            	document.cookie="avis-reponse1=John;expires=Wed, 18 Dec 2023 12:00:00 GMT";
+            }else{
+            	setCookie("avis-reponse2", reponse, 1);
+//            	document.cookie="avis-reponse2=Smith;expires=Wed, 18 Dec 2023 12:00:00 GMT";
+            }
         }
     });
 
@@ -409,10 +420,31 @@ $(document).ready(function () {
         var d = new Date();
         d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
         var expires = "expires="+d.toUTCString();
-        if (document.cookie.length == 0){
-        	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-        } else {
-        	document.cookie = ";" + cname + "=" + cvalue + ";" + expires + ";path=/";
-        }
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
+    
+    function finish(element) {
+    	alert(getCookie("avis-reponse1") + " " + getCookie("avis-reponse2"));
+    	if(!getCookie("avis-reponse1")){
+    		return false;
+    	} else if (getCookie("avis-reponse2")) {
+    		return false;
+		} else {
+			alert("Je vais envoyer les data");
+			 $(element).attr("href", "/remerciements");
+		}
+    }
+    
+    $("#avis-envoie").click(function(event) {        
+        if(getCookie("avis-reponse1") && getCookie("avis-reponse2")){        	
+        	var comment  = $("#avis-commentaire").val();
+        	setCookie("avis-commentaire", comment.replace(/ /g,"_"), 1);
+        	return true
+        } else {
+//        	 $('#exemple-modal').modal('hide');
+        	confirm("Merci de saisir vos réponse avant l'envoie");
+        	 return false;
+		}
+    });
+    
 });

@@ -204,8 +204,58 @@ textarea{
 .pictogramme{
     @include pictogramme-svg("printemps","picto_printemps","","");
     @include pictogramme-svg("votre-avis","picto_votreAvis","","");
+    @include pictogramme-svg("smile-positif","Smile-positif","","");
+    @include pictogramme-svg("smile-negatif","smiley_negatif","","");
+    @include pictogramme-svg("smile-passif","Smile-passif","","");
+    
+    &.center{
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
-h3{
+
+.smiles{
+    
+    cursor: pointer;
+    
+    &.positif{
+        &.active{
+           font-family: $opensans-semi-bold;
+           color: #50BD9C;
+        }
+    }
+    &.negatif{
+        &.active{
+           font-family: $opensans-semi-bold;
+           color: #F16667;
+        }
+    }
+    &.passif{
+        &.active{
+           font-family: $opensans-semi-bold;
+           color: #FECE09;
+        }
+    }
+}
+
+
+
+.titre-page-test{
+    font-size: 21px;
+    font-family: $opensans !important;
+    color: #4a4a4a;
+}
+
+h3, h4{
     font-size: 1rem;
+}
+
+
+.btn-multiligne{
+    height: auto;
+}
+
+.lowercase{
+    text-transform: lowercase;
 }

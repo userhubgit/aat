@@ -42,9 +42,10 @@ public class Enquete implements Serializable {
 	// Heure fin de l'enquete
 	@Column(name="HORODATAGE_3")
 	private Date horodateur3;
-	
-	@Column(name="TRANSMISSION")
-	private String transmission;
+		
+	// Heure fin de l'enquete
+	@Column(name="HORODATAGE_4")
+	private Date horodateur4;
 
 	
 	public String getIdentifiant() {
@@ -87,12 +88,12 @@ public class Enquete implements Serializable {
 		this.horodateur3 = horodateur3;
 	}
 
-	public String getTransmission() {
-		return transmission;
+	public Date getHorodateur4() {
+		return horodateur4;
 	}
 
-	public void setTransmission(String transmission) {
-		this.transmission = transmission;
+	public void setHorodateur4(Date horodateur4) {
+		this.horodateur4 = horodateur4;
 	}
 	
 }
