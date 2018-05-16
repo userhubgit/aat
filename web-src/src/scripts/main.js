@@ -92,6 +92,9 @@ $(document).ready(function () {
         
         $('.alphabet .lettre.active').removeClass('selected'),
         $(this).addClass('selected');
+        
+        document.cookie="clic-liste-complete=;expires=Wed; 01 Jan 1970";
+    	setCookie("clic-liste-complete", "OUI", 1);
     });
     /**
      * La fonction qui permet de créer dynamiquement la popIn
@@ -190,11 +193,18 @@ $(document).ready(function () {
     ); */
 
     $('#motifs-plus-frequents .capsule').click(function () {
-
+    	document.cookie="clic-plus-frequent=;expires=Wed; 01 Jan 1970";
+    	document.cookie="motif-origine=;expires=Wed; 01 Jan 1970";
+    	setCookie("clic-plus-frequent", "OUI", 1);
+    	setCookie("motif-origine", "LES_PLUS_FREQUENTS", 1);
     });
     
     $('#motifs-en-ce-moment .capsule').click(function () {
-
+    	
+    	document.cookie="clic-en-ce-moment=;expires=Wed; 01 Jan 1970";
+    	setCookie("clic-en-ce-moment", "OUI", 1);
+    	document.cookie="motif-origine=;expires=Wed; 01 Jan 1970";
+    	setCookie("motif-origine", "EN_CE_MOMENT", 1);
     });
     
     $('#complement-info-motif').on('keyup change', function () {
@@ -208,28 +218,19 @@ $(document).ready(function () {
             $(this).val(text.substring(0, max));
             $($(this).attr('data-compteur')).html((max + '/' + max));
         }
+        
+        setCookie("motif-complement", $(this).val().replace(/ /g,"_"), 1);
     });
-
-//    var optionsAutocompleteMotifs = {
-//        url: "ressources/motifs.json",
-//        getValue: "motif",
-//        adjustWidth: false,
-//        list: {
-//            match: {
-//                enabled: true
-//            },
-//            onChooseEvent: function () {
-//                var idMotif = $("#motif-aat-input").getSelectedItemData().id;
-//                var nomMotif = $("#motif-aat-input").getSelectedItemData().motif;
-//                selectMotif(idMotif, nomMotif);
-//            }
-//        }
-//    };
+    
+    document.cookie="motif-complement=;expires=Wed; 01 Jan 1970";
+    document.cookie="motif-origine=;expires=Wed; 01 Jan 1970";
+    setCookie("clic-en-ce-moment", "NON", 1);
+    setCookie("clic-plus-frequent", "NON", 1);
+    setCookie("clic-liste-complete", "NON", 1);
     
     var codeSelection=null;
     var libelleSelection=null;
     
-
 	
     function autofocus(code, libelle){
     	codeSelection = code;
@@ -264,6 +265,9 @@ $(document).ready(function () {
                     var idMotif = $("#motif-aat-input").getSelectedItemData().label;
                     var nomMotif = $("#motif-aat-input").getSelectedItemData().value;
                     selectMotif(idMotif, nomMotif);
+                    
+                	document.cookie="motif-origine=;expires=Wed; 01 Jan 1970";
+                	setCookie("motif-origine", "SAISIE", 1);
                 },
             }
     		
@@ -276,6 +280,8 @@ $(document).ready(function () {
     	if(isEntry == 13){
     		if(codeSelection && libelleSelection){
     			selectMotif(codeSelection, libelleSelection);
+    			document.cookie="motif-origine=;expires=Wed; 01 Jan 1970";
+            	setCookie("motif-origine", "SAISIE", 1);
     		}
     	}
         
@@ -357,8 +363,14 @@ $(document).ready(function () {
         $('#id-motif-selectionne').val('');
         $('#motif-aat-input').val('');
         $('#recherche-button').removeClass('focus');
+        
         codeSelection=null;
         libelleSelection=null;
+        document.cookie="motif-complement=;expires=Wed; 01 Jan 1970";
+        document.cookie="motif-origine=;expires=Wed; 01 Jan 1970";
+        setCookie("clic-en-ce-moment", "NON", 1);
+        setCookie("clic-plus-frequent", "NON", 1);
+        setCookie("clic-liste-complete", "NON", 1);
     }
 
     $('#recherche-button').click(function () {
@@ -368,6 +380,8 @@ $(document).ready(function () {
     $('#motif-aat-input').keyup(function (e) {
         if (e.keyCode == 13) {
             selectMotif(false, $('#motif-aat-input').val());
+            document.cookie="motif-origine=;expires=Wed; 01 Jan 1970";
+        	setCookie("motif-origine", "SAISIE", 1);
             return false;
         }
     });
@@ -389,10 +403,8 @@ $(document).ready(function () {
             var reponse = $(this).text(); 
             if(parentId === "options-avis-recherche-1"){
             	setCookie("avis-reponse1", reponse, 1);
-//            	document.cookie="avis-reponse1=John;expires=Wed, 18 Dec 2023 12:00:00 GMT";
             }else{
             	setCookie("avis-reponse2", reponse, 1);
-//            	document.cookie="avis-reponse2=Smith;expires=Wed, 18 Dec 2023 12:00:00 GMT";
             }
         }
     });

@@ -20,8 +20,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.google.gson.Gson;
-
 import fr.cnam.dao.AvisRepository;
 import fr.cnam.dao.EnqueteRepository;
 import fr.cnam.dao.MotifAATRepository;
@@ -36,7 +34,7 @@ public class IndexController {
 	private final static String SESSION_ATTR_ENQUETE = "enquete";
 	private final static String SESSION_ATTR_MOTIF = "motif";
 	private final static String SESSION_ATTR_AVIS = "avis";
-	private final static String RETOUR_FORMULAIRE = "oui";
+//	private final static String RETOUR_FORMULAIRE = "oui";
 	
 	/**
 	 * FIXME Conrainte de document.cookie qui n'autorise pas d'espace.
@@ -100,7 +98,15 @@ public class IndexController {
 	}
 
 	@GetMapping("/avis")
-	public String avis(HttpSession session, @CookieValue("libelle") String info) {
+	public String avis(HttpSession session, 
+			@CookieValue("libelle") String info,
+			@CookieValue("clic-en-ce-moment") String actuel,
+			@CookieValue("clic-plus-frequent") String frequent,
+			@CookieValue("clic-liste-complete") String complete,
+			@CookieValue("motif-origine") String origine,
+			@CookieValue("motif-complement") String complement) {
+		
+		
 		logger.info("AFFICHAGE COOKIE ************* {} ", info);
 		String libelle = info.replace(SEPARATEUR_ESPACE, " ");
 		logger.info("AFFICHAGE LIBELLE CHOISI ************* {} ", libelle);
@@ -117,8 +123,16 @@ public class IndexController {
 				}
 				enquete.setHorodateur2(new Date(System.currentTimeMillis()));
 				// Motif
-				MotifAAT motifAAT = (MotifAAT) session.getAttribute(SESSION_ATTR_MOTIF);
+				MotifAAT motifAAT = new MotifAAT((MotifAAT) session.getAttribute(SESSION_ATTR_MOTIF));
 				motifAAT.setLibelle(libelle);
+				motifAAT.setSessionId(enquete.getIdentifiant());
+				motifAAT.setClicActuel(actuel);
+				motifAAT.setClicListeComplete(complete);
+				motifAAT.setClicPlusFrequent(frequent);
+				motifAAT.setOrigine(origine);
+				motifAAT.setComplement(complement.replace(SEPARATEUR_ESPACE, " "));
+				
+				motifRepository.save(motifAAT);
 			}
 		}
 		return "avis";
@@ -144,7 +158,6 @@ public class IndexController {
 		avis.setLibelle(motifAAT.getLibelle());
 		avis.setSessionId(enquete.getIdentifiant());
 		
-		motifRepository.save(motifAAT);
 		enqueteRepository.save(enquete);
 		avisRepository.save(avis);
 		
