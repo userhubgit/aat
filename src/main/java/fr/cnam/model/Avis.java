@@ -27,9 +27,20 @@ public class Avis implements Serializable {
 	
 	@Column(name="REPONSE_QUESTION_2")
 	private String reponse2;
+	
+	@Column(name="SESSION_ID")
+	private String sessionId;
+	
+	@Column(name="LIBELLE_ASSOCIE")
+	private String libelle;
 
-	@Column(name="REPONSE_QUESTION_3")
-	private String reponse3;
+	public String getLibelle() {
+		return libelle;
+	}
+
+	public void setLibelle(String liblle) {
+		this.libelle = liblle;
+	}
 
 	public String getReponse1() {
 		return reponse1;
@@ -47,12 +58,12 @@ public class Avis implements Serializable {
 		this.reponse2 = reponse2;
 	}
 
-	public String getReponse3() {
-		return reponse3;
+	public String getSessionId() {
+		return sessionId;
 	}
 
-	public void setReponse3(String reponse3) {
-		this.reponse3 = reponse3;
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
 	}
 
 	@Column(name="COMMENTAIRES")

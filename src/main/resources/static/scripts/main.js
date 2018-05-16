@@ -189,6 +189,14 @@ $(document).ready(function () {
             }
     ); */
 
+    $('#motifs-plus-frequents .capsule, #motifs-en-ce-moment .capsule').click(function () {
+    	alert('motifs-plus-frequents');
+    });
+    
+    $('#motifs-en-ce-moment .capsule').click(function () {
+    	alert('en ce moment');
+    });
+    
     $('#complement-info-motif').on('keyup change', function () {
         var text = $(this).val();
         max = 500;

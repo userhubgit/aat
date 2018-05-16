@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="MOTIF")
+@Table(name = "MOTIF")
 public class MotifAAT implements Serializable {
 
 	/**
@@ -21,30 +21,67 @@ public class MotifAAT implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
-	@Column(name="LIBELLE")
+
+	@Column(name = "LIBELLE")
 	private String libelle;
-	
-	@Column(name="COMPLEMENT")
+
+	@Column(name = "COMPLEMENT")
 	private String complement;
 
-	@Column(name="ORIGINE_MOTIF")
+	@Column(name = "ORIGINE_MOTIF")
 	private String origine;
-	
-	@Column(name="CLIC_LISTE_COMPLETE ")
+
+	@Column(name = "CLIC_LISTE_COMPLETE ")
 	private String clicListeComplete;
-	
-	@Column(name="CLIC_LES_PLUS_FREQUENTS")
+
+	@Column(name = "CLIC_LES_PLUS_FREQUENTS")
 	private String clicPlusFrequent;
-	
-	@Column(name="CLIC_EN_CE_MOMENT")
+
+	@Column(name = "CLIC_EN_CE_MOMENT")
 	private String clicActuel;
-	 
-	@Column(name="RESULTAT_RECHERCHE")
+
+	@Column(name = "RESULTAT_RECHERCHE")
 	private String resultatRecherche;
 
-	@Column(name="COMMENTAIRES")
+	@Column(name = "COMMENTAIRES")
 	private String commentaire;
+
+	@Column(name = "SESSION_ID")
+	private String sessionId;
+
+	public MotifAAT() {
+
+	}
+
+	public MotifAAT(MotifAAT motif) {
+		if (null != motif) {
+			this.setSessionId(motif.getSessionId());
+			this.setLibelle(motif.getLibelle());
+			this.setClicActuel(motif.getClicActuel());
+			this.setClicListeComplete(motif.getClicListeComplete());
+			this.setClicPlusFrequent(motif.getClicPlusFrequent());
+			this.setCommentaire(motif.getCommentaire());
+			this.setComplement(motif.getComplement());
+			this.setOrigine(motif.getOrigine());
+			this.setResultatRecherche(motif.getResultatRecherche());
+		}
+	}
+
+	public String getResultatRecherche() {
+		return resultatRecherche;
+	}
+
+	public void setResultatRecherche(String resultatRecherche) {
+		this.resultatRecherche = resultatRecherche;
+	}
+
+	public String getSessionId() {
+		return sessionId;
+	}
+
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
 
 	public String getLibelle() {
 		return libelle;
@@ -92,14 +129,6 @@ public class MotifAAT implements Serializable {
 
 	public void setClicActuel(String clicActuel) {
 		this.clicActuel = clicActuel;
-	}
-
-	public String getResultatRecheche() {
-		return resultatRecherche;
-	}
-
-	public void setResultatRecheche(String resultatRecheche) {
-		this.resultatRecherche = resultatRecheche;
 	}
 
 	public String getCommentaire() {

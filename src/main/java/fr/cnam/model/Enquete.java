@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ENQUETE_AAT")
+@Table(name = "ENQUETE_AAT")
 public class Enquete implements Serializable {
 
 	/**
@@ -22,32 +22,48 @@ public class Enquete implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+
 	// Identifiant fonctionnel (la session d'un PS)
-	@Column(name="IDENTIFIANT")
+	@Column(name = "IDENTIFIANT")
 	private String identifiant;
-	
+
 	// Navigateur du testeur
-	@Column(name="NAVIGATEUR")
+	@Column(name = "NAVIGATEUR")
 	private String navigateur;
 
 	// Heure du demarrage du test
-	@Column(name="HORODATAGE_1")
+	@Column(name = "HORODATAGE_1")
 	private Date horodateur1;
-	
+
 	// Heure de fin de recherche
-	@Column(name="HORODATAGE_2")
+	@Column(name = "HORODATAGE_2")
 	private Date horodateur2;
-	
+
 	// Heure fin de l'enquete
-	@Column(name="HORODATAGE_3")
+	@Column(name = "HORODATAGE_3")
 	private Date horodateur3;
-		
+
 	// Heure fin de l'enquete
-	@Column(name="HORODATAGE_4")
+	@Column(name = "HORODATAGE_4")
 	private Date horodateur4;
 
-	
+	public Enquete() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Enquete(Enquete enquete) {
+		
+		if (null != enquete) {
+
+			this.setHorodateur1(enquete.getHorodateur1());
+			this.setHorodateur2(enquete.getHorodateur2());
+			this.setHorodateur3(enquete.getHorodateur3());
+			this.setHorodateur4(enquete.getHorodateur4());
+			this.setIdentifiant(enquete.getIdentifiant());
+			this.setNavigateur(enquete.getNavigateur());
+		}
+	}
+
 	public String getIdentifiant() {
 		return identifiant;
 	}
@@ -95,5 +111,5 @@ public class Enquete implements Serializable {
 	public void setHorodateur4(Date horodateur4) {
 		this.horodateur4 = horodateur4;
 	}
-	
+
 }

@@ -29,9 +29,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.gson.Gson;
 
 import fr.cnam.dao.AvisRepository;
+import fr.cnam.dao.EnqueteRepository;
+import fr.cnam.dao.MotifAATRepository;
 import fr.cnam.dto.MotifView;
 import fr.cnam.model.Avis;
+import fr.cnam.model.Enquete;
 import fr.cnam.model.Motif;
+import fr.cnam.model.MotifAAT;
 import fr.cnam.service.LuceneIndexRecherche;
 import fr.cnam.util.Constante;
 import fr.cnam.util.MotifMapper;
@@ -52,8 +56,13 @@ public class MotifController {
 	DataSource dataSource;
 	
 	@Autowired
-	AvisRepository avisRepository;
-//	EnqueteRepository enqueteRepository;
+	private AvisRepository avisRepository;
+	
+	@Autowired
+	private EnqueteRepository enqueteRepository;
+	
+	@Autowired
+	private MotifAATRepository motifRepository;
 
 	private Gson gson = new Gson();
 
@@ -66,10 +75,6 @@ public class MotifController {
 			for (Motif motif : output) {
 				listMotifView.add(MotifMapper.convertMotifToMotifView(motif));
 			}
-//			Enquete enquete = new Enquete();
-//			enquete.setUserInput(msg);
-//			logger.info("JE STOKE EN BASE DE DONNEES");
-//			enqueteRepository.save(enquete);
 		}
 		
 		return gson.toJson(listMotifView);
@@ -136,42 +141,22 @@ public class MotifController {
 		outStream.close();
 		return gson.toJson(mapMotif);
 	}
-	
-	@GetMapping("/aat/register")
-	public ResponseEntity<?> loadAvis() throws IOException {
-		logger.info("ENREGISTREMENT DES AVIS ...........");
-		Avis avis = new Avis();
 		
-		avis.setCommentaire("Comment 1");
-		avis.setReponse1("OUI");
-		avis.setReponse2("NON");
-		avis.setReponse3("EN PARTIE");
-		
-		avisRepository.save(avis);
-		
-		Avis avis2 = new Avis();
-		avis2.setCommentaire("Comment 2");
-		avis2.setReponse1("NON");
-		avis2.setReponse2("OUI");
-		avis2.setReponse3("EN PARTIE");
-		
-		avisRepository.save(avis2);
-		
-		Avis avis3 = new Avis();		
-		avis3.setCommentaire("Comment 3");
-		avis3.setReponse1("EN PARTIE");
-		avis3.setReponse2("EN PARTIE");
-		avis3.setReponse3("EN PARTIE");
-		
-		avisRepository.save(avis3);
-		
-		logger.info("ENREGISTREMENT DES AVIS SUCCESSFULL ...........");
-		return new ResponseEntity<>(HttpStatus.OK);
-	}
-	
-	@GetMapping("/aat/enquetes")
+	@GetMapping("/aat/avis")
 	public ResponseEntity<Iterable<Avis>> listeAvis(HttpSession session) throws IOException {
 		Iterable<Avis> avis = avisRepository.findAll();
 		return new ResponseEntity<Iterable<Avis>>(avis, HttpStatus.OK);
+	}
+	
+	@GetMapping("/aat/motifs")
+	public ResponseEntity<Iterable<MotifAAT>> listeMotif(HttpSession session) throws IOException {
+		Iterable<MotifAAT> motifAAT = motifRepository.findAll();
+		return new ResponseEntity<Iterable<MotifAAT>>(motifAAT, HttpStatus.OK);
+	}
+	
+	@GetMapping("/aat/enquetes")
+	public ResponseEntity<Iterable<Enquete>> listeEnquetes(HttpSession session) throws IOException {
+		Iterable<Enquete> enquete = enqueteRepository.findAll();
+		return new ResponseEntity<Iterable<Enquete>>(enquete, HttpStatus.OK);
 	}
 }

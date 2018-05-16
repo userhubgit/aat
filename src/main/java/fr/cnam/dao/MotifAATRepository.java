@@ -25,4 +25,6 @@ public interface MotifAATRepository extends CrudRepository<MotifAAT, Long> {
 	List<MotifAAT> findByComplement(String complement);
 
 	List<MotifAAT> findByResultatRecherche(String resultat);
+	
+	List<MotifAAT> findBySessionId(final String libelle);
 }

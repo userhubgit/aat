@@ -18,6 +18,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.google.gson.Gson;
 
 import fr.cnam.dao.AvisRepository;
 import fr.cnam.dao.EnqueteRepository;
@@ -33,6 +36,7 @@ public class IndexController {
 	private final static String SESSION_ATTR_ENQUETE = "enquete";
 	private final static String SESSION_ATTR_MOTIF = "motif";
 	private final static String SESSION_ATTR_AVIS = "avis";
+	private final static String RETOUR_FORMULAIRE = "oui";
 	
 	/**
 	 * FIXME Conrainte de document.cookie qui n'autorise pas d'espace.
@@ -71,7 +75,7 @@ public class IndexController {
 	}
 
 	@GetMapping("/formulaire")
-	public String form(HttpSession session) {
+	public String form(HttpSession session, @RequestParam("retour") String retour) {
 		if (null != session) {
 			if (null != session.getAttribute(SESSION_ATTR_ENQUETE)) {
 
@@ -81,6 +85,15 @@ public class IndexController {
 				if (null == enquete.getHorodateur1()) {
 					enquete.setHorodateur1(new Date(System.currentTimeMillis()));
 				}
+//				if (retour.equalsIgnoreCase(RETOUR_FORMULAIRE)) {					
+//					logger.info("*************** request {} ", retour);
+//					enquete.setHorodateur4(new Date(System.currentTimeMillis()));
+//					logger.info("*************** request {} ", new Gson().toJson(enquete));
+//					
+//				} else {
+//					enquete.setHorodateur4(null);
+//				}
+				
 			}
 		}
 		return "recherche";
@@ -121,14 +134,25 @@ public class IndexController {
 		avis.setReponse2(reponse2);
 		avis.setCommentaire(commentaire.replace(SEPARATEUR_ESPACE, " "));
 		
-		motifRepository.save((MotifAAT)session.getAttribute(SESSION_ATTR_MOTIF));
-		enqueteRepository.save((Enquete)session.getAttribute(SESSION_ATTR_ENQUETE));
+		
+		Enquete enquete = new Enquete((Enquete)session.getAttribute(SESSION_ATTR_ENQUETE));
+		enquete.setHorodateur3(new Date(System.currentTimeMillis()));
+		
+		MotifAAT motifAAT = new MotifAAT((MotifAAT)session.getAttribute(SESSION_ATTR_MOTIF));
+		motifAAT.setSessionId(((Enquete)session.getAttribute(SESSION_ATTR_ENQUETE)).getIdentifiant());
+		
+		avis.setLibelle(motifAAT.getLibelle());
+		avis.setSessionId(enquete.getIdentifiant());
+		
+		motifRepository.save(motifAAT);
+		enqueteRepository.save(enquete);
 		avisRepository.save(avis);
 		
 		return "remerciements";
 	}
 
 	private void initSession(HttpSession session, HttpHeaders headers) {
+		
 		logger.info("Initialisation des donnees");
 		logger.info("Navigateur : {}", headers.get("user-agent").get(0));
 
