@@ -252,6 +252,10 @@ $(document).ready(function () {
     setCookie("clic-en-ce-moment", "NON", 1);
     setCookie("clic-plus-frequent", "NON", 1);
     setCookie("clic-liste-complete", "NON", 1);
+    setCookie("motif-complement", "", 1);
+    setCookie("recherche-commentaire", "", 1);
+    setCookie("avis-commentaire", "", 1);
+    setCookie("resultat-recherche", "", 1);
     
     var codeSelection=null;
     var libelleSelection=null;
