@@ -51,6 +51,24 @@ $(document).ready(function () {
 
         var toHide = $(this).attr('data-hide');
         var toShow = $(this).attr('data-show');
+        
+        // alimentation cookie
+        var idValue = $(this).attr('id');
+        
+        if(idValue === "smiles-positif"){        	
+        	document.cookie="recherche-commentaire=;expires=Wed; 01 Jan 1970";
+        	setCookie("resultat-recherche", "OUI", 1);
+        }
+        
+        if(idValue === "smiles-negatif"){        	
+        	setCookie("resultat-recherche", "NON", 1);
+        }
+        
+        if(idValue === "smiles-passif"){        	
+        	setCookie("resultat-recherche", "MOYEN", 1);
+        }
+        
+        
         var reverseShowHide = $(this).attr('data-reverse-show-hide');
         if (toHide != '') {
             $(toHide).hide();
@@ -96,6 +114,11 @@ $(document).ready(function () {
         document.cookie="clic-liste-complete=;expires=Wed; 01 Jan 1970";
     	setCookie("clic-liste-complete", "OUI", 1);
     });
+    
+    $('#recherche-commentaire').on('keyup change', function () {
+        setCookie("recherche-commentaire", $(this).val().replace(/ /g,"_"), 1);
+    });
+    
     /**
      * La fonction qui permet de créer dynamiquement la popIn
      */
@@ -223,7 +246,9 @@ $(document).ready(function () {
     });
     
     document.cookie="motif-complement=;expires=Wed; 01 Jan 1970";
-    document.cookie="motif-origine=;expires=Wed; 01 Jan 1970";
+    //document.cookie="motif-origine=;expires=Wed; 01 Jan 1970";
+    
+    setCookie("motif-origine", "LISTE_COMPLETE", 1);
     setCookie("clic-en-ce-moment", "NON", 1);
     setCookie("clic-plus-frequent", "NON", 1);
     setCookie("clic-liste-complete", "NON", 1);
@@ -366,8 +391,11 @@ $(document).ready(function () {
         
         codeSelection=null;
         libelleSelection=null;
+        document.cookie="resultat-recherche=;expires=Wed; 01 Jan 1970";
+        document.cookie="recherche-commentaire=;expires=Wed; 01 Jan 1970";
         document.cookie="motif-complement=;expires=Wed; 01 Jan 1970";
         document.cookie="motif-origine=;expires=Wed; 01 Jan 1970";
+        setCookie("motif-origine", "LISTE_COMPLETE", 1);
         setCookie("clic-en-ce-moment", "NON", 1);
         setCookie("clic-plus-frequent", "NON", 1);
         setCookie("clic-liste-complete", "NON", 1);

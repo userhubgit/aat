@@ -65,7 +65,6 @@ public class IndexController {
 			if (session.isNew()) {
 				initSession(session, headers);
 			} else {
-
 				logger.info("Mise a jour des donnees");
 			}
 		}
@@ -73,25 +72,19 @@ public class IndexController {
 	}
 
 	@GetMapping("/formulaire")
-	public String form(HttpSession session, @RequestParam("retour") String retour) {
+	public String form(HttpSession session, @RequestHeader HttpHeaders headers, @RequestParam("retour") String retour) {
 		if (null != session) {
-			if (null != session.getAttribute(SESSION_ATTR_ENQUETE)) {
-
-				// Renseignement de l'heure de de debut de l'enquête
-				// L'initialisation ce fait juste au premier passage.
-				Enquete enquete = (Enquete) session.getAttribute(SESSION_ATTR_ENQUETE);
-				if (null == enquete.getHorodateur1()) {
-					enquete.setHorodateur1(new Date(System.currentTimeMillis()));
+			if (! session.isNew()) {				
+				if (null != session.getAttribute(SESSION_ATTR_ENQUETE)) {
+					// Renseignement de l'heure de de debut de l'enquête
+					// L'initialisation ce fait juste au premier passage.
+					Enquete enquete = (Enquete) session.getAttribute(SESSION_ATTR_ENQUETE);
+					if (null == enquete.getHorodateur1()) {
+						enquete.setHorodateur1(new Date(System.currentTimeMillis()));
+					}
 				}
-//				if (retour.equalsIgnoreCase(RETOUR_FORMULAIRE)) {					
-//					logger.info("*************** request {} ", retour);
-//					enquete.setHorodateur4(new Date(System.currentTimeMillis()));
-//					logger.info("*************** request {} ", new Gson().toJson(enquete));
-//					
-//				} else {
-//					enquete.setHorodateur4(null);
-//				}
-				
+			} else {
+				initSession(session, headers);
 			}
 		}
 		return "recherche";
@@ -104,14 +97,13 @@ public class IndexController {
 			@CookieValue("clic-plus-frequent") String frequent,
 			@CookieValue("clic-liste-complete") String complete,
 			@CookieValue("motif-origine") String origine,
-			@CookieValue("motif-complement") String complement) {
+			@CookieValue("motif-complement") String complement,
+			@CookieValue("resultat-recherche") String resultatRecherche,
+			@CookieValue("recherche-commentaire") String commentaire) {
 		
-		
-		logger.info("AFFICHAGE COOKIE ************* {} ", info);
 		String libelle = info.replace(SEPARATEUR_ESPACE, " ");
-		logger.info("AFFICHAGE LIBELLE CHOISI ************* {} ", libelle);
+		logger.info("Le libelle choisi pas le PS = {} ", libelle);
 		
-		logger.info("SESSION ************* {} ", session);
 		if (null != session) {
 			if (null != session.getAttribute(SESSION_ATTR_ENQUETE)) {
 
@@ -131,6 +123,8 @@ public class IndexController {
 				motifAAT.setClicPlusFrequent(frequent);
 				motifAAT.setOrigine(origine);
 				motifAAT.setComplement(complement.replace(SEPARATEUR_ESPACE, " "));
+				motifAAT.setCommentaire(commentaire.replace(SEPARATEUR_ESPACE, " "));
+				motifAAT.setResultatRecherche(resultatRecherche);
 				
 				motifRepository.save(motifAAT);
 			}
@@ -141,6 +135,7 @@ public class IndexController {
 	@GetMapping("/remerciements")
 	public String remercier(HttpSession session, @CookieValue("avis-reponse1") String reponse1,
 			@CookieValue("avis-reponse2") String reponse2, @CookieValue("avis-commentaire") String commentaire) {
+		
 		logger.info("reponse1= {} reponse2= {}  commentaire = {}", reponse1, reponse2, commentaire);
 
 		Avis avis = new Avis();

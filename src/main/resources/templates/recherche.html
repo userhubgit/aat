@@ -187,15 +187,15 @@
                     <div id="options-avis-recherche" class="spacer row ">
 
                       <div class="row">
-                        <div class="col-xs-2 col-xs-offset-3 show-hide smiles positif" data-parent="#options-avis-recherche" data-hide="#commentaire-avis">
+                        <div id="smiles-positif" class="col-xs-2 col-xs-offset-3 show-hide smiles positif" data-parent="#options-avis-recherche" data-hide="#commentaire-avis">
                           <span class="pictogramme-svg-smile-positif x-large center"></span>
                           <div class="very-small-spacer">OUI</div>
                         </div>
-                        <div class="col-xs-2 show-hide smiles negatif" data-parent="#options-avis-recherche" data-show="#commentaire-avis">
+                        <div id="smiles-negatif" class="col-xs-2 show-hide smiles negatif" data-parent="#options-avis-recherche" data-show="#commentaire-avis">
                           <span class="pictogramme-svg-smile-negatif x-large center"></span>
                           <div class="very-small-spacer">NON</div>
                         </div>
-                        <div class="col-xs-2 show-hide smiles passif" data-parent="#options-avis-recherche" data-show="#commentaire-avis">
+                        <div id="smiles-passif" class="col-xs-2 show-hide smiles passif" data-parent="#options-avis-recherche" data-show="#commentaire-avis">
                           <span class="pictogramme-svg-smile-passif  x-large center"></span>
                           <div class="very-small-spacer">MOYEN</div>
                         </div>
@@ -204,7 +204,7 @@
 
                     <div id="commentaire-avis" class="collapse small-spacer">
                       <p class="medium-spacer">Pouvez-vous nous indiquer le motif attendu</p>
-                      <textarea class="form-control" rows="4" placeholder="Motif attendu..."></textarea>
+                      <textarea id="recherche-commentaire" class="form-control" rows="4" placeholder="Motif attendu..."></textarea>
                     </div>
 
                     <div class="spacer">
