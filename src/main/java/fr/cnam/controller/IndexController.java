@@ -124,7 +124,7 @@ public class IndexController {
 				motifAAT.setClicActuel(actuel);
 				motifAAT.setClicListeComplete(complete);
 				motifAAT.setClicPlusFrequent(frequent);
-				motifAAT.setOrigine(origine);
+				motifAAT.setOrigine(origine.replace(SEPARATEUR_ESPACE, " "));
 				motifAAT.setComplement(complement.replace(SEPARATEUR_ESPACE, " "));
 				motifAAT.setCommentaire(commentaire.replace(SEPARATEUR_ESPACE, " "));
 				motifAAT.setResultatRecherche(resultatRecherche);

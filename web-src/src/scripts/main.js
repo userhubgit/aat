@@ -481,8 +481,7 @@ $(document).ready(function () {
         	setCookie("avis-commentaire", comment.replace(/ /g,"_"), 1);
         	return true
         } else {
-//        	 $('#exemple-modal').modal('hide');
-        	confirm("Merci de saisir vos réponse avant l'envoie");
+        	 $('#exemple-modal').modal('show');
         	 return false;
 		}
     });
