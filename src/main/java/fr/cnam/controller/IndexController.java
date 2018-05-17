@@ -1,5 +1,6 @@
 package fr.cnam.controller;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -8,7 +9,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.Response;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -133,28 +136,44 @@ public class IndexController {
 	}
 
 	@GetMapping("/remerciements")
-	public String remercier(HttpSession session, @CookieValue("avis-reponse1") String reponse1,
-			@CookieValue("avis-reponse2") String reponse2, @CookieValue("avis-commentaire") String commentaire) {
+	public String remercier(HttpSession session, 
+			HttpServletResponse response , 
+			@CookieValue("avis-reponse1") String reponse1,
+			@CookieValue("avis-reponse2") String reponse2, 
+			@CookieValue("avis-commentaire") String commentaire) {
 		
 		logger.info("reponse1= {} reponse2= {}  commentaire = {}", reponse1, reponse2, commentaire);
 
-		Avis avis = new Avis();
-		avis.setReponse1(reponse1);
-		avis.setReponse2(reponse2);
-		avis.setCommentaire(commentaire.replace(SEPARATEUR_ESPACE, " "));
-		
-		
-		Enquete enquete = new Enquete((Enquete)session.getAttribute(SESSION_ATTR_ENQUETE));
-		enquete.setHorodateur3(new Date(System.currentTimeMillis()));
-		
-		MotifAAT motifAAT = new MotifAAT((MotifAAT)session.getAttribute(SESSION_ATTR_MOTIF));
-		motifAAT.setSessionId(((Enquete)session.getAttribute(SESSION_ATTR_ENQUETE)).getIdentifiant());
-		
-		avis.setLibelle(motifAAT.getLibelle());
-		avis.setSessionId(enquete.getIdentifiant());
-		
-		enqueteRepository.save(enquete);
-		avisRepository.save(avis);
+		if(null != session && 
+				null != session.getAttribute(SESSION_ATTR_MOTIF) &&
+				null !=  session.getAttribute(SESSION_ATTR_ENQUETE) && 
+				null !=  session.getAttribute(SESSION_ATTR_AVIS)) {			
+			Avis avis = new Avis();
+			avis.setReponse1(reponse1);
+			avis.setReponse2(reponse2);
+			avis.setCommentaire(commentaire.replace(SEPARATEUR_ESPACE, " "));
+			
+			
+			Enquete enquete = new Enquete((Enquete)session.getAttribute(SESSION_ATTR_ENQUETE));
+			enquete.setHorodateur3(new Date(System.currentTimeMillis()));
+			
+			MotifAAT motifAAT = new MotifAAT((MotifAAT)session.getAttribute(SESSION_ATTR_MOTIF));
+			motifAAT.setSessionId(((Enquete)session.getAttribute(SESSION_ATTR_ENQUETE)).getIdentifiant());
+			
+			avis.setLibelle(motifAAT.getLibelle());
+			avis.setSessionId(enquete.getIdentifiant());
+			
+			enqueteRepository.save(enquete);
+			avisRepository.save(avis);
+			
+		} else {
+			try {
+				response.sendRedirect("formulaire?retour=non");
+			} catch (IOException e) {
+				logger.error("Redirection KO", e);
+			}
+			return "recherche";
+		}
 		
 		return "remerciements";
 	}
