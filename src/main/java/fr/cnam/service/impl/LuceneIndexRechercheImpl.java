@@ -362,11 +362,11 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			// Affichage des tokens dans le libelle
 			logger.info("****** DEBUT : Affichage des tokens dans le libelle *******");
 
-			TermEnum terms = writer.getReader().terms(new Term(CHAMP_GENERIQUE));
+			TermEnum terms = writer.getReader().terms(new Term(CHAMP_LIBELLE));
 			if (null != terms.term()) {
 				do {
 					Term term = terms.term();
-					if (term.field().endsWith(CHAMP_GENERIQUE)) {
+					if (term.field().endsWith(CHAMP_LIBELLE)) {
 						logger.info("[" + term.field() + "] == " + term.text());
 					}
 				} while (terms.next());
@@ -529,11 +529,11 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			terme = supprAccent(terme.toLowerCase());
 			Set<String> listeInterdite = AATLuceneAnalyzerUtil.etendreFrenchStopWordSet();
 			Set<String> listeSansAccent = normaliserListe(listeInterdite);
-			if (listeSansAccent.contains(terme) || ReferentielCSVReaderUtil.ESPACE.equals(terme)) {
+ 			if (listeSansAccent.contains(terme) || ReferentielCSVReaderUtil.ESPACE.equals(terme)) {
 
 				pSaisieUtilisateur.replace(terme, ReferentielCSVReaderUtil.VIDE);
 			} else {
-//				if (terme.length() >=2){					
+//				if (!(terme.length() ==  1 && i == 0)){					
 					if (i < (saisieTermes.length - 1)) {
 						valideSaisie.append(terme).append(" ");
 					} else {
@@ -616,7 +616,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			pSearcher.search(bq, collector);
 			ScoreDoc[] hits = collector.topDocs().scoreDocs;
 
-			logger.info("======= { Nombre de motif trouvï¿½ := " + hits.length + " } ===========\n");
+			logger.info("======= { Nombre de motif trouvé(s) := " + hits.length + " } ===========\n");
 
 			for (int i = 0; i < hits.length; i++) {
 				ScoreDoc doc = hits[i];
@@ -671,7 +671,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			pSearcher.search(bq, collector);
 			ScoreDoc[] hits = collector.topDocs().scoreDocs;
 
-			logger.info("======= { Nombre de motif trouvï¿½ " + hits.length + " } ===========\n");
+			logger.info("======= { Nombre de motif trouvé(s) " + hits.length + " } ===========\n");
 
 			for (int i = 0; i < hits.length; i++) {
 				ScoreDoc doc = hits[i];

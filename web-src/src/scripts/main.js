@@ -301,18 +301,26 @@ $(document).ready(function () {
             }
     		
     };
-
+    // ?./§*%$£¤}]=+@^&#"~"'{([-|_\ 
     $("#motif-aat-input").easyAutocomplete(optionsAutocompleteMotifs);
     
     $('#motif-aat-input').on('keypress', function (event) {
     	var isEntry = event.which;
-    	if(isEntry == 13){
-    		if(codeSelection && libelleSelection){
-    			selectMotif(codeSelection, libelleSelection);
-    			document.cookie="motif-origine=;expires=Wed; 01 Jan 1970";
-            	setCookie("motif-origine", "SAISIE", 1);
-    		}
-    	}
+    	var txt = String.fromCharCode(event.which);
+        
+        if(!txt.match(/[A-Za-z0-9àâäéèêëîôöùûïÄÀÂÇÉÈÊÔÖÎÏÛÙ -]/)) 
+        {
+            return false;
+        } else {       	
+        	if(isEntry == 13) {
+        		if(codeSelection && libelleSelection){
+        			selectMotif(codeSelection, libelleSelection);
+        			document.cookie="motif-origine=;expires=Wed; 01 Jan 1970";
+        			setCookie("motif-origine", "SAISIE", 1);
+        		}
+        	}
+        }
+        
         
     });
 	
@@ -391,7 +399,9 @@ $(document).ready(function () {
         $('#nom-motif-selectionne').text('');
         $('#id-motif-selectionne').val('');
         $('#motif-aat-input').val('');
-        $('#recherche-button').removeClass('focus');
+        $('#complement-info-motif').val('');
+        document.getElementsByClassName("filter-option pull-left")[0].innerHTML="-- Catégorie de pathologies --";
+        $('#recherche-button').removeClass('focus');        
         
         codeSelection=null;
         libelleSelection=null;

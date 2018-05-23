@@ -31,17 +31,17 @@ public class LuceneIndexRechercheTest {
 	// Test libelle avec erreurs dans l'ordre.
 	@Test
 	public void testLibelleAvecErreur1() {
-		List<Motif> resultat = service.rechercher("DÃ©colement dechirure");
+		List<Motif> resultat = service.rechercher("Décollement");
 		Assert.assertTrue(resultat.size() == 1);
-		Assert.assertTrue(resultat.get(0).getLibelle().equalsIgnoreCase("DÃ©collement et dÃ©chirure de la rÃ©tine"));	
+		Assert.assertTrue(resultat.get(0).getLibelle().equalsIgnoreCase("Décollement et déchirure de la rétine"));	
 	}
 	
 	// Test libelle avec erreurs dans le dï¿½sordre.
 	@Test
 	public void testLibelleAvecErreur2() {
-		List<Motif> resultat = service.rechercher("dechirure dÃ©coement");
+		List<Motif> resultat = service.rechercher("dechirure décoement");
 		Assert.assertTrue(resultat.size() == 1);
-		Assert.assertTrue(resultat.get(0).getLibelle().equalsIgnoreCase("DÃ©collement et dÃ©chirure de la rÃ©tine"));	
+		Assert.assertTrue(resultat.get(0).getLibelle().equalsIgnoreCase("Décollement et déchirure de la rétine"));	
 	}
 	
 	// Test passant sur un acronyme
@@ -49,7 +49,7 @@ public class LuceneIndexRechercheTest {
 	public void testAcronymePassant(){
 		List<Motif> resultat = service.rechercher("DNID");
 		Assert.assertTrue(resultat.size() == 1);
-		Assert.assertTrue(resultat.get(0).getLibelle().equalsIgnoreCase("DiabÃ¨te"));
+		Assert.assertTrue(resultat.get(0).getLibelle().equalsIgnoreCase("Diabète"));
 	}
 	
 	// Test passant sur un acronyme
@@ -57,7 +57,7 @@ public class LuceneIndexRechercheTest {
 	public void testAcronymePassant2(){
 		List<Motif> resultat = service.rechercher("DES");
 		Assert.assertTrue(resultat.size() == 1);
-		Assert.assertTrue(resultat.get(0).getLibelle().equalsIgnoreCase("DiabÃ¨te"));
+		Assert.assertTrue(resultat.get(0).getLibelle().equalsIgnoreCase("Diabète"));
 	}
 	
 	// Test nont passant sur un acronyme
@@ -67,11 +67,12 @@ public class LuceneIndexRechercheTest {
 		Assert.assertTrue(resultat.size() == 0);
 	}
 	
-	// Test synonyme
+	// Test synonyme avec pluriel
 	@Test
 	public void testSynonyme(){
 		List<Motif> resultat = service.rechercher("DNIDs");
-		Assert.assertTrue(resultat.size() == 0);
+		Assert.assertTrue(resultat.size() == 1);
+		Assert.assertTrue(resultat.get(0).getLibelle().equalsIgnoreCase("Diabète"));
 	}
 	
 	@Test

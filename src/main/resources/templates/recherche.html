@@ -81,7 +81,7 @@
                     <div class="recherche-label">Saisissez le motif d’arrêt de travail</div>
                     <div class="row">
                       <div class="col-xs-12 col-sm-10 col-sm-offset-1 recherche-input">
-                        <input id="motif-aat-input" type="text" />
+                        <input id="motif-aat-input" type="text" name="motif-aat-input" pattern="[A-Za-z]{3}" title="Que 3 chiffres" />
                         <button id="recherche-button" type="button"></button>
                       </div>
                     </div>
@@ -140,18 +140,18 @@
                     </div>
                     <div class="row">
                       <div class="col-xs-10 col-sm-6">
-                        <select class="row small-spacer form-control">
-                                        <option>-- Catégorie de pathologies --</option>
-                                        <option>Maladies du système ostéo-articulaire, des muscles et du tissu conjonctif</option>
-                                        <option>Troubles mentaux et du comportement</option>
-                                        <option>Lésions traumatiques</option>
-                                        <option>Tumeurs</option>
-                                        <option>Maladies de l'appareil circulatoire</option>
-                                        <option>Maladies infectieuses et parasitaires</option>
-                                        <option>Maladies du système nerveux</option>
-                                        <option>Maladies de l'appareil digestif</option>
-                                        <option>Maladies de l'appareil respiratoire</option>
-                                        <option>Autres maladies</option>
+                        <select id="liste-categorie" class="row small-spacer form-control">
+                                        <option value="0">-- Catégorie de pathologies --</option>
+                                        <option  value="1">Maladies du système ostéo-articulaire, des muscles et du tissu conjonctif</option>
+                                        <option  value="2">Troubles mentaux et du comportement</option>
+                                        <option  value="3">Lésions traumatiques</option>
+                                        <option  value="4">Tumeurs</option>
+                                        <option  value="5">Maladies de l'appareil circulatoire</option>
+                                        <option  value="6">Maladies infectieuses et parasitaires</option>
+                                        <option  value="7">Maladies du système nerveux</option>
+                                        <option  value="8">Maladies de l'appareil digestif</option>
+                                        <option  value="9">Maladies de l'appareil respiratoire</option>
+                                        <option  value="10">Autres maladies</option>
                                     </select>
                       </div>
                       <div class="col-xs-1 small-spacer no-padding">*</div>
