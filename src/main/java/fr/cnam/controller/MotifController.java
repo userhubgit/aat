@@ -8,7 +8,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -19,10 +24,15 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,6 +48,7 @@ import fr.cnam.model.Motif;
 import fr.cnam.model.MotifAAT;
 import fr.cnam.service.LuceneIndexRecherche;
 import fr.cnam.util.Constante;
+import fr.cnam.util.DataBaseDump;
 import fr.cnam.util.MotifMapper;
 import fr.cnam.util.ReferentielCSVReaderUtil;
 
@@ -64,6 +75,9 @@ public class MotifController {
 	@Autowired
 	private MotifAATRepository motifRepository;
 
+	@Autowired
+	private DataBaseDump dbBaseDump;
+	
 	private Gson gson = new Gson();
 
 	@GetMapping("/aat/motif")
@@ -158,5 +172,23 @@ public class MotifController {
 	public ResponseEntity<Iterable<Enquete>> listeEnquetes(HttpSession session) throws IOException {
 		Iterable<Enquete> enquete = enqueteRepository.findAll();
 		return new ResponseEntity<Iterable<Enquete>>(enquete, HttpStatus.OK);
+	}
+	
+	@RequestMapping(path = "/aat/dump", method = RequestMethod.GET)
+	public ResponseEntity<Resource> download(String param) throws IOException {
+
+		StringBuffer result = new StringBuffer();
+		dbBaseDump.dumpDB(result);
+		File file = dbBaseDump.createDumpFile(result);
+	    Path path = Paths.get(file.getAbsolutePath());
+	    ByteArrayResource resource = new ByteArrayResource(Files.readAllBytes(path));
+		
+		Date date = new Date();
+		String fileName = "aat_dump";
+	    return ResponseEntity.ok()
+	            .contentLength(file.length())
+	            .header("Content-Disposition", String.format("attachment; filename=\"" + fileName +"_"+ new SimpleDateFormat("YYYYMMddHHmmss").format(date) + ".sql"+ "\""))
+	            .contentType(MediaType.parseMediaType("application/octet-stream"))
+	            .body(resource);
 	}
 }

@@ -365,18 +365,36 @@ $(document).ready(function () {
 //		}
 //	});
     
-    $("#motif-aat-input").keyup(
-            function () {
-                codeSelection=null;
-                libelleSelection=null;
-                if ($(this).val().length >= 2) {
-                    $('#recherche-button').addClass('focus');
-                } else {
-                    $('#recherche-button').removeClass('focus');
-                }
-            }
-    );
-
+//    $('#motif-aat-input').keyup(
+//            function () {
+//                if ($(this).val().length >= 2) {
+//                    $('#recherche-button').addClass('focus');
+//                } else {
+//                    $('#recherche-button').removeClass('focus');
+//                }
+//            }
+//    );
+    
+    $('#motif-aat-input').keyup(function (e) {
+    	
+        if ($(this).val().length >= 2) {
+            $('#recherche-button').addClass('focus');
+        } else {
+            $('#recherche-button').removeClass('focus');
+        }
+        
+        if (e.keyCode == 13) {
+        	if(codeSelection && libelleSelection){
+    			selectMotif(codeSelection, libelleSelection)
+    		 }else {    			 
+    			selectMotif(false, $('#motif-aat-input').val());
+    		 }
+            document.cookie="motif-origine=;expires=Wed; 01 Jan 1970";
+        	setCookie("motif-origine", "SAISIE", 1);
+            return false;
+        }
+    });
+    
     function selectMotif(idMotif, nomMotif) {
         if (nomMotif != '') {
             $('#options-recherche').hide();
@@ -417,15 +435,6 @@ $(document).ready(function () {
 
     $('#recherche-button').click(function () {
         selectMotif(false, $('#motif-aat-input').val());
-    });
-
-    $('#motif-aat-input').keyup(function (e) {
-        if (e.keyCode == 13) {
-            selectMotif(false, $('#motif-aat-input').val());
-            document.cookie="motif-origine=;expires=Wed; 01 Jan 1970";
-        	setCookie("motif-origine", "SAISIE", 1);
-            return false;
-        }
     });
 
     $('[data-nom-motif]').click(function () {

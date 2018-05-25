@@ -35,13 +35,16 @@ import org.tartarus.snowball.ext.FrenchStemmer;
 public final class AATLuceneAnalyzerUtil {
 
 	/**
-	 * Liste des termes ignores ï¿½ l'indexation et pour la recherche dans lucene.
+	 * Liste des termes ignores à l'indexation et pour la recherche dans lucene.
 	 * Elle permet d'etendre la liste de base FrenchAnalyzer.getDefaultStopSet()
 	 */
-	public static final String[] STOP_WORD = new String[] { "chez","-","droite","droit","gauche","drt","drte","gche","gches",
-			"gch","gauches","droites","dte","bilatéral","bilatérale","bilater","bilat","gau","pb","pbs","tb","tbs","tbls",
-			"tbrl","trbles","état","suite","suites","épisode","épisodes","invalidant","invalidantes","aigue","aigu","aigus",
-			"chronique","chroniques","sévère","sévères","s "};
+	public static final String[] STOP_WORD = new String[] {"chez","-","droite","droit","gauche","drt","drte","gche","gches","gch",
+			"gauches","droites","dte","bilatéral","bilatérale","bilater","bilat","gau","problème","problèmes",
+			"pb","pbs","pbm","pbms","pbl","pbls","tb","tbs","tbls","trb",
+			"tbrl","trbles","troubles","sd","synd","syndrome","syndome","syndrme","syndrom","syndome",
+			"trouble","troubles","état","états","suite","suites","épisode","épisodes","invalidant","invalidantes",
+			"invalidants","invalidante","s ","aigu","aigus","aigues","aigue","chronioque","chroniques","chronique",
+			"sévère","sévères"};
 
 	/**
 	 * Constructeur privï¿½.

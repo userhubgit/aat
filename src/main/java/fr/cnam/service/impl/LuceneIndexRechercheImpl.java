@@ -373,7 +373,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			}
 			logger.info("****** FIN : Affichage des tokens dans le libelle *******");
 
-			logger.info("Nombre de documents indexÃ©s : ".concat(String.valueOf(i)));
+			logger.info("Nombre de documents indexés : ".concat(String.valueOf(i)));
 
 			logger.info("Taille (en byte) memoire du thesaurus := " + ramDirectory.sizeInBytes());
 			writer.close();
@@ -425,23 +425,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 				}
 			}
 
-			// // Affichage des tokens dans le libelle
-			// logger.debug("****** DEBUT : Affichage des tokens dans le libelle
-			// *******");
-			//
-			// TermEnum terms = writer.getReader().terms(new
-			// Term(CHAMP_LIBELLE));
-			// if (null != terms.term()) {
-			// do {
-			// Term term = terms.term();
-			// if (term.field().endsWith(CHAMP_LIBELLE))
-			// logger.info("[" + term.field() + "] == " + term.text());
-			// } while (terms.next());
-			// }
-			// logger.debug("****** FIN : Affichage des tokens dans le libelle
-			// *******");
-
-			logger.info("Nombre de documents indexï¿½s : ".concat(String.valueOf(i)));
+			logger.info("Nombre de documents indexes : ".concat(String.valueOf(i)));
 			logger.info("Taille (en byte) memoire du thesaurus := " + ramDirectory.sizeInBytes());
 
 			writer.close();
@@ -508,10 +492,10 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 	}
 
 	/**
-	 * MÃ©thode permettant de valider si la saisie fait l'objet d'une recherche
-	 * par autocomplÃ©tion.
+	 * Methode permettant de valider si la saisie fait l'objet d'une recherche
+	 * par autocomplétion.
 	 *
-	 * L'idï¿½e est retirer tous les termes insignifiants contenus dans la
+	 * L'idée est retirer tous les termes insignifiants contenus dans la
 	 * saisie de l'utulisateur.
 	 *
 	 * @param pSaisieUtilisateur
@@ -533,13 +517,13 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 
 				pSaisieUtilisateur.replace(terme, ReferentielCSVReaderUtil.VIDE);
 			} else {
-//				if (!(terme.length() ==  1 && i == 0)){					
+				if (!(terme.length() ==  1 && i == 0)){					
 					if (i < (saisieTermes.length - 1)) {
 						valideSaisie.append(terme).append(" ");
 					} else {
 						valideSaisie.append(terme);
 					}
-//				}
+				}
 			}
 		}
 		return valideSaisie.toString();
