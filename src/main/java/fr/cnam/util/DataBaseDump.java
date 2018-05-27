@@ -28,7 +28,9 @@ public class DataBaseDump {
 		String driverClassName = "org.postgresql.Driver";
 		String url = "jdbc:postgresql://" + System.getenv("POSTGRESQL_SERVICE_HOST") + ":"
 				+ System.getenv("POSTGRESQL_SERVICE_PORT_POSTGRESQL") + "/" + System.getenv("POSTGRESQL_DATABASE");
-		
+		logger.info("-----------------URL---------------- {}", url);
+		logger.info("-----------------URL---------------- {}", url);
+		logger.info("-----------------URL---------------- {}", url);
 //		String url = "jdbc:postgresql://localhost:5432/sampledb";
 		String columnNameQuote = "";
 		DatabaseMetaData dbMetaData = null;
@@ -48,7 +50,7 @@ public class DataBaseDump {
 			String schema = "public";
 			String tables = null;
 
-			ResultSet rs = dbMetaData.getTables(catalog, schema, tables, null);
+			ResultSet rs = dbMetaData.getTables(null, null, tables, null);
 			if (!rs.next()) {
 				logger.error("Unable to find any tables matching: catalog=" + catalog + " schema=" + schema
 						+ " tables=" + tables);
