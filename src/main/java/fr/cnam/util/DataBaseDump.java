@@ -27,7 +27,7 @@ public class DataBaseDump {
 		
 		String driverClassName = "org.postgresql.Driver";
 		String url = "jdbc:postgresql://" + System.getenv("POSTGRESQL_SERVICE_HOST") + ":"
-				+ System.getenv("POSTGRESQL_SERVICE_PORT_POSTGRESQL") + "/" + System.getenv("POSTGRESQL_DATABASE");
+				+ System.getenv("POSTGRESQL_SERVICE_PORT_POSTGRESQL") + "/sampledb";
 		logger.info("-----------------URL---------------- {}", url);
 		logger.info("-----------------URL---------------- {}", url);
 		logger.info("-----------------URL---------------- {}", url);
