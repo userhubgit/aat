@@ -411,6 +411,7 @@ $(document).ready(function () {
         }
     }
 
+    
     function resetMotif() {
         $('#options-recherche').fadeIn('slow');
         $('#validation-recherche, #avis-recherche').hide();
@@ -495,6 +496,10 @@ $(document).ready(function () {
         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
     
+    $("#someButton").click(function() {
+    	$("#myForm").submit();
+    });
+
     $("#avis-envoie").click(function(event) {        
         if(getCookie("avis-reponse1") && getCookie("avis-reponse2")){        	
         	var comment  = $("#avis-commentaire").val();

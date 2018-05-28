@@ -65,6 +65,7 @@
     </header>
 
     <main>
+    <form id="myForm" action="/avis" method="post">
       <article class="recherche">
         <div class="row">
           <div class="col-xs-12">
@@ -161,7 +162,7 @@
                   <div class="small-spacer">
                     Complément d’information :
                     <div>
-                      <textarea id="complement-info-motif" data-compteur="#compteur-complement-info-motif" class="form-control" rows="4" maxlength="500"></textarea>
+                      <textarea id="complement-info-motif" name="complement-info-motif" data-compteur="#compteur-complement-info-motif" class="form-control" rows="4" maxlength="500"></textarea>
                       <div class="text-right" id="compteur-complement-info-motif">0/500</div>
                     </div>
                   </div>
@@ -204,7 +205,7 @@
 
                     <div id="commentaire-avis" class="collapse small-spacer">
                       <p class="medium-spacer">Pouvez-vous nous indiquer le motif attendu</p>
-                      <textarea id="recherche-commentaire" class="form-control" rows="4" placeholder="Motif attendu..."></textarea>
+                      <textarea id="recherche-commentaire" name="recherche-commentaire" class="form-control" rows="4" placeholder="Motif attendu..."></textarea>
                     </div>
 
                     <div class="spacer">
@@ -214,12 +215,12 @@
                     </div>
 
                     <div class="spacer">
-                      <a href="avis.html" class="btn btn-default btn-multiligne">
+                      <button id="someButton" class="btn btn-default btn-multiligne">
                                     <span class="lowercase">J’ai fini mes recherches de motifs
 </span> 
                                     <br/>
                                     <span class="texte-courant-semi-gras">je partage mon avis</span>
-                                </a>
+                                </button>
                     </div>
 
                   </div>
@@ -825,7 +826,7 @@
           <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
-      </div>
+      </div></form>
     </main>
 
 

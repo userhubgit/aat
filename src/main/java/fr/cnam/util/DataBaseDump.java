@@ -14,6 +14,7 @@ import java.sql.SQLException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -22,13 +23,15 @@ public class DataBaseDump {
 	
 	private static final Logger logger = LoggerFactory.getLogger(DataBaseDump.class);
 	
+	
 	/** Dump the whole database to an SQL string */
 	public String dumpDB(StringBuffer result) {
 		
 		String driverClassName = "org.postgresql.Driver";
-		String url = "jdbc:postgresql://" + System.getenv("POSTGRESQL_SERVICE_HOST") + ":"
-				+ System.getenv("POSTGRESQL_SERVICE_PORT_POSTGRESQL") + "/sampledb";
+//		String url = "jdbc:postgresql://" + System.getenv("POSTGRESQL_SERVICE_HOST") + ":"
+//				+ System.getenv("POSTGRESQL_SERVICE_PORT_POSTGRESQL") + "/sampledb";
 
+		String url = "jdbc:postgresql://localhost:5432/sampledb";
 		String columnNameQuote = "";
 		DatabaseMetaData dbMetaData = null;
 		Connection dbConn = null;
@@ -78,8 +81,15 @@ public class DataBaseDump {
 							if ("NO".equalsIgnoreCase(nullable)) {
 								nullString = "NOT NULL";
 							}
-							result.append("    " + columnNameQuote + columnName + columnNameQuote + " " + columnType
-									+ " (" + columnSize + ")" + " " + nullString);
+							
+							if(columnType.equals("int8")){
+								columnType = "bigint";
+								result.append("    " + columnNameQuote + columnName + columnNameQuote + " " + columnType
+										 + " " + nullString);
+							} else {
+								result.append("    " + columnNameQuote + columnName + columnNameQuote + " " + columnType
+										+ " (" + columnSize + ")" + " " + nullString);
+							}
 						}
 						tableMetaData.close();
 
@@ -102,9 +112,9 @@ public class DataBaseDump {
 									if (primaryKeyColumns.length() > 0) {
 										// There's something to output
 										result.append(",\n    PRIMARY KEY ");
-										if (primaryKeyName != null) {
-											result.append(primaryKeyName);
-										}
+//										if (primaryKeyName != null) {
+//											result.append(primaryKeyName);
+//										}
 										result.append("(" + primaryKeyColumns.toString() + ")");
 									}
 									// Start again with the new name
@@ -120,9 +130,9 @@ public class DataBaseDump {
 							if (primaryKeyColumns.length() > 0) {
 								// There's something to output
 								result.append(",\n    PRIMARY KEY ");
-								if (primaryKeyName != null) {
-									result.append(primaryKeyName);
-								}
+//								if (primaryKeyName != null) {
+//									result.append(primaryKeyName);
+//								}
 								result.append(" (" + primaryKeyColumns.toString() + ")");
 							}
 						} catch (SQLException e) {

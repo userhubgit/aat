@@ -1,6 +1,7 @@
 package fr.cnam.controller;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.cnam.dao.AvisRepository;
@@ -86,16 +89,16 @@ public class IndexController {
 		return "recherche";
 	}
 
-	@GetMapping("/avis")
+	@RequestMapping(value = "/avis", method = RequestMethod.POST)
 	public String avis(HttpSession session, 
 			@CookieValue("libelle") String info,
 			@CookieValue("clic-en-ce-moment") String actuel,
 			@CookieValue("clic-plus-frequent") String frequent,
 			@CookieValue("clic-liste-complete") String complete,
 			@CookieValue("motif-origine") String origine,
-			@CookieValue("motif-complement") String complement,
+			@RequestParam("recherche-commentaire") String commentaire,
 			@CookieValue("resultat-recherche") String resultatRecherche,
-			@CookieValue("recherche-commentaire") String commentaire) {
+			@RequestParam("complement-info-motif") String complement) {
 		
 		String libelle = info.replace(SEPARATEUR_ESPACE, " ");
 		logger.info("Le libelle choisi pas le PS = {} ", libelle);
@@ -107,9 +110,9 @@ public class IndexController {
 				// L'initialisation ce fait juste au premier passage.
 				Enquete enquete = (Enquete) session.getAttribute(SESSION_ATTR_ENQUETE);
 				if (null == enquete.getHorodateur1()) {
-					enquete.setHorodateur2(new Date(System.currentTimeMillis()));
+					enquete.setHorodateur2(currentDate().getTime());
 				}
-				enquete.setHorodateur2(new Date(System.currentTimeMillis()));
+				enquete.setHorodateur2(currentDate().getTime());
 				// Motif
 				MotifAAT motifAAT = new MotifAAT((MotifAAT) session.getAttribute(SESSION_ATTR_MOTIF));
 				motifAAT.setLibelle(libelle);
@@ -118,8 +121,8 @@ public class IndexController {
 				motifAAT.setClicListeComplete(complete);
 				motifAAT.setClicPlusFrequent(frequent);
 				motifAAT.setOrigine(origine.replace(SEPARATEUR_ESPACE, " "));
-				motifAAT.setComplement(complement.replace(SEPARATEUR_ESPACE, " "));
-				motifAAT.setCommentaire(commentaire.replace(SEPARATEUR_ESPACE, " "));
+				motifAAT.setComplement(complement);
+				motifAAT.setCommentaire(commentaire);
 				motifAAT.setResultatRecherche(resultatRecherche);
 				
 				motifRepository.save(motifAAT);
@@ -128,12 +131,21 @@ public class IndexController {
 		return "avis";
 	}
 
-	@GetMapping("/remerciements")
+	private Calendar currentDate() {
+		Calendar cal = Calendar.getInstance();
+		int heure = cal.get(Calendar.HOUR_OF_DAY);
+		cal.set(Calendar.HOUR_OF_DAY, heure-2);
+		return cal;
+	}
+
+//	@GetMapping("/remerciements")
+	@RequestMapping(value = "/remerciements", method = RequestMethod.POST)
 	public String remercier(HttpSession session, 
 			HttpServletResponse response , 
 			@CookieValue("avis-reponse1") String reponse1,
 			@CookieValue("avis-reponse2") String reponse2, 
-			@CookieValue("avis-commentaire") String commentaire) {
+			@CookieValue("avis-commentaire") String commentaire,
+			@RequestParam("avis-commentaire") String avisComment) {
 		
 		logger.info("reponse1= {} reponse2= {}  commentaire = {}", reponse1, reponse2, commentaire);
 
@@ -144,11 +156,11 @@ public class IndexController {
 			Avis avis = new Avis();
 			avis.setReponse1(reponse1);
 			avis.setReponse2(reponse2);
-			avis.setCommentaire(commentaire.replace(SEPARATEUR_ESPACE, " "));
+			avis.setCommentaire(avisComment);
 			
 			
 			Enquete enquete = new Enquete((Enquete)session.getAttribute(SESSION_ATTR_ENQUETE));
-			enquete.setHorodateur3(new Date(System.currentTimeMillis()));
+			enquete.setHorodateur3(currentDate().getTime());
 			
 			MotifAAT motifAAT = new MotifAAT((MotifAAT)session.getAttribute(SESSION_ATTR_MOTIF));
 			motifAAT.setSessionId(((Enquete)session.getAttribute(SESSION_ATTR_ENQUETE)).getIdentifiant());

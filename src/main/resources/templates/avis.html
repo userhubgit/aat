@@ -25,90 +25,91 @@
 
 
 		<main>
-		<article class="avis">
-			<div class="row">
-				<div class="col-xs-10 col-xs-offset-1">
+		<form id="avisForm" action="/remerciements" method="post">
+			<article class="avis">
+				<div class="row">
+					<div class="col-xs-10 col-xs-offset-1">
 
-					<h2 class="text-center titre-page-test">Merci de votre
-						collaboration !</h2>
+						<h2 class="text-center titre-page-test">Merci de votre
+							collaboration !</h2>
 
-					<div class="panel panel-default spacer">
-						<div class="panel-heading">
-							<h3 class="text-center">Veuillez partager votre avis</h3>
-						</div>
-						<div class="panel-body">
+						<div class="panel panel-default spacer">
+							<div class="panel-heading">
+								<h3 class="text-center">Veuillez partager votre avis</h3>
+							</div>
+							<div class="panel-body">
 
-							<div class="row spacer">
-								<div class="col-xs-8 col-xs-offset-2 no-padding">
+								<div class="row spacer">
+									<div class="col-xs-8 col-xs-offset-2 no-padding">
 
-									<div class="row">
-										<div class="col-xs-12 col-sm-9 small-spacer">La
-											recherche des motifs vous paraît-elle plus adaptée à vos
-											besoins ?</div>
-										<div class="col-xs-12 col-sm-3">
-											<div id="options-avis-recherche-1">
-												<span data-parent="#options-avis-recherche-1"
-													class="capsule capsule-jaune">OUI</span> <span
-													data-parent="#options-avis-recherche-1"
-													class="capsule capsule-jaune">NON</span>
+										<div class="row">
+											<div class="col-xs-12 col-sm-9 small-spacer">La
+												recherche des motifs vous paraît-elle plus adaptée à vos
+												besoins ?</div>
+											<div class="col-xs-12 col-sm-3">
+												<div id="options-avis-recherche-1">
+													<span data-parent="#options-avis-recherche-1"
+														class="capsule capsule-jaune">OUI</span> <span
+														data-parent="#options-avis-recherche-1"
+														class="capsule capsule-jaune">NON</span>
+												</div>
 											</div>
 										</div>
-									</div>
 
-									<div class="row">
-										<div class="col-xs-12 col-sm-9 small-spacer">
-											L’affichage des motifs les plus fréquents est-il utile ?</div>
-										<div class="col-xs-12 col-sm-3">
-											<div id="options-avis-recherche-2">
-												<span data-parent="#options-avis-recherche-2"
-													class="capsule capsule-jaune">OUI</span> <span
-													data-parent="#options-avis-recherche-2"
-													class="capsule capsule-jaune">NON</span>
+										<div class="row">
+											<div class="col-xs-12 col-sm-9 small-spacer">
+												L’affichage des motifs les plus fréquents est-il utile ?</div>
+											<div class="col-xs-12 col-sm-3">
+												<div id="options-avis-recherche-2">
+													<span data-parent="#options-avis-recherche-2"
+														class="capsule capsule-jaune">OUI</span> <span
+														data-parent="#options-avis-recherche-2"
+														class="capsule capsule-jaune">NON</span>
+												</div>
 											</div>
 										</div>
-									</div>
 
-									<div class="spacer">
-										<p>De quelles autres améliorations auriez-vous besoin ?</p>
-										<textarea id="avis-commentaire" class="form-control" rows="5"
-											placeholder="Vos commentaires..."></textarea>
-									</div>
+										<div class="spacer">
+											<p>De quelles autres améliorations auriez-vous besoin ?</p>
+											<textarea id="avis-commentaire" name="avis-commentaire" class="form-control" rows="5"
+												placeholder="Vos commentaires..."></textarea>
+										</div>
 
 
-									<div class="spacer text-center">
-										<a id="avis-envoie" class="btn btn-default"
-											href="/remerciements">ENVOYER</a>
+										<div class="spacer text-center">
+											<button id="avis-envoie" class="btn btn-default">ENVOYER</button>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
 
-					</div>
-				</div>
-			</div>
-		</article>
-		<article>
-			<div id="exemple-modal" class="modal fade" tabindex="-1"
-				role="dialog">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h4 class="modal-title text-center">Confirmation avis</h4>
-						</div>
-						<div class="modal-body">
-							<p>Pouvez vous répondre aux 2 questions ?</p>
-							<p>Merci d'avance.</p>
-						</div>
-						<div class="modal-footer" style="text-align: center;">
-							<button type="button" class="btn btn-default" data-dismiss="modal"
-								title="OK">OK</button>
 						</div>
 					</div>
-					<!-- /.modal-content -->
 				</div>
-				<!-- /.modal-dialog -->
-			</div>
-		</article>
+			</article>
+			<article>
+				<div id="exemple-modal" class="modal fade" tabindex="-1"
+					role="dialog">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title text-center">Confirmation avis</h4>
+							</div>
+							<div class="modal-body">
+								<p>Pouvez vous répondre aux 2 questions ?</p>
+								<p>Merci d'avance.</p>
+							</div>
+							<div class="modal-footer" style="text-align: center;">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal" title="OK">OK</button>
+							</div>
+						</div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal-dialog -->
+				</div>
+			</article>
+		</form>
 		</main>
 
 		<footer id="footer" class="container-fluid">
