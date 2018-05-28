@@ -14,7 +14,6 @@ import java.sql.SQLException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -73,8 +72,7 @@ public class DataBaseDump {
 							}
 							String columnName = tableMetaData.getString("COLUMN_NAME");
 							String columnType = tableMetaData.getString("TYPE_NAME");
-							// WARNING: this may give daft answers for some
-							// types on some databases (eg JDBC-ODBC link)
+							// WARNING:
 							int columnSize = tableMetaData.getInt("COLUMN_SIZE");
 							String nullable = tableMetaData.getString("IS_NULLABLE");
 							String nullString = "NULL";
@@ -93,7 +91,7 @@ public class DataBaseDump {
 						}
 						tableMetaData.close();
 
-						// Now we need to put the primary key constraint
+						// Contrainte cle primaire
 						try {
 							
 							ResultSet primaryKeys = dbMetaData.getPrimaryKeys(catalog, schema, tableName);
@@ -106,9 +104,7 @@ public class DataBaseDump {
 										|| (thisKeyName == null && primaryKeyName != null)
 										|| (thisKeyName != null && !thisKeyName.equals(primaryKeyName))
 										|| (primaryKeyName != null && !primaryKeyName.equals(thisKeyName))) {
-									// the keynames aren't the same, so output
-									// all that we have so far (if anything)
-									// and start a new primary key entry
+
 									if (primaryKeyColumns.length() > 0) {
 										// There's something to output
 										result.append(",\n    PRIMARY KEY ");
@@ -136,10 +132,6 @@ public class DataBaseDump {
 								result.append(" (" + primaryKeyColumns.toString() + ")");
 							}
 						} catch (SQLException e) {
-							// NB you will get this exception with the JDBC-ODBC
-							// link because it says
-							// [Microsoft][ODBC Driver Manager] Driver does not
-							// support this function
 							logger.error("Impossible de trouver la cle primaire de la table " + tableName + " cause", e);
 						}
 
@@ -154,7 +146,7 @@ public class DataBaseDump {
 			dbConn.close();
 			return result.toString();
 		} catch (SQLException e) {
-			e.printStackTrace(); // To change body of catch statement use
+			e.printStackTrace();
 		}
 		return null;
 	}
