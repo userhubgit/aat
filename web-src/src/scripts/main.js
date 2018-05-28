@@ -403,6 +403,7 @@ $(document).ready(function () {
             $('#id-motif-selectionne').val(idMotif);
 
             if (!idMotif) {
+            	setCookie("motif-origine", "SAISIE", 1);
                 $('#categorie-motif').show();
             }
             
