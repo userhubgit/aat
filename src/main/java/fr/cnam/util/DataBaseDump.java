@@ -23,7 +23,7 @@ public class DataBaseDump {
 	private static final Logger logger = LoggerFactory.getLogger(DataBaseDump.class);
 	
 	
-	/** Dump the whole database to an SQL string */
+	/** Dump de toute la base en SQL string*/
 	public String dumpDB(StringBuffer result) {
 		
 		String driverClassName = "org.postgresql.Driver";
