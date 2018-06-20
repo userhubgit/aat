@@ -14,8 +14,6 @@ public interface MotifAATRepository extends CrudRepository<MotifAAT, Long> {
 
 	List<MotifAAT> findByOrigine(String origine);
 
-	List<MotifAAT> findByClicPlusFrequent(String plusFrequent);
-
 	List<MotifAAT> findByClicListeComplete(String listeComplete);
 
 	List<MotifAAT> findByClicActuel(String clicActuel);

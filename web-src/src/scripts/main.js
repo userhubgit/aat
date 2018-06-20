@@ -205,22 +205,6 @@ $(document).ready(function () {
         $('.alphabet .lettre.active').removeClass('selected'),
                 $(this).addClass('selected');
     });
-
-    /* $('#motifs-plus-frequents .capsule, #motifs-en-ce-moment .capsule').hover(
-            function () {
-                $(this).html($(this).data('nom-long-motif'));
-            },
-            function () {
-                $(this).html($(this).data('nom-motif'));
-            }
-    ); */
-
-    $('#motifs-plus-frequents .capsule').click(function () {
-    	document.cookie="clic-plus-frequent=;expires=Wed; 01 Jan 1970";
-    	document.cookie="motif-origine=;expires=Wed; 01 Jan 1970";
-    	setCookie("clic-plus-frequent", "OUI", 1);
-    	setCookie("motif-origine", "LES_PLUS_FREQUENTS", 1);
-    });
     
     $('#motifs-en-ce-moment .capsule').click(function () {
     	
@@ -250,7 +234,6 @@ $(document).ready(function () {
     
     setCookie("motif-origine", "LISTE_COMPLETE", 1);
     setCookie("clic-en-ce-moment", "NON", 1);
-    setCookie("clic-plus-frequent", "NON", 1);
     setCookie("clic-liste-complete", "NON", 1);
     setCookie("motif-complement", "", 1);
     setCookie("recherche-commentaire", "", 1);
@@ -405,6 +388,7 @@ $(document).ready(function () {
             if (!idMotif) {
             	setCookie("motif-origine", "SAISIE", 1);
                 $('#categorie-motif').show();
+                ('.btn-group.bootstrap-select.row.small-spacer.form-control').addClass('open');
             }
             
             setCookie("libelle", nomMotif.replace(/ /g,"_"), 1);
@@ -431,7 +415,6 @@ $(document).ready(function () {
         document.cookie="motif-origine=;expires=Wed; 01 Jan 1970";
         setCookie("motif-origine", "LISTE_COMPLETE", 1);
         setCookie("clic-en-ce-moment", "NON", 1);
-        setCookie("clic-plus-frequent", "NON", 1);
         setCookie("clic-liste-complete", "NON", 1);
     }
 

@@ -34,9 +34,6 @@ public class MotifAAT implements Serializable {
 	@Column(name = "CLIC_LISTE_COMPLETE ")
 	private String clicListeComplete;
 
-	@Column(name = "CLIC_LES_PLUS_FREQUENTS")
-	private String clicPlusFrequent;
-
 	@Column(name = "CLIC_EN_CE_MOMENT")
 	private String clicActuel;
 
@@ -59,7 +56,6 @@ public class MotifAAT implements Serializable {
 			this.setLibelle(motif.getLibelle());
 			this.setClicActuel(motif.getClicActuel());
 			this.setClicListeComplete(motif.getClicListeComplete());
-			this.setClicPlusFrequent(motif.getClicPlusFrequent());
 			this.setCommentaire(motif.getCommentaire());
 			this.setComplement(motif.getComplement());
 			this.setOrigine(motif.getOrigine());
@@ -113,14 +109,6 @@ public class MotifAAT implements Serializable {
 
 	public void setClicListeComplete(String clicListeComplete) {
 		this.clicListeComplete = clicListeComplete;
-	}
-
-	public String getClicPlusFrequent() {
-		return clicPlusFrequent;
-	}
-
-	public void setClicPlusFrequent(String clicPlusFrequent) {
-		this.clicPlusFrequent = clicPlusFrequent;
 	}
 
 	public String getClicActuel() {

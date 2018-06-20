@@ -173,25 +173,11 @@ $(document).ready(function () {
 //	});
     
     $('.alphabet .lettre.active').click(function () {
-//        var position = $('#' + $(this).text()).offset().top - $('.liste-motifs').offset().top + $('.liste-motifs').scrollTop();
-//        $('.liste-motifs').animate({scrollTop: position}, 50);
 
         $('.alphabet .lettre.active').removeClass('selected'),
                 $(this).addClass('selected');
     });
 
-    /* $('#motifs-plus-frequents .capsule, #motifs-en-ce-moment .capsule').hover(
-            function () {
-                $(this).html($(this).data('nom-long-motif'));
-            },
-            function () {
-                $(this).html($(this).data('nom-motif'));
-            }
-    ); */
-
-    $('#motifs-plus-frequents .capsule, #motifs-en-ce-moment .capsule').click(function () {
-    	alert('motifs-plus-frequents');
-    });
     
     $('#motifs-en-ce-moment .capsule').click(function () {
     	alert('en ce moment');

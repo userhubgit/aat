@@ -93,7 +93,6 @@ public class IndexController {
 	public String avis(HttpSession session, 
 			@CookieValue("libelle") String info,
 			@CookieValue("clic-en-ce-moment") String actuel,
-			@CookieValue("clic-plus-frequent") String frequent,
 			@CookieValue("clic-liste-complete") String complete,
 			@CookieValue("motif-origine") String origine,
 			@RequestParam("recherche-commentaire") String commentaire,
@@ -119,7 +118,6 @@ public class IndexController {
 				motifAAT.setSessionId(enquete.getIdentifiant());
 				motifAAT.setClicActuel(actuel);
 				motifAAT.setClicListeComplete(complete);
-				motifAAT.setClicPlusFrequent(frequent);
 				motifAAT.setOrigine(origine.replace(SEPARATEUR_ESPACE, " "));
 				motifAAT.setComplement(complement);
 				motifAAT.setCommentaire(commentaire);
