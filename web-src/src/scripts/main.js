@@ -290,10 +290,11 @@ $(document).ready(function () {
     $('#motif-aat-input').on('keypress', function (event) {
     	var isEntry = event.which;
     	var txt = String.fromCharCode(event.which);
-        
         if(!txt.match(/[A-Za-z0-9àâäéèêëîôöùûïÄÀÂÇÉÈÊÔÖÎÏÛÙ -]/)) 
         {
-            return false;
+        	if(!(event.which==8)){        		
+        		event.preventDefault();
+			}
         } else {       	
         	if(isEntry == 13) {
         		if(codeSelection && libelleSelection){
@@ -367,14 +368,17 @@ $(document).ready(function () {
         }
         
         if (e.keyCode == 13) {
-        	if(codeSelection && libelleSelection){
-    			selectMotif(codeSelection, libelleSelection)
-    		 }else {    			 
-    			selectMotif(false, $('#motif-aat-input').val());
-    		 }
-            document.cookie="motif-origine=;expires=Wed; 01 Jan 1970";
-        	setCookie("motif-origine", "SAISIE", 1);
-            return false;
+        	if ($(this).val().length >= 2) {
+        		
+        		if(codeSelection && libelleSelection){
+        			selectMotif(codeSelection, libelleSelection)
+        		}else {    			 
+        			selectMotif(false, $('#motif-aat-input').val());
+        		}
+        		document.cookie="motif-origine=;expires=Wed; 01 Jan 1970";
+        		setCookie("motif-origine", "SAISIE", 1);
+        		return false;
+        	}
         }
     });
     
@@ -388,7 +392,7 @@ $(document).ready(function () {
             if (!idMotif) {
             	setCookie("motif-origine", "SAISIE", 1);
                 $('#categorie-motif').show();
-                ('.btn-group.bootstrap-select.row.small-spacer.form-control').addClass('open');
+                $('.btn-group.bootstrap-select.row.small-spacer.form-control').addClass('open');
             }
             
             setCookie("libelle", nomMotif.replace(/ /g,"_"), 1);
@@ -493,5 +497,4 @@ $(document).ready(function () {
         	 return false;
 		}
     });
-    
 });
