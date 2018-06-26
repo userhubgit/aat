@@ -382,6 +382,9 @@ $(document).ready(function () {
         }
     });
     
+    $('#liste-categorie').addClass('open');
+    $('#categorie-motif .bootstrap-select').addClass('open');
+    
     function selectMotif(idMotif, nomMotif) {
         if (nomMotif != '') {
             $('#options-recherche').hide();
@@ -422,8 +425,11 @@ $(document).ready(function () {
         setCookie("clic-liste-complete", "NON", 1);
     }
 
-    $('#recherche-button').click(function () {
+    $('#recherche-button').click(function (e) {
         selectMotif(false, $('#motif-aat-input').val());
+        $('#liste-categorie').addClass('open');
+        e.stopPropagation();
+        $('#categorie-motif .bootstrap-select').addClass('open');
     });
 
     $('[data-nom-motif]').click(function () {
