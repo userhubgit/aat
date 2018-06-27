@@ -290,7 +290,7 @@ $(document).ready(function () {
     $('#motif-aat-input').on('keypress', function (event) {
     	var isEntry = event.which;
     	var txt = String.fromCharCode(event.which);
-        if(!txt.match(/[A-Za-z0-9àâäéèêëîôöùûïÄÀÂÇÉÈÊÔÖÎÏÛÙ -]/)) 
+        if(!txt.match(/[A-Za-z0-9àâäéèêëîôöùûïÄÀÂÇÉÈÊÔÖÎÏÛÙ -']/)) 
         {
         	if(!(event.which==8)){        		
         		event.preventDefault();

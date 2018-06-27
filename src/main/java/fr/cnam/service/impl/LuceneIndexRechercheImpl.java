@@ -360,7 +360,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			}
 
 			// Affichage des tokens dans le libelle
-			logger.info("****** DEBUT : Affichage des tokens dans le libelle *******");
+			logger.info("****** DEBUT : Affichage des tokens dans le CHAMP_LIBELLE *******");
 
 			TermEnum terms = writer.getReader().terms(new Term(CHAMP_LIBELLE));
 			if (null != terms.term()) {
@@ -371,9 +371,9 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 					}
 				} while (terms.next());
 			}
-			logger.info("****** FIN : Affichage des tokens dans le libelle *******");
+			logger.info("****** FIN : Affichage des tokens dans le CHAMP_LIBELLE *******");
 
-			logger.info("Nombre de documents indexés : ".concat(String.valueOf(i)));
+			logger.info("Nombre de documents indexï¿½s : ".concat(String.valueOf(i)));
 
 			logger.info("Taille (en byte) memoire du thesaurus := " + ramDirectory.sizeInBytes());
 			writer.close();
@@ -493,9 +493,9 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 
 	/**
 	 * Methode permettant de valider si la saisie fait l'objet d'une recherche
-	 * par autocomplétion.
+	 * par autocomplï¿½tion.
 	 *
-	 * L'idée est retirer tous les termes insignifiants contenus dans la
+	 * L'idï¿½e est retirer tous les termes insignifiants contenus dans la
 	 * saisie de l'utulisateur.
 	 *
 	 * @param pSaisieUtilisateur
@@ -513,7 +513,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			terme = supprAccent(terme.toLowerCase());
 			Set<String> listeInterdite = AATLuceneAnalyzerUtil.etendreFrenchStopWordSet();
 			Set<String> listeSansAccent = normaliserListe(listeInterdite);
- 			if (listeSansAccent.contains(terme) || ReferentielCSVReaderUtil.ESPACE.equals(terme)) {
+  			if (listeSansAccent.contains(terme) || ReferentielCSVReaderUtil.ESPACE.equals(terme)) {
 
 				pSaisieUtilisateur.replace(terme, ReferentielCSVReaderUtil.VIDE);
 			} else {
@@ -600,7 +600,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			pSearcher.search(bq, collector);
 			ScoreDoc[] hits = collector.topDocs().scoreDocs;
 
-			logger.info("======= { Nombre de motif trouvé(s) := " + hits.length + " } ===========\n");
+			logger.info("======= { Nombre de motif trouvï¿½(s) := " + hits.length + " } ===========\n");
 
 			for (int i = 0; i < hits.length; i++) {
 				ScoreDoc doc = hits[i];
@@ -655,7 +655,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			pSearcher.search(bq, collector);
 			ScoreDoc[] hits = collector.topDocs().scoreDocs;
 
-			logger.info("======= { Nombre de motif trouvé(s) " + hits.length + " } ===========\n");
+			logger.info("======= { Nombre de motif trouvï¿½(s) " + hits.length + " } ===========\n");
 
 			for (int i = 0; i < hits.length; i++) {
 				ScoreDoc doc = hits[i];

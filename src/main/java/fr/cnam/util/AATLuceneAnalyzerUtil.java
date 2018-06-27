@@ -20,6 +20,7 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.WhitespaceTokenizer;
 import org.apache.lucene.analysis.fr.FrenchAnalyzer;
+import org.apache.lucene.analysis.fr.FrenchLightStemFilter;
 import org.apache.lucene.analysis.snowball.SnowballFilter;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.analysis.standard.StandardFilter;
@@ -35,19 +36,13 @@ import org.tartarus.snowball.ext.FrenchStemmer;
 public final class AATLuceneAnalyzerUtil {
 
 	/**
-	 * Liste des termes ignores à l'indexation et pour la recherche dans lucene.
+	 * Liste des termes ignores ï¿½ l'indexation et pour la recherche dans lucene.
 	 * Elle permet d'etendre la liste de base FrenchAnalyzer.getDefaultStopSet()
 	 */
-	public static final String[] STOP_WORD = new String[] {"chez","-","droite","droit","gauche","drt","drte","gche","gches","gch",
-			"gauches","droites","dte","bilatéral","bilatérale","bilater","bilat","gau","problème","problèmes",
-			"pb","pbs","pbm","pbms","pbl","pbls","tb","tbs","tbls","trb",
-			"tbrl","trbles","troubles","sd","synd","syndrome","syndome","syndrme","syndrom","syndome",
-			"trouble","troubles","état","états","suite","suites","épisode","épisodes","invalidant","invalidantes",
-			"invalidants","invalidante","s ","aigu","aigus","aigues","aigue","chronioque","chroniques","chronique",
-			"sévère","sévères"};
+	public static final String[] STOP_WORD = new String[] {"-","aigu","aigue","aigues","aigus","bilat","bilater","bilatÃ©ral","bilatÃ©rale","chez","chronioque","chronique","chroniques","droit","droite","droites","drt","drte","dte","Ã©pisode","Ã©pisodes","Ã©tat","Ã©tats","gau","gauche","gauches","gch","gche","gches","invalidant","invalidante","invalidantes","invalidants","pb","pbl","pbls","pbm","pbms","pbs","problÃ¨me","problÃ¨mes","s ","sd","sÃ©vÃ¨re","sÃ©vÃ¨res","suite","suites","synd","syndome","syndr","syndrme","syndrom","syndrome","syndromes","tb","tbls","tbrl","tbrls","tbs","trb","trble","trbles","trbs","trouble","troubles", "Ã "};
 
 	/**
-	 * Constructeur privï¿½.
+	 * Constructeur privÃ©.
 	 */
 	private AATLuceneAnalyzerUtil() {
 		super();
@@ -93,7 +88,8 @@ public final class AATLuceneAnalyzerUtil {
 				filter = new LowerCaseFilter(Version.LUCENE_36, filter);
 				filter = new ASCIIFoldingFilter(filter);
 				filter = new StopFilter(Version.LUCENE_36, filter, normaliserListe);
-				filter = new SnowballFilter(filter, new FrenchStemmer());
+//				filter = new SnowballFilter(filter, new FrenchStemmer());
+				filter = new FrenchLightStemFilter(filter);
 				return filter;
 				
 			}
@@ -116,7 +112,8 @@ public final class AATLuceneAnalyzerUtil {
 				filter = new StopFilter(Version.LUCENE_36, filter, etendreFrenchStopWordSet());
 				filter = new LowerCaseFilter(Version.LUCENE_36, filter);
 				filter = new ASCIIFoldingFilter(filter);
-				filter = new SnowballFilter(filter, new FrenchStemmer());
+//				filter = new SnowballFilter(filter, new FrenchStemmer());
+				filter = new FrenchLightStemFilter(filter);
 				return filter;
 			}
 		};
@@ -159,7 +156,8 @@ public final class AATLuceneAnalyzerUtil {
 				TokenStream filter = new StandardFilter(Version.LUCENE_36, generiqueTokenizer);
 				filter = new LowerCaseFilter(Version.LUCENE_36, filter);
 				filter = new ASCIIFoldingFilter(filter);
-				filter = new SnowballFilter(filter, new FrenchStemmer());
+//				filter = new SnowballFilter(filter, new FrenchStemmer());
+				filter = new FrenchLightStemFilter(filter);
 				return filter;
 			}
 		};
@@ -221,7 +219,7 @@ public final class AATLuceneAnalyzerUtil {
 		// Suppression des mots une lettre.
 		final Set<String> stopWordEtendu2 = new HashSet<String>();
 		for (String mot : stopWordEtendu) {
-			if (mot.length() > 1) {
+			if (mot.length() > 1 || (mot.equals("Ã ") || mot.equals("a"))) {
 				stopWordEtendu2.add(mot);
 			}
 		}
