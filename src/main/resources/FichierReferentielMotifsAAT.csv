@@ -196,3 +196,9 @@
 00010002;Bronchite aiguë sans comorbidité;010;;inflammation des bronches,bronchorrhée,infection des bronches, bronchiolite,bronchite asthmatiforme;;;;;
 00010001;Angine;008;AEP;amygdalite,infection de l'oropharynx,inflammation des amygdales, amygdale, erythemato-pultacée, erythematopultacée, erythemato, pultacée,oro-pharynx,amigdales, amygdale, bactérienne,virale,blanche,rouge;;;;;
 01000126;Autres douleurs;999;;douleur,bras, jambes, poignet, muscles, mains, coude, genou, triceps, quadriceps,biceps, courbatures,cervicales;algie,dlr, douelurs;;;;
+1000127;Autres tumeurs;999;;carcinome, cancer colorectal;;;;;
+1000128;pneumothorax;999;PNO,PNOG,PNOD;;;;;;
+1000129;zona;999;;;;;;;
+1000130;Sarcoïdose;999;BBS;Maladie de Besnier Boeck Schaumann;;;;;
+1000131;Angor;999;MC,MCA;angine de poitrine, insuffisance coronaire, coronarienne;;;;;
+1000132;Baisse de l'acuité visuelle;999;;cécité, DMLA, glaucome, vision,acuité;;;;;
