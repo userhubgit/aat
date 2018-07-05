@@ -86,14 +86,15 @@ public class LuceneTest {
         addDoc(w, "syndrôme épaule main", "55320055Z");
         addDoc(w, "chirurgie", "55063554A");
         addDoc(w, "allergie", "9900333X");
+        addDoc(w, "insuffisance", "9900333X");
         displayIndex(w);
         
         w.close();
         
         
         // 2 query
-		String querystr = args.length > 0 ? args[0] : "amygd";		
-		Query q = new QueryParser(Version.LUCENE_36, "libelle", analyzer).parse(querystr);
+		String querystr = args.length > 0 ? args[0] : "insuf";		
+		Query q = new QueryParser(Version.LUCENE_36, "libelle", analyzer).parse("(" + querystr+"*" + ") OR (" + querystr.trim() + ")" );
 //		q = getLibelleWithApproximatifQuery(querystr);
 		
 		// 3. search

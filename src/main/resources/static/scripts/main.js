@@ -413,6 +413,7 @@ $(document).ready(function () {
         document.cookie="recherche-commentaire=;expires=Wed; 01 Jan 1970";
         document.cookie="motif-complement=;expires=Wed; 01 Jan 1970";
         document.cookie="motif-origine=;expires=Wed; 01 Jan 1970";
+        document.cookie="libelle=;expires=Wed; 01 Jan 1970";
         setCookie("motif-origine", "LISTE_COMPLETE", 1);
         setCookie("clic-en-ce-moment", "NON", 1);
         setCookie("clic-liste-complete", "NON", 1);

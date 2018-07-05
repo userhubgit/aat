@@ -685,7 +685,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 		QueryParser libQuery = new QueryParser(Version.LUCENE_36, CHAMP_LIBELLE, ANALYZER);
 		libQuery.setDefaultOperator(Operator.AND);
 		Query query;
-		query = libQuery.parse(str);
+		query = libQuery.parse("(" + str + ") OR (" + userInput.trim() + ")");
 		query.setBoost(Constante.LIBELLE_SCORE);
 
 		return query;

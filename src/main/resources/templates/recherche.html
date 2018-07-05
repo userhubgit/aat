@@ -66,6 +66,14 @@
 
     <main>
     <form id="myForm" action="/avis" method="post">
+	<!--  DEBUT   Champ caché utilsé pour sockage de la navigation utilisateur -->
+	<input type="hidden" value="" name="libelle" id="libelle"/>
+	<input type="hidden" value="" name="clic-en-ce-moment" id="clic-en-ce-moment"/>
+	<input type="hidden" value="" name="clic-liste-complete" id="clic-liste-complete"/>
+	<input type="hidden" value="" name="motif-origine" id="motif-origine"/>
+	<input type="hidden" value="" name="resultat-recherche" id="resultat-recherche"/>
+	<!--  FIN   Champ caché utilsé pour sockage de la navigation utilisateur -->
+		
       <article class="recherche">
         <div class="row">
           <div class="col-xs-12">
@@ -204,15 +212,15 @@
                     <div class="spacer">
                       <a id="btn-nuovelle-recherche" class="btn btn-default">
                                     Rechercher un autre motif
-                                </a>
+                      </a>
                     </div>
 
                     <div class="spacer">
-                      <button id="someButton" class="btn btn-default btn-multiligne">
-                                    <span class="lowercase">J’ai fini mes recherches de motifs</span> 
-                                    <br/>
-                                    <span class="texte-courant-semi-gras">je partage mon avis</span>
-                                </button>
+                      <button id="someButton" class="btn btn-default btn-multiligne" type="submit">
+                          <span class="lowercase">J’ai fini mes recherches de motifs</span> 
+                          <br/>
+                          <span class="texte-courant-semi-gras">je partage mon avis</span>
+                       </button>
                     </div>
 
                   </div>
@@ -857,6 +865,7 @@
   </div>
   <!-- JS library -->
   <script src="js/amelipro.min.js" type="text/javascript"></script>
+    <script src="js/jquery-ui.js" type="text/javascript"></script>
 </body>
 
 </html>

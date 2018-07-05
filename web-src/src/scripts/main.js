@@ -56,16 +56,15 @@ $(document).ready(function () {
         var idValue = $(this).attr('id');
         
         if(idValue === "smiles-positif"){        	
-        	document.cookie="recherche-commentaire=;expires=Wed; 01 Jan 1970";
-        	setCookie("resultat-recherche", "OUI", 1);
+        	$('#resultat-recherche').val("OUI");
         }
         
         if(idValue === "smiles-negatif"){        	
-        	setCookie("resultat-recherche", "NON", 1);
+        	$('#resultat-recherche').val("NON");
         }
         
         if(idValue === "smiles-passif"){        	
-        	setCookie("resultat-recherche", "MOYEN", 1);
+        	$('#resultat-recherche').val("MOYEN");
         }
         
         
@@ -110,13 +109,11 @@ $(document).ready(function () {
         
         $('.alphabet .lettre.active').removeClass('selected'),
         $(this).addClass('selected');
-        
-        document.cookie="clic-liste-complete=;expires=Wed; 01 Jan 1970";
-    	setCookie("clic-liste-complete", "OUI", 1);
+        $('#clic-liste-complete').val("OUI");
     });
     
     $('#recherche-commentaire').on('keyup change', function () {
-        setCookie("recherche-commentaire", $(this).val().replace(/ /g,"_"), 1);
+    	 $('#recherche-commentaire').val($(this).val());
     });
     
     /**
@@ -206,12 +203,10 @@ $(document).ready(function () {
                 $(this).addClass('selected');
     });
     
-    $('#motifs-en-ce-moment .capsule').click(function () {
-    	
-    	document.cookie="clic-en-ce-moment=;expires=Wed; 01 Jan 1970";
-    	setCookie("clic-en-ce-moment", "OUI", 1);
-    	document.cookie="motif-origine=;expires=Wed; 01 Jan 1970";
-    	setCookie("motif-origine", "EN_CE_MOMENT", 1);
+    $('#motifs-en-ce-moment .capsule').click(function () {    	    	
+    	// ALIMENTATION PARAM REQUEST
+    	$('#clic-en-ce-moment').val("OUI");
+    	$('#motif-origine').val("EN_CE_MOMENT");
     });
     
     $('#complement-info-motif').on('keyup change', function () {
@@ -225,20 +220,16 @@ $(document).ready(function () {
             $(this).val(text.substring(0, max));
             $($(this).attr('data-compteur')).html((max + '/' + max));
         }
-        
-        setCookie("motif-complement", $(this).val().replace(/ /g,"_"), 1);
+        $('#motif-complement').val($(this).val());
     });
     
-    document.cookie="motif-complement=;expires=Wed; 01 Jan 1970";
-    //document.cookie="motif-origine=;expires=Wed; 01 Jan 1970";
-    
-    setCookie("motif-origine", "LISTE_COMPLETE", 1);
-    setCookie("clic-en-ce-moment", "NON", 1);
-    setCookie("clic-liste-complete", "NON", 1);
-    setCookie("motif-complement", "", 1);
-    setCookie("recherche-commentaire", "", 1);
-    setCookie("avis-commentaire", "", 1);
-    setCookie("resultat-recherche", "", 1);
+
+       
+    // ALIMENTATION PARAM REQUEST
+    $('#motif-origine').val("LISTE_COMPLETE");
+    $('#clic-en-ce-moment').val("NON");
+    $('#clic-liste-complete').val("NON");
+    $('#resultat-recherche').val("");
     
     var codeSelection=null;
     var libelleSelection=null;
@@ -247,15 +238,38 @@ $(document).ready(function () {
     function autofocus(code, libelle){
     	codeSelection = code;
     	libelleSelection = libelle;
-    }
+    };
+    
+//    function caratereValide(txt){
+//    	
+//    	// ?./§*%$£¤}]=+@^&#"~"'{([-|_\ 
+//    	
+//    	if(!txt.match(/[A-Za-z0-9àâäéèêëîôöùûïÄÀÂÇÉÈÊÔÖÎÏÛÙ -']/)) 
+//        {  
+//    	   console.log(txt);
+//    	   var texteValide = txt.replace(/[A-Za-z0-9àâäéèêëîôöùûïÄÀÂÇÉÈÊÔÖÎÏÛÙ -']/g,'');
+//    	       		   
+//    		for (var i = 0; i < txt.length; i++) {
+//				if (txt.indexOf('?') > -1){
+//					txt.replace('?','');
+//				}
+//			}
+//      	   return txt;
+//        } 	
+//    };
 	
     var optionsAutocompleteMotifs = {
             url: function(){
+            	
             	return "/aat/motif?param="+ $("#motif-aat-input").val();
             },
             getValue: "value",
             adjustWidth: false,
-            minCharNumber: 2,            
+            minCharNumber: 2,
+            preparePostData: function(data, inputPhrase) {
+            	data = [];
+            	return data;
+            },
             list: {
             	maxNumberOfElements: 10,
             	match: {
@@ -278,88 +292,73 @@ $(document).ready(function () {
                     var nomMotif = $("#motif-aat-input").getSelectedItemData().value;
                     selectMotif(idMotif, nomMotif);
                     
-                	document.cookie="motif-origine=;expires=Wed; 01 Jan 1970";
-                	setCookie("motif-origine", "SAISIE", 1);
+                	$('#motif-origine').val("SAISIE");
                 },
             }
     		
     };
-    // ?./§*%$£¤}]=+@^&#"~"'{([-|_\ 
-    $("#motif-aat-input").easyAutocomplete(optionsAutocompleteMotifs);
-    
-    $('#motif-aat-input').on('keypress', function (event) {
-    	var isEntry = event.which;
-    	var txt = String.fromCharCode(event.which);
-        if(!txt.match(/[A-Za-z0-9àâäéèêëîôöùûïÄÀÂÇÉÈÊÔÖÎÏÛÙ -']/)) 
-        {
-        	if(!(event.which==8)){        		
-        		event.preventDefault();
-			}
-        } else {       	
-        	if(isEntry == 13) {
-        		if(codeSelection && libelleSelection){
-        			selectMotif(codeSelection, libelleSelection);
-        			document.cookie="motif-origine=;expires=Wed; 01 Jan 1970";
-        			setCookie("motif-origine", "SAISIE", 1);
-        		}
-        	}
-        }
-        
-        
-    });
+
+//    $("#motif-aat-input").easyAutocomplete(optionsAutocompleteMotifs);
+     
+	$.ui.autocomplete.prototype._renderItem = function (ul, item) {
+		item.propDuree = item.value;
+		item.propDuree = item.propDuree.replace(new RegExp("(?![^&;]+;)(?!<[^<>]*)(" + $.ui.autocomplete.escapeRegex(this.term) + ")(?![^<>]*>)(?![^&;]+;)", "gi"), "<strong>$1</strong>");
+		return $("<li></li>")
+			.data("item.autocomplete", item)
+			.append("<a>" + item.propDuree + "</a>")
+			.appendTo(ul);
+	};
 	
-//    $("#motif-aat-input").autocomplete({
-//
-//		source: function(requete, reponse){ // les deux arguments représentent les données nécessaires au plugin
-//			$.ajax({
-//				type: 'GET',
-//				url: '/aat/motif?param='+$('#motif-aat-input').val(),
-//				dataType : 'json',
-//	            success: function(data) {
-//	                reponse($.map(data, function(objet){
-//	                    return objet;
-//	                }));
-//	            },
-//	            error: function() {
-//		              alert('La requête n\'a pas abouti'); 
-//				}
-//	        });
-//	    },			    		    
-//		minLength: 3,
-//		delay : 0,
-//	    select : function(event,ui){
-//	    	
-//	    	if(event.keyCode != 9){
-//	    		motifSelectionne = document.getElementById('#motif-aat-input').value;
-//		    	if(ui.item.value.length > 0){
-//					motifSelectionne = ui.item.value;
-//					codeLibelle = ui.item.label;
-//					ui.item.value = "";
-//		    	}
-//		    	validationSaisie();
-//	    	}
-//	    },
-//
-//		<!-- gestion du no resultat -->
-//		response : function(event,ui){
-//			var resultSize = ui.content.length;
-//			if(resultSize == 0){
-//				motifSelectionne = "";
-//			}
-//		}
-//	});
+    /**
+     * Plugin de gestion d'autocomplétion.
+     */
+     $("#motif-aat-input").autocomplete({
     
-//    $('#motif-aat-input').keyup(
-//            function () {
-//                if ($(this).val().length >= 2) {
-//                    $('#recherche-button').addClass('focus');
-//                } else {
-//                    $('#recherche-button').removeClass('focus');
-//                }
-//            }
-//    );
+    		source: 
+    			function(requete, reponse){
+    			$.ajax({
+    				type: 'GET',
+    				url: '/aat/motif?param='+$("#motif-aat-input").val(),
+    				dataType : 'json',
+    	            success: function(data) {
+    	                reponse($.map(data, function(objet){
+    	                    return objet;
+    	                }));
+    	            },
+    	            error: function() {
+    		              alert('La requête n\'a pas abouti'); 
+    				}
+    	        });
+    	    },	    		    
+    		minLength: 2,
+    		delay : 0,
+    	    select : function(event,ui){
+    	    	
+    	    	if(event.keyCode != 9){
+    	    		libelleSelection = $(this).val();
+    		    	if(ui.item.value.length > 0){
+    		    		libelleSelection = ui.item.value;
+    		    		codeSelection = ui.item.label;
+    					ui.item.value = "";
+    		    	}
+    		    	selectMotif(codeSelection, libelleSelection);
+    	    	}
+    	    },
+    		response : function(event,ui){
+    			var resultSize = ui.content.length;
+    			if(resultSize == 0){
+    				libelleSelection = "";
+    			}
+    		}
+    	});
     
     $('#motif-aat-input').keyup(function (e) {
+    	
+    	var txt = e.key;
+    	if(!txt.match(/[A-Za-z0-9àâäéèêëîôöùûïÄÀÂÇÉÈÊÔÖÎÏÛÙ -']/)) 
+        {
+        	e.preventDefault();
+        }
     	
         if ($(this).val().length >= 2) {
             $('#recherche-button').addClass('focus');
@@ -375,15 +374,42 @@ $(document).ready(function () {
         		}else {    			 
         			selectMotif(false, $('#motif-aat-input').val());
         		}
-        		document.cookie="motif-origine=;expires=Wed; 01 Jan 1970";
-        		setCookie("motif-origine", "SAISIE", 1);
+        		$('#motif-origine').val("SAISIE");
+        		return false;
+        	} else {
         		return false;
         	}
         }
     });
     
-    $('#liste-categorie').addClass('open');
-    $('#categorie-motif .bootstrap-select').addClass('open');
+    $('#motif-aat-input').keypress(function (e) {
+    	
+    	var txt = e.key;
+    	if(!txt.match(/[A-Za-z0-9àâäéèêëîôöùûïÄÀÂÇÉÈÊÔÖÎÏÛÙ -']/)) 
+        {
+        	e.preventDefault();
+        }
+        if ($(this).val().length >= 2) {
+            $('#recherche-button').addClass('focus');
+        } else {
+            $('#recherche-button').removeClass('focus');
+        }
+        
+        if (e.keyCode == 13) {
+        	if ($(this).val().length >= 2) {
+        		
+        		if(codeSelection && libelleSelection){
+        			selectMotif(codeSelection, libelleSelection)
+        		}else {    			 
+        			selectMotif(false, $('#motif-aat-input').val());
+        		}
+        		$('#motif-origine').val("SAISIE");
+        		return false;
+        	} else {
+        		return false;
+        	}
+        }
+    });    
     
     function selectMotif(idMotif, nomMotif) {
         if (nomMotif != '') {
@@ -393,12 +419,11 @@ $(document).ready(function () {
             $('#id-motif-selectionne').val(idMotif);
 
             if (!idMotif) {
-            	setCookie("motif-origine", "SAISIE", 1);
+            	$('#motif-origine').val("SAISIE");
                 $('#categorie-motif').show();
-                $('.btn-group.bootstrap-select.row.small-spacer.form-control').addClass('open');
             }
-            
-            setCookie("libelle", nomMotif.replace(/ /g,"_"), 1);
+            // ALIMENTATION PARAM REQUEST
+            $('#libelle').val(nomMotif);
         }
     }
 
@@ -416,20 +441,15 @@ $(document).ready(function () {
         
         codeSelection=null;
         libelleSelection=null;
-        document.cookie="resultat-recherche=;expires=Wed; 01 Jan 1970";
-        document.cookie="recherche-commentaire=;expires=Wed; 01 Jan 1970";
-        document.cookie="motif-complement=;expires=Wed; 01 Jan 1970";
-        document.cookie="motif-origine=;expires=Wed; 01 Jan 1970";
-        setCookie("motif-origine", "LISTE_COMPLETE", 1);
-        setCookie("clic-en-ce-moment", "NON", 1);
-        setCookie("clic-liste-complete", "NON", 1);
+        
+        
+        $('#motif-origine').val("LISTE_COMPLETE");
+        $('#clic-en-ce-moment').val("NON");
+        $('#clic-liste-complete').val("NON");
     }
 
     $('#recherche-button').click(function (e) {
         selectMotif(false, $('#motif-aat-input').val());
-        $('#liste-categorie').addClass('open');
-        e.stopPropagation();
-        $('#categorie-motif .bootstrap-select').addClass('open');
     });
 
     $('[data-nom-motif]').click(function () {
@@ -448,55 +468,22 @@ $(document).ready(function () {
             var parentId = $(this).parent().attr('id');
             var reponse = $(this).text(); 
             if(parentId === "options-avis-recherche-1"){
-            	setCookie("avis-reponse1", reponse, 1);
+            	$('#avis-reponse1').val(reponse);
             }else{
-            	setCookie("avis-reponse2", reponse, 1);
+            	$('#avis-reponse2').val(reponse);
             }
         }
     });
 
-    function checkCookie() {
-        var username = getCookie("libelle");
-        if (username != "") {
-            alert("Welcome again " + username);
-        } else {
-            username = prompt("Please enter your libelle:", "");
-            if (username != "" && username != null) {
-                setCookie("libelle", username, 365);
-            }
-        }
-    }
-    
-    function getCookie(cname) {
-        var name = cname + "=";
-        var ca = document.cookie.split(';');
-        for(var i = 0; i < ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) == ' ') {
-                c = c.substring(1);
-            }
-            if (c.indexOf(name) == 0) {
-                return c.substring(name.length, c.length);
-            }
-        }
-        return "";
-    }
-    
-    function setCookie(cname, cvalue, exdays) {
-        var d = new Date();
-        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-        var expires = "expires="+d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    }
-    
-    $("#someButton").click(function() {
-    	$("#myForm").submit();
-    });
+ 
+//    $("#someButton").click(function() {
+//    	$("#myForm").submit();
+//    });
 
     $("#avis-envoie").click(function(event) {        
-        if(getCookie("avis-reponse1") && getCookie("avis-reponse2")){        	
+        if($('#avis-reponse1').val() && $('#avis-reponse2').val()){        	
         	var comment  = $("#avis-commentaire").val();
-        	setCookie("avis-commentaire", comment.replace(/ /g,"_"), 1);
+        	$('#avis-commentaire').val(comment);
         	return true
         } else {
         	 $('#exemple-modal').modal('show');

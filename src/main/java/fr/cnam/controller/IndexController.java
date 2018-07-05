@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,7 +68,14 @@ public class IndexController {
 		}
 		return "index";
 	}
-
+	
+	/**
+	 * Methode qui gère l'affichage du formulaire de recherche.
+	 * @param session : session http encours.
+	 * @param headers : header http.
+	 * @param retour : paramètre de la requête http
+	 * @return : la page
+	 */
 	@GetMapping("/formulaire")
 	public String form(HttpSession session, @RequestHeader HttpHeaders headers, @RequestParam("retour") String retour) {
 		if (null != session) {
@@ -88,15 +94,27 @@ public class IndexController {
 		}
 		return "recherche";
 	}
-
+	
+	/**
+	 * 
+	 * @param session
+	 * @param info
+	 * @param actuel
+	 * @param complete
+	 * @param origine
+	 * @param commentaire
+	 * @param resultatRecherche
+	 * @param complement
+	 * @return : la page
+	 */
 	@RequestMapping(value = "/avis", method = RequestMethod.POST)
 	public String avis(HttpSession session, 
-			@CookieValue("libelle") String info,
-			@CookieValue("clic-en-ce-moment") String actuel,
-			@CookieValue("clic-liste-complete") String complete,
-			@CookieValue("motif-origine") String origine,
+			@RequestParam("libelle") String info,
+			@RequestParam("clic-en-ce-moment") String actuel,
+			@RequestParam("clic-liste-complete") String complete,
+			@RequestParam("motif-origine") String origine,
 			@RequestParam("recherche-commentaire") String commentaire,
-			@CookieValue("resultat-recherche") String resultatRecherche,
+			@RequestParam("resultat-recherche") String resultatRecherche,
 			@RequestParam("complement-info-motif") String complement) {
 		
 		String libelle = info.replace(SEPARATEUR_ESPACE, " ");
@@ -136,16 +154,23 @@ public class IndexController {
 		return cal;
 	}
 
-//	@GetMapping("/remerciements")
+	/**
+	 * Methode qui gère la stockage d'information sur l'enquête.
+	 * @param session : session http encours.
+	 * @param response :  reponse http.
+	 * @param reponse1 : reponse à la question 1 de l'enquête.
+	 * @param reponse2 : reponse à la question 2 de l'enquête.
+	 * @param avisComment : le commentaire sur l'enquête.
+	 * @return
+	 */
 	@RequestMapping(value = "/remerciements", method = RequestMethod.POST)
 	public String remercier(HttpSession session, 
 			HttpServletResponse response , 
-			@CookieValue("avis-reponse1") String reponse1,
-			@CookieValue("avis-reponse2") String reponse2, 
-			@CookieValue("avis-commentaire") String commentaire,
+			@RequestParam("avis-reponse1") String reponse1,
+			@RequestParam("avis-reponse2") String reponse2, 
 			@RequestParam("avis-commentaire") String avisComment) {
 		
-		logger.info("reponse1= {} reponse2= {}  commentaire = {}", reponse1, reponse2, commentaire);
+		logger.info("reponse1= {} reponse2= {}  commentaire = {}", reponse1, reponse2, avisComment);
 
 		if(null != session && 
 				null != session.getAttribute(SESSION_ATTR_MOTIF) &&
@@ -181,6 +206,11 @@ public class IndexController {
 		return "remerciements";
 	}
 
+	/**
+	 * Methode d'initialisation de la session et les données  à stocker dans celle-ci
+	 * @param session : session http encours.
+	 * @param headers : Headers http.
+	 */
 	private void initSession(HttpSession session, HttpHeaders headers) {
 		
 		logger.info("Initialisation des donnees");
