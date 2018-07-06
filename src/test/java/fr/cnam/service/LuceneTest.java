@@ -3,6 +3,8 @@ package fr.cnam.service;
 import java.io.IOException;
 import java.io.Reader;
 
+import javax.crypto.SealedObject;
+
 import org.apache.lucene.analysis.ASCIIFoldingFilter;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.LowerCaseFilter;
@@ -28,9 +30,11 @@ import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.FuzzyQuery;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.MultiTermQuery;
+import org.apache.lucene.search.PrefixQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.search.WildcardQuery;
 import org.apache.lucene.search.spans.SpanMultiTermQueryWrapper;
 import org.apache.lucene.search.spans.SpanNearQuery;
 import org.apache.lucene.search.spans.SpanQuery;
@@ -74,34 +78,54 @@ public class LuceneTest {
 		//  1 create the index
 		Directory d = new RAMDirectory();
 
-		Analyzer analyzer =  AATLuceneAnalyzerUtil.getSynonymeAnalyzer();
+		Analyzer searchAnalyzer =  AATLuceneAnalyzerUtil.getSearchAnalyzer();
 
 				// AATLuceneAnalyzerUtil.getAnalyzer();
-		IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_36, analyzer);
+		IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_36, AATLuceneAnalyzerUtil.getAnalyzer());
 		
 	
 
 		IndexWriter w = new IndexWriter(d, config);
 		addDoc(w, "amygdalite thyroïde", "193398817");
+		 addDoc(w, "Comptable", "55320055Z");
         addDoc(w, "syndrôme épaule main", "55320055Z");
         addDoc(w, "chirurgie", "55063554A");
         addDoc(w, "allergie", "9900333X");
-        addDoc(w, "insuffisance", "9900333X");
+        addDoc(w, "insuffisance renal", "9900333X");
         displayIndex(w);
         
         w.close();
         
+        BooleanQuery booleanQuery = new BooleanQuery();
+        
         
         // 2 query
-		String querystr = args.length > 0 ? args[0] : "insuf";		
-		Query q = new QueryParser(Version.LUCENE_36, "libelle", analyzer).parse("(" + querystr+"*" + ") OR (" + querystr.trim() + ")" );
-//		q = getLibelleWithApproximatifQuery(querystr);
+		String querystr = args.length > 0 ? args[0] : "insuffisance ren";
+		String term = querystr;
+		QueryParser queryParser = new QueryParser(Version.LUCENE_36, "libelle", searchAnalyzer);
+		queryParser.setAllowLeadingWildcard(true);
+		Query q = queryParser.parse(querystr);
+		
+		booleanQuery.add(q, Occur.MUST);
+		/**
+		 * Lucene prefix Query
+		 */
+		PrefixQuery prefixQuery = new PrefixQuery(new Term("libelle", term+"*"));
+
+		/**
+		 * 
+		 */
+		WildcardQuery wildcardQuery = new WildcardQuery(new Term("libelle", term));
+		
+		/**
+		 * 
+		 */
 		
 		// 3. search
         int hitsPerPage = 10;
         IndexReader reader = IndexReader.open(d);
         IndexSearcher searcher = new IndexSearcher(reader);
-        TopDocs docs = searcher.search(q, hitsPerPage);
+        TopDocs docs = searcher.search(prefixQuery, hitsPerPage);
         ScoreDoc[] hits = docs.scoreDocs;
 
         // 4. display results

@@ -70,7 +70,31 @@ public final class AATLuceneAnalyzerUtil {
 		};
 		return customAnalyzer;
 	}
-	
+		
+	/**
+	 *
+	 * @return {@link Analyzer}
+	 * @throws IOException
+	 */
+	public static Analyzer getSearchAnalyzer() {
+
+		Analyzer customAnalyzer = new Analyzer() {
+			@Override
+			public TokenStream tokenStream(String fieldName, Reader reader) {
+				
+				Tokenizer aatTokenizer = new LetterTokenizer(Version.LUCENE_36, reader);
+				TokenStream filter = new StandardFilter(Version.LUCENE_36, aatTokenizer);
+				Set<String> normaliserListe = normaliserListe(etendreFrenchStopWordSet());
+				filter = new LowerCaseFilter(Version.LUCENE_36, filter);
+				filter = new ASCIIFoldingFilter(filter);
+				filter = new StopFilter(Version.LUCENE_36, filter, normaliserListe);
+				filter = new FrenchLightStemFilter(filter);
+				return filter;
+				
+			}
+		};
+		return customAnalyzer;
+	}
 	/**
 	 *
 	 * @return {@link Analyzer}
@@ -88,8 +112,6 @@ public final class AATLuceneAnalyzerUtil {
 				filter = new LowerCaseFilter(Version.LUCENE_36, filter);
 				filter = new ASCIIFoldingFilter(filter);
 				filter = new StopFilter(Version.LUCENE_36, filter, normaliserListe);
-//				filter = new SnowballFilter(filter, new FrenchStemmer());
-				filter = new FrenchLightStemFilter(filter);
 				return filter;
 				
 			}
@@ -112,8 +134,6 @@ public final class AATLuceneAnalyzerUtil {
 				filter = new StopFilter(Version.LUCENE_36, filter, etendreFrenchStopWordSet());
 				filter = new LowerCaseFilter(Version.LUCENE_36, filter);
 				filter = new ASCIIFoldingFilter(filter);
-//				filter = new SnowballFilter(filter, new FrenchStemmer());
-				filter = new FrenchLightStemFilter(filter);
 				return filter;
 			}
 		};

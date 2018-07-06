@@ -298,59 +298,59 @@ $(document).ready(function () {
     		
     };
 
-//    $("#motif-aat-input").easyAutocomplete(optionsAutocompleteMotifs);
+    $("#motif-aat-input").easyAutocomplete(optionsAutocompleteMotifs);
      
-	$.ui.autocomplete.prototype._renderItem = function (ul, item) {
-		item.propDuree = item.value;
-		item.propDuree = item.propDuree.replace(new RegExp("(?![^&;]+;)(?!<[^<>]*)(" + $.ui.autocomplete.escapeRegex(this.term) + ")(?![^<>]*>)(?![^&;]+;)", "gi"), "<strong>$1</strong>");
-		return $("<li></li>")
-			.data("item.autocomplete", item)
-			.append("<a>" + item.propDuree + "</a>")
-			.appendTo(ul);
-	};
-	
-    /**
-     * Plugin de gestion d'autocomplétion.
-     */
-     $("#motif-aat-input").autocomplete({
-    
-    		source: 
-    			function(requete, reponse){
-    			$.ajax({
-    				type: 'GET',
-    				url: '/aat/motif?param='+$("#motif-aat-input").val(),
-    				dataType : 'json',
-    	            success: function(data) {
-    	                reponse($.map(data, function(objet){
-    	                    return objet;
-    	                }));
-    	            },
-    	            error: function() {
-    		              alert('La requête n\'a pas abouti'); 
-    				}
-    	        });
-    	    },	    		    
-    		minLength: 2,
-    		delay : 0,
-    	    select : function(event,ui){
-    	    	
-    	    	if(event.keyCode != 9){
-    	    		libelleSelection = $(this).val();
-    		    	if(ui.item.value.length > 0){
-    		    		libelleSelection = ui.item.value;
-    		    		codeSelection = ui.item.label;
-    					ui.item.value = "";
-    		    	}
-    		    	selectMotif(codeSelection, libelleSelection);
-    	    	}
-    	    },
-    		response : function(event,ui){
-    			var resultSize = ui.content.length;
-    			if(resultSize == 0){
-    				libelleSelection = "";
-    			}
-    		}
-    	});
+//	$.ui.autocomplete.prototype._renderItem = function (ul, item) {
+//		item.propDuree = item.value;
+//		item.propDuree = item.propDuree.replace(new RegExp("(?![^&;]+;)(?!<[^<>]*)(" + $.ui.autocomplete.escapeRegex(this.term) + ")(?![^<>]*>)(?![^&;]+;)", "gi"), "<strong>$1</strong>");
+//		return $("<li></li>")
+//			.data("item.autocomplete", item)
+//			.append("<a>" + item.propDuree + "</a>")
+//			.appendTo(ul);
+//	};
+//	
+//    /**
+//     * Plugin de gestion d'autocomplétion.
+//     */
+//     $("#motif-aat-input").autocomplete({
+//    
+//    		source: 
+//    			function(requete, reponse){
+//    			$.ajax({
+//    				type: 'GET',
+//    				url: '/aat/motif?param='+$("#motif-aat-input").val(),
+//    				dataType : 'json',
+//    	            success: function(data) {
+//    	                reponse($.map(data, function(objet){
+//    	                    return objet;
+//    	                }));
+//    	            },
+//    	            error: function() {
+//    		              alert('La requête n\'a pas abouti'); 
+//    				}
+//    	        });
+//    	    },	    		    
+//    		minLength: 2,
+//    		delay : 0,
+//    	    select : function(event,ui){
+//    	    	
+//    	    	if(event.keyCode != 9){
+//    	    		libelleSelection = $(this).val();
+//    		    	if(ui.item.value.length > 0){
+//    		    		libelleSelection = ui.item.value;
+//    		    		codeSelection = ui.item.label;
+//    					ui.item.value = "";
+//    		    	}
+//    		    	selectMotif(codeSelection, libelleSelection);
+//    	    	}
+//    	    },
+//    		response : function(event,ui){
+//    			var resultSize = ui.content.length;
+//    			if(resultSize == 0){
+//    				libelleSelection = "";
+//    			}
+//    		}
+//    	});
     
     $('#motif-aat-input').keyup(function (e) {
     	
