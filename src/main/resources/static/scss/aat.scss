@@ -259,3 +259,16 @@ h3, h4{
 .lowercase{
     text-transform: lowercase;
 }
+
+.ui-menu-item a{
+    padding: 10px  !important;
+	
+    width: 100%;
+    display: block;
+	text-decoration: none;
+	&.ui-state-active{ 
+		color: $noir; 
+		background-color:  $gris-5 !important; 
+		border: 1px solid $gris-4; 
+	}
+}

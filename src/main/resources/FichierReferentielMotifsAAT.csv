@@ -1,4 +1,4 @@
-01000125;Hypotension;999;;hypo tension, chute de tension,hipotension,hypotention,hipotention,ypotension,cta;;;;;
+01000125;Hypotension;999;CTA;hypo tension, chute de tension,hipotension,hypotention,hipotention,ypotension,cta;;;;;
 01000124;Diarrhée;999;;diahree,diahré,diahrée,diarrhées, diahrés,turista,tourista,turistra,tousitra;;;;;
 01000123;Endométriose;999;;endométrose,Métrorragies,pelvienne;;;;;
 01000122;Gonalgie;999;;genou,inflammatoire,inflammatoires,gonlgie,gonlgies,gon algie;;;;;
@@ -26,7 +26,7 @@
 01000100;Réaction à un facteur de stress;999;BUR;souffrance au travail, burn-out, syndrôme d'épuisement professionnel,burnout,surmenage,burn,burning out, bore out, boreout, bore-out,burn-out, professionnel, burnt out, professionnel, burnt out,burn out professionnel,conflit,employeur,réactionnel;;;;;
 01000099;Suites de couches compliquées;999;;hémorragie de la délivrance, rétention placentaire;;;;;
 01000098;Tumeur maligne de l'ovaire;999;;tumeur,cancer de l'ovaire, carcinome de l'ovaire, Kukenberg, néoplasie, chimiothérapie, radiothérapie;;;;;
-01000097;Autres allergies;999;AAC;gluten, lactose, intolérance, maladie coeliaque,réaction allergique,allergie alimentaire croisee,cutané,oculaire,urticaire;;;;;
+01000097;Autres allergies;999;AAC,urticaire;gluten, lactose, intolérance, maladie coeliaque,réaction allergique,allergie alimentaire croisee,cutané,oculaire,urticaire;;;;;
 01000096;Plaie - autres localisations;999;;plaie,genou,épaule,bras,coude,mollet,cuissen,Ulcération, excoriation,front,cuir chevelu,arcade sourcilière;;;;;
 01000095;Plaie du pied;999;;Ulcération, excoriation;;;;;
 01000094;Plaie de la jambe;999;;Ulcération, excoriation,;;;;;
@@ -194,8 +194,8 @@
 00010004;Grippe saisonnière;009;SD,SG;grippal,influenzae,état grippal;;;;;
 00010003;Gastro-entérite virale;005;GEA,GEV,DH+; grippe intestinale, gastroentérite, gastro entérite, gastroentrite,gasytro enterite, diarrhée,diahree,diahré,diahrée,diarrhées, diahrés,GE virale;;;;;
 00010002;Bronchite aiguë sans comorbidité;010;;inflammation des bronches,bronchorrhée,infection des bronches, bronchiolite,bronchite asthmatiforme;;;;;
-00010001;Angine;008;AEP;amygdalite,infection de l'oropharynx,inflammation des amygdales, amygdale, erythemato-pultacée, erythematopultacée, erythemato, pultacée,oro-pharynx,amigdales, amygdale, bactérienne,virale,blanche,rouge;;;;;
-01000126;Autres douleurs;999;;douleur,bras, jambes, poignet, muscles, mains, coude, genou, triceps, quadriceps,biceps, courbatures,cervicales;algie,dlr, douelurs;;;;
+00010001;Angine;008;AEP;angine, amygdalite,infection de l'oropharynx,inflammation des amygdales, amygdale, erythemato-pultacée, erythematopultacée, erythemato, pultacée,oro-pharynx,amigdales, amygdale, bactérienne,virale,blanche,rouge;;;;;
+01000126;Autres douleurs;999;;douleur,bras, jambes, poignet, muscles, mains, coude, genou, triceps, quadriceps,biceps, courbatures,cervicales;;;;;
 1000127;Autres tumeurs;999;;carcinome, cancer colorectal;;;;;
 1000128;pneumothorax;999;PNO,PNOG,PNOD;;;;;;
 1000129;zona;999;;;;;;;

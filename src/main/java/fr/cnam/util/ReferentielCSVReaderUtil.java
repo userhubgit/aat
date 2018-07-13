@@ -11,7 +11,7 @@ import java.util.List;
 import fr.cnam.model.Motif;
 
 /**
- * Classe utilitaire qui permet de lire le référentiel(CSV) de motif AAT.
+ * Classe utilitaire qui permet de lire le rï¿½fï¿½rentiel(CSV) de motif AAT.
  *
  * @author ONDONGO-09929
  *
@@ -29,11 +29,11 @@ public final class ReferentielCSVReaderUtil {
     public static final String VIDE = "";
 
     /**
-     * Separateur des données.
+     * Separateur des donnï¿½es.
      */
     public static final String CSV_SERAPTOR = ";";
     /**
-     * Séparateur des synonymes.
+     * Sï¿½parateur des synonymes.
      */
     public static final String SYNONYME_SERAPTOR = ",";
 
@@ -45,7 +45,7 @@ public final class ReferentielCSVReaderUtil {
     }
 
     /**
-     * Méthode qui permet de lire une ligne spécifique du fichier CSV.
+     * Mï¿½thode qui permet de lire une ligne spï¿½cifique du fichier CSV.
      * @param pLigne : la ligne en cours de lecture
      * @return : une instance de {@link Motif}
      * qui encapsule les infos de la ligne
@@ -75,9 +75,9 @@ public final class ReferentielCSVReaderUtil {
     }
 
     /**
-     * Méthode qui permet de lire toute
-     * les lignes du fichier (référentiel) CSV.
-     * @param pReferentielCSV : le fichier référentiel.
+     * Mï¿½thode qui permet de lire toute
+     * les lignes du fichier (rï¿½fï¿½rentiel) CSV.
+     * @param pReferentielCSV : le fichier rï¿½fï¿½rentiel.
      * @return : liste d'objet de la classe {@link Motif}.
      * @throws IOException : Notification d'une erreur technique
      * lors de la lecture du fichier.

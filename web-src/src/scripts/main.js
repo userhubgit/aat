@@ -29,7 +29,7 @@ $(document).ready(function () {
     );
 
     // Initialisation des datesPicker
-    $('.datepicker, .input-group.date').attr({'readonly': 'readonly'}).datepicker({todayHighlight: true, clearBtn: true, language: "fr", autoclose: true});
+    //$('.datepicker, .input-group.date').attr({'readonly': 'readonly'}).datepicker({todayHighlight: true, clearBtn: true, language: "fr", autoclose: true});
 
 
     $(document).keyup(function (e) {
@@ -258,10 +258,12 @@ $(document).ready(function () {
 //        } 	
 //    };
 	
+	/*
     var optionsAutocompleteMotifs = {
             url: function(){
             	
-            	return "/aat/motif?param="+ $("#motif-aat-input").val();
+            	//return "/aat/motif?param="+ $("#motif-aat-input").val();
+				return  "/ressources/motifs.json";
             },
             getValue: "value",
             adjustWidth: false,
@@ -298,62 +300,65 @@ $(document).ready(function () {
     		
     };
 
-    $("#motif-aat-input").easyAutocomplete(optionsAutocompleteMotifs);
+    $("#motif-aat-input").easyAutocomplete(optionsAutocompleteMotifs); */
      
-//	$.ui.autocomplete.prototype._renderItem = function (ul, item) {
-//		item.propDuree = item.value;
-//		item.propDuree = item.propDuree.replace(new RegExp("(?![^&;]+;)(?!<[^<>]*)(" + $.ui.autocomplete.escapeRegex(this.term) + ")(?![^<>]*>)(?![^&;]+;)", "gi"), "<strong>$1</strong>");
-//		return $("<li></li>")
-//			.data("item.autocomplete", item)
-//			.append("<a>" + item.propDuree + "</a>")
-//			.appendTo(ul);
-//	};
-//	
-//    /**
-//     * Plugin de gestion d'autocomplétion.
-//     */
-//     $("#motif-aat-input").autocomplete({
-//    
-//    		source: 
-//    			function(requete, reponse){
-//    			$.ajax({
-//    				type: 'GET',
-//    				url: '/aat/motif?param='+$("#motif-aat-input").val(),
-//    				dataType : 'json',
-//    	            success: function(data) {
-//    	                reponse($.map(data, function(objet){
-//    	                    return objet;
-//    	                }));
-//    	            },
-//    	            error: function() {
-//    		              alert('La requête n\'a pas abouti'); 
-//    				}
-//    	        });
-//    	    },	    		    
-//    		minLength: 2,
-//    		delay : 0,
-//    	    select : function(event,ui){
-//    	    	
-//    	    	if(event.keyCode != 9){
-//    	    		libelleSelection = $(this).val();
-//    		    	if(ui.item.value.length > 0){
-//    		    		libelleSelection = ui.item.value;
-//    		    		codeSelection = ui.item.label;
-//    					ui.item.value = "";
-//    		    	}
-//    		    	selectMotif(codeSelection, libelleSelection);
-//    	    	}
-//    	    },
-//    		response : function(event,ui){
-//    			var resultSize = ui.content.length;
-//    			if(resultSize == 0){
-//    				libelleSelection = "";
-//    			}
-//    		}
-//    	});
+$.ui.autocomplete.prototype._renderItem = function (ul, item) {
+	item.propDuree = item.value;
+	item.propDuree = item.propDuree.replace(new RegExp("(?![^&;]+;)(?!<[^<>]*)(" + $.ui.autocomplete.escapeRegex(this.term) + ")(?![^<>]*>)(?![^&;]+;)", "gi"), "<strong>$1</strong>");
+	return $("<li></li>")
+		.data("item.autocomplete", item)
+		.append("<a>" + item.propDuree + "</a>")
+		.appendTo(ul);
+};
+
+
+
+   /**
+    * Plugin de gestion d'autocomplétion.
+    */
+    $("#motif-aat-input").autocomplete({
+   
+   		source: 
+   			function(requete, reponse){
+   			$.ajax({
+   				type: 'GET',
+   				url: '/aat/motif?param='+$("#motif-aat-input").val(),
+   				dataType : 'json',
+   	            success: function(data) {
+   	                reponse($.map(data, function(objet){
+   	                    return objet;
+   	                }));
+   	            },
+   	            error: function() {
+   		              alert('La requête n\'a pas abouti'); 
+   				}
+   	        });
+   	    },
+   	    autoFocus: true,
+//	    source:["Abcès cutané furoncle et anthrax","Hypotension","Endométriose","Vertiges","Douleurs thoraciques","Fracture du coude","Fracture de la cheville","Fracture du tubia"],
+   		minLength: 2,
+   		delay : 0,
+   	    select : function(event,ui){
+   	    	
+   	    	if(event.keyCode != 9){
+   	    		libelleSelection = $(this).val();
+   		    	if(ui.item.value.length > 0){
+   		    		libelleSelection = ui.item.value;
+   		    		codeSelection = ui.item.label;
+   					ui.item.value = "";
+   		    	}
+   		    	selectMotif(codeSelection, libelleSelection);
+   	    	}
+   	    },
+   		response : function(event,ui){
+   			var resultSize = ui.content.length;
+   			if(resultSize == 0){
+   				libelleSelection = "";
+   			}
+   		}
+   	});
     
-    $('#motif-aat-input').keyup(function (e) {
-    	
+    $('#motif-aat-input').on('keyup keypress',function (e) {
     	var txt = e.key;
     	if(!txt.match(/[A-Za-z0-9àâäéèêëîôöùûïÄÀÂÇÉÈÊÔÖÎÏÛÙ -']/)) 
         {
@@ -381,36 +386,7 @@ $(document).ready(function () {
         	}
         }
     });
-    
-    $('#motif-aat-input').keypress(function (e) {
     	
-    	var txt = e.key;
-    	if(!txt.match(/[A-Za-z0-9àâäéèêëîôöùûïÄÀÂÇÉÈÊÔÖÎÏÛÙ -']/)) 
-        {
-        	e.preventDefault();
-        }
-        if ($(this).val().length >= 2) {
-            $('#recherche-button').addClass('focus');
-        } else {
-            $('#recherche-button').removeClass('focus');
-        }
-        
-        if (e.keyCode == 13) {
-        	if ($(this).val().length >= 2) {
-        		
-        		if(codeSelection && libelleSelection){
-        			selectMotif(codeSelection, libelleSelection)
-        		}else {    			 
-        			selectMotif(false, $('#motif-aat-input').val());
-        		}
-        		$('#motif-origine').val("SAISIE");
-        		return false;
-        	} else {
-        		return false;
-        	}
-        }
-    });    
-    
     function selectMotif(idMotif, nomMotif) {
         if (nomMotif != '') {
             $('#options-recherche').hide();
@@ -422,6 +398,9 @@ $(document).ready(function () {
             	$('#motif-origine').val("SAISIE");
                 $('#categorie-motif').show();
             }
+			// Forcer l'ouverture du select 
+            event.stopPropagation();
+			$("#categorie-motif .dropdown-toggle").trigger('click');
             // ALIMENTATION PARAM REQUEST
             $('#libelle').val(nomMotif);
         }

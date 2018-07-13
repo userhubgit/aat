@@ -582,8 +582,9 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 
 				if (saisieValide.length() > 2) {
 					Query querySynonyme = getSynonymeQuery(saisieNormalise);
+					Query querySynonymeProche = getSynonymeWithApproximatifQuery(saisieNormalise);
 					bq.add(querySynonyme, Occur.SHOULD);
-					
+					bq.add(querySynonymeProche, Occur.SHOULD);
 					Query queryGenerique = getGeneriqueQuery(saisieNormalise);
 					bq.add(queryGenerique, Occur.SHOULD);
 				}
@@ -735,6 +736,19 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 		return querySynonyme;
 	}
 
+	private BooleanQuery getSynonymeWithApproximatifQuery(String userInput) throws org.apache.lucene.queryParser.ParseException {
+
+		BooleanQuery approximativeRecherche = new BooleanQuery();
+		String[] termSaisie = userInput.split(" ");		
+		for (int i = 0; i < termSaisie.length; i++) {
+			FuzzyQuery fuzz = new FuzzyQuery(new Term(CHAMP_SYNONYME, termSaisie[i]), 0.7f, 2);
+			
+			approximativeRecherche.setBoost(Constante.LIBELLE_SCORE);
+			approximativeRecherche.add(fuzz, Occur.MUST);			
+		}
+		return approximativeRecherche;
+	}
+	
 	private Query getAcronymeQuery(final String userInput) {
 		TermQuery termQuery = new TermQuery(new Term(CHAMP_ACRONYME, userInput));
 		termQuery.setBoost(Constante.ACRONYME_SCORE);
