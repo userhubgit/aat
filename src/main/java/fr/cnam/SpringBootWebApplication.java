@@ -11,6 +11,11 @@ import com.zaxxer.hikari.HikariDataSource;
 @SpringBootApplication
 public class SpringBootWebApplication {
 	
+	/**
+	 * 
+	 * @param properties
+	 * @return
+	 */
 	@Bean
     @ConfigurationProperties("spring.datasource")
     public HikariDataSource dataSource(DataSourceProperties properties) {
