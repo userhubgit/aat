@@ -360,20 +360,20 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			}
 
 			// Affichage des tokens dans le libelle
-			logger.info("****** DEBUT : Affichage des tokens dans le CHAMP_LIBELLE *******");
+			logger.debug("****** DEBUT : Affichage des tokens dans le CHAMP_LIBELLE *******");
 
 			TermEnum terms = writer.getReader().terms(new Term(CHAMP_LIBELLE));
 			if (null != terms.term()) {
 				do {
 					Term term = terms.term();
 					if (term.field().endsWith(CHAMP_LIBELLE)) {
-						logger.info("[" + term.field() + "] == " + term.text());
+						logger.debug("[" + term.field() + "] == " + term.text());
 					}
 				} while (terms.next());
 			}
-			logger.info("****** FIN : Affichage des tokens dans le CHAMP_LIBELLE *******");
+			logger.debug("****** FIN : Affichage des tokens dans le CHAMP_LIBELLE *******");
 
-			logger.info("Nombre de documents index�s : ".concat(String.valueOf(i)));
+			logger.info("Nombre de documents indexés : ".concat(String.valueOf(i)));
 
 			logger.info("Taille (en byte) memoire du thesaurus := " + ramDirectory.sizeInBytes());
 			writer.close();
@@ -601,7 +601,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 			pSearcher.search(bq, collector);
 			ScoreDoc[] hits = collector.topDocs().scoreDocs;
 
-			logger.info("======= { Nombre de motif trouv�(s) := " + hits.length + " } ===========\n");
+			logger.info("======= { Nombre de motif trouvé(s) := " + hits.length + " } ===========\n");
 
 			for (int i = 0; i < hits.length; i++) {
 				ScoreDoc doc = hits[i];
@@ -699,7 +699,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 //		SpanQuery[] clauses = new SpanQuery[termSaisie.length];
 		
 		for (int i = 0; i < termSaisie.length; i++) {
-			FuzzyQuery fuzz = new FuzzyQuery(new Term(CHAMP_LIBELLE, termSaisie[i]), 0.5f, 2);
+			FuzzyQuery fuzz = new FuzzyQuery(new Term(CHAMP_LIBELLE, termSaisie[i]), 0.6f, 2);
 //			clauses[i] = new SpanMultiTermQueryWrapper<MultiTermQuery>(fuzz);
 			
 			approximativeRecherche.setBoost(Constante.LIBELLE_SCORE);
@@ -743,7 +743,7 @@ public class LuceneIndexRechercheImpl implements LuceneIndexRecherche {
 		for (int i = 0; i < termSaisie.length; i++) {
 			FuzzyQuery fuzz = new FuzzyQuery(new Term(CHAMP_SYNONYME, termSaisie[i]), 0.7f, 2);
 			
-			approximativeRecherche.setBoost(Constante.LIBELLE_SCORE);
+			approximativeRecherche.setBoost(Constante.SYNONYME_SCORE);
 			approximativeRecherche.add(fuzz, Occur.MUST);			
 		}
 		return approximativeRecherche;

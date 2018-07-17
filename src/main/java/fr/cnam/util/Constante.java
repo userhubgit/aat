@@ -23,7 +23,7 @@ public class Constante {
     public static final String CHAMP_XML = "xml";
     public static final String CHAMP_NEW_XML = "mewxml";
     
-    public static final int LIBELLE_SCORE = 100;
+    public static final int LIBELLE_SCORE = 1000;
     public static final int ACRONYME_SCORE = 50;
     public static final int SYNONYME_SCORE = 25;
     

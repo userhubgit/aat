@@ -322,7 +322,7 @@ $.ui.autocomplete.prototype._renderItem = function (ul, item) {
    			function(requete, reponse){
    			$.ajax({
    				type: 'GET',
-   				url: '/aat/motif?param='+$("#motif-aat-input").val(),
+   				url: encodeURI('/aat/motif?param='+$("#motif-aat-input").val()),
    				dataType : 'json',
    	            success: function(data) {
    	                reponse($.map(data, function(objet){
@@ -330,7 +330,7 @@ $.ui.autocomplete.prototype._renderItem = function (ul, item) {
    	                }));
    	            },
    	            error: function() {
-   		              alert('La requête n\'a pas abouti'); 
+   		              console.log('La requête n\'a pas abouti'); 
    				}
    	        });
    	    },
@@ -341,6 +341,7 @@ $.ui.autocomplete.prototype._renderItem = function (ul, item) {
    	    select : function(event,ui){
    	    	
    	    	if(event.keyCode != 9){
+   	    		$('#motif-origine').val("SAISIE");
    	    		libelleSelection = $(this).val();
    		    	if(ui.item.value.length > 0){
    		    		libelleSelection = ui.item.value;
@@ -397,10 +398,10 @@ $.ui.autocomplete.prototype._renderItem = function (ul, item) {
             if (!idMotif) {
             	$('#motif-origine').val("SAISIE");
                 $('#categorie-motif').show();
+    			// Forcer l'ouverture du select 
+//                event.stopPropagation();
+//    			$("#categorie-motif .dropdown-toggle").trigger('click');
             }
-			// Forcer l'ouverture du select 
-            event.stopPropagation();
-			$("#categorie-motif .dropdown-toggle").trigger('click');
             // ALIMENTATION PARAM REQUEST
             $('#libelle').val(nomMotif);
         }
