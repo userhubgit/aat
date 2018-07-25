@@ -75,6 +75,9 @@ public class LuceneIndexRechercheTest {
 		Assert.assertTrue(resultat.get(0).getLibelle().equalsIgnoreCase("Diabète"));
 	}
 	
+	/**
+	 * 
+	 */
 	@Test
 	public void testGeneriquePassant(){
 		
