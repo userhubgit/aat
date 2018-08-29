@@ -8,10 +8,10 @@
 01000118;Asthénie;999;;asrhenie,asrhénie;fatigue;;;;
 01000117;Vertiges;999;PPB,VPPB,VPB;vertige,sensations, sensation,vertigineuses, Meniere,vestibulaire,paroxystique,positionnel,rotatoires, rotatoire; bénin,bénins,périphérique;;;;
 01000116;Douleurs thoraciques;999;;douleurs,costales,intercostal,intercostale,intercostales,douleur basi,douleur costal,costale,intercostale, inter-costale, intercostales, inter-costales,sternocostale,sternocostales,vertébrale, vertébral,déchirure,thoracique,côtes;dlr,douelurs,douleru,douelur,dlrs,douelurs,douleur,névralgie,algies, algie;;;;
-01000115;Douleurs dentaires;999;;douleur,alveolo,hyperalgique,aces,dents,infection,abcès,rage,avultion,extraction,sagesse,dent,ablation dents sagesse,extractions dentaires,avulsion,odontalgie,gingival;dlr, douelurs,Douleru,douelur,algie,algies,névralgie;;;;
+01000115;Douleurs dentaires;999;;douleur,alveolo,hyperalgique,aces,dents,infection,abcès,rage,avultion,extraction,sagesse,dent,ablation dents sagesse,extractions dentaires,avulsion,odontalgie,gingival;dlr,douelurs,douleru,douelur,dlrs,douelurs,douleur,névralgie,algies, algie;;;;
 01000114;Douleurs pelviennes;999;;douleur,abdominopelvienne,gynéco,dysmenorrhée,dysmenorree,dysmenorrhee,dysménorrhée,dysmnenorrhee,Métrorragies,metroragie,ménométrogies,menometroragie,menometrorragie,menometrorragies,menorragie,ménorragies,metrorrhagies,metrorrhagie,méno-métrorragies ;dlr, douelurs,Douleru,douelur,algie,algies,névralgie;;;;
 01000113;Douleurs articulaires;999;;douleur,ligamentaires,polyarthralgie,polyarthralgie diffuse,polyarthralgies,inflammatoires,inflammatoire, inflamatoire,poly arthralgie,poly arthralgies,goutte;dlr, douelurs,Douleru,douelur,algie,algies,névralgie;;;;
-01000112;Douleurs abdominales;999;;douleur,abdo,epigastrique,épigastriques,spasmes abdominaux,abdomen,épi gastrique,épi gastriques,ventre;dlr, douelurs,Douleru,douelur,algie,algies,névralgie,maux;;;;
+01000112;Douleurs abdominales;999;;douleur,abdo,epigastrique,épigastriques,spasmes abdominaux,abdomen,épi gastrique,épi gastriques,ventre;dlr,douelurs,douleru,douelur,dlrs,douelurs,douleur,névralgie,algies, algie;;;;
 01000111;Bouffée délirante;999;BDA;délire;;;;;
 01000110;Insuffisance cardiaque;999;IC,ICD,ICG;cardiomyopathie, cardio myopathie, index cardiaque,insuffisance cardiaque droite, insuffisance cardiaque gauche,maladie cardiaque athérosclérotique,maladie cardiovasculaire;;;;;
 01000109;Algodystrophie;999;SRDC;algoneurodystrophie, dystrophie sympathique réflexe, syndrôme régional douloureux complexe;épaule, main, genou;;;;
@@ -85,7 +85,7 @@
 01000041;Laryngite;999;;épiglottite;;;;;
 01000040;Labyrinthite;999;;infection labyrinthique;;;;;
 01000039;Encéphalite;999;CMV;méningoencephalite, encéphalopathie septique, encéphalopathie herpétique, encéphalopathie, encéphalopathie, cytomégalovirus, encépahlopathie bacterienne, encéphalopatie,encéphalo-pathie,méningo-encéphalite,méningoencephalopathie;;;;;
-01000038;Décollement et déchirure de la rétine;999;DR,DRR;troubles de la vue, vision,décollement rétinien,baisse de l'acuité visuelle,rétine rhegmatogène;;;;;
+01000038;Décollement et déchirure de la rétine;999;DR,DRR;troubles de la vue, vision,décollement rétinien,baisse de l'acuité visuelle,rétine rhegmatogène,vue;;;;;
 01000037;Conjonctivite;999;;oeil rouge, yeux rouges;;;;;
 01000036;Brûlures;999;;;;;;;
 01000035;Abcès cutané furoncle et anthrax;999;;furonculose, maladie de Verneuil, furoncles, kyste sébacé infecté, folliculite;;;;;
@@ -195,10 +195,10 @@
 00010003;Gastro-entérite virale;005;GEA,GEV,DH+; grippe intestinale, gastroentérite, gastro entérite, gastroentrite,gasytro enterite, diarrhée,diahree,diahré,diahrée,diarrhées, diahrés,GE virale;;;;;
 00010002;Bronchite aiguë sans comorbidité;010;;inflammation des bronches,bronchorrhée,infection des bronches, bronchiolite,bronchite asthmatiforme;;;;;
 00010001;Angine;008;AEP;angine, amygdalite,infection de l'oropharynx,inflammation des amygdales, amygdale, erythemato-pultacée, erythematopultacée, erythemato, pultacée,oro-pharynx,amigdales, amygdale, bactérienne,virale,blanche,rouge;;;;;
-01000126;Autres douleurs;999;;douleur,bras, jambes, poignet, muscles, mains, coude, genou, triceps, quadriceps,biceps, courbatures,cervicales;;;;;
+01000126;Autres douleurs;999;;douleur,bras, jambes, poignet, muscles, mains, coude, genou, triceps, quadriceps,biceps, courbatures,cervicales;dlr,douelurs,douleru,douelur,dlrs,douelurs,douleur,névralgie,algies, algie;;;;
 1000127;Autres tumeurs;999;;carcinome, cancer colorectal;;;;;
 1000128;pneumothorax;999;PNO,PNOG,PNOD;;;;;;
-1000129;zona;999;;;;;;0;
+1000129;zona;999;;;;;;;
 1000130;Sarcoïdose;999;BBS;Maladie de Besnier Boeck Schaumann;;;;;
 1000131;Angor;999;MC,MCA;angine de poitrine, insuffisance coronaire, coronarienne;;;;;
-1000132;Baisse de l'acuité visuelle;999;;cécité, DMLA, glaucome, vision,acuité;;;;;
+1000132;Baisse de l'acuité visuelle;999;;cécité, DMLA, glaucome, vision,acuité,vue;;;;;

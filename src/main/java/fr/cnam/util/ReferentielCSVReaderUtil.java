@@ -54,7 +54,7 @@ public final class ReferentielCSVReaderUtil {
         final String[] fields = pLigne.split(CSV_SERAPTOR);
         Motif motif = new Motif();
         
-        if (fields.length >= Constante.CSV_SYNONYME_INDEX) {
+        if (fields.length >= Constante.CSV_CODIFICATION_INDEX) {
         	
             motif.setCode(fields[Constante.CSV_CODE_INDEX]);
             motif.setLibelle(fields[Constante.CSV_LIBELLE_INDEX]);
@@ -94,7 +94,7 @@ public final class ReferentielCSVReaderUtil {
         while ((line = br.readLine()) != null) {
 
             String[] fields = line.split(CSV_SERAPTOR);
-            if (fields.length >= Constante.CSV_SYNONYME_INDEX) {
+            if (fields.length >= Constante.CSV_CODIFICATION_INDEX) {
             	Motif motifEncours = new Motif();
                 motifEncours.setCode(fields[Constante.CSV_CODE_INDEX]);
                 motifEncours.setLibelle(fields[Constante.CSV_LIBELLE_INDEX]);
